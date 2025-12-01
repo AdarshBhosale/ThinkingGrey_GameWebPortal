@@ -17,3 +17,5 @@ Frontend: HTML, CSS, Bootstrap, JavaScript
 Backend: PHP
 Database: SQL (MySQL)
 Games: Construct3
+
+<img width="1901" height="854" alt="image" src="https://github.com/user-attachments/assets/64cd2697-88ac-497c-b45f-b82670348ecf" />
