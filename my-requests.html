@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My TG Gaming requests</title>
+
+  <!--  Bootstrap + icons  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <!--  your existing master styles (keep them!)  -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css">
+
+  <style>
+  /* ───────────  GLOBAL  ─────────── */
+  html,body{height:100%}                       /* foundation for flex layout */
+  body{
+    display:flex;flex-direction:column;        /* footer fix                */
+    background:url("assets/images/bg.png") center/cover fixed;
+    font-family:"Poppins",sans-serif;color:#fff;margin:0
+  }
+  main{flex:1}                                 /* grows to push footer down */
+  section.container{max-width:1080px}
+
+  /* ───────────  NAVBAR  ─────────── */
+  .navbar{
+    background:url("assets/images/nav-foot-bg.png") center/cover;
+    display:flex;justify-content:space-between;align-items:center;
+            padding: 16px 35px;border-bottom:1px solid #222;position:sticky;top:0;z-index:999
+  }
+  .navbar .logo{        width: 140px;
+        height: 60px;}
+
+  .nav-actions{display:flex;align-items:center;gap:20px}
+  .nav-actions .nav-link{
+    color:#fff;font-size:1rem;font-weight:500;text-decoration:none;position:relative;padding-bottom:3px
+  }
+  .nav-actions .nav-link::after{
+    content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;
+    background:linear-gradient(90deg,#ff00b8,#ffa300);
+    transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.25,.8,.25,1)
+  }
+  .nav-actions .nav-link:hover::after,
+  .nav-actions .nav-link:focus::after,
+  .nav-actions .nav-link.active::after{transform:scaleX(1)}
+
+  .cart-icon{font-size:24px;color:#fff;transition:.3s}
+
+  .badge{
+    position:absolute;top:-6px;right:-6px;background:#ff4e6b;
+    color:#fff;font-size:.7rem;line-height:1;padding:2px 5px;border-radius:50%
+  }
+
+  .user-badge{    margin-top: -10px;
+    width:34px;height:34px;border-radius:50%;background:#fff;color:#1a0033;
+    font:700 1rem/34px "Poppins",sans-serif;text-align:center;user-select:none
+  }
+
+  /* ───────────  TABLES  ─────────── */
+  table{--bs-table-bg:rgba(255,255,255,.04)}
+  th,td{white-space:nowrap;vertical-align:middle}
+
+  /*  mobile “card view”  */
+  @media (max-width:480px){
+    .navbar{padding: 16px 20px;}.nav-actions{gap:25px}.navbar .logo{        width: 140px;
+        height: 60px;}
+
+    table.table{border:0}
+    thead{display:none}
+    tbody,tr,td{display:block;width:100%}
+    tr{border:1px solid rgba(255,255,255,.15);margin-bottom:.75rem;border-radius:.25rem}
+    td{padding:.5rem .75rem;text-align:left}
+    td::before {
+        content: attr(data-label) ": ";
+        font-weight: 600;
+        display: inline-block;
+        width: 8rem;
+        max-width: 35%;
+    }
+    
+  }
+  /* very small phones */
+  @media (max-width:350px){
+    .nav-actions .nav-link{font-size:.85rem}
+    .navbar .logo{        width: 140px;
+        height: 60px;}
+  }
+
+  /* ───────────  FOOTER  ─────────── */
+  footer{
+    background:url("assets/images/nav-foot-bg.png") center/cover;
+    text-align:center;color:#aaa;padding:30px 20px;font-size:1rem;border-top:1px solid #222;width:100%
+  }
+  @media (max-width:350px){
+    footer{font-size:.85rem;padding:24px 12px}
+  }
+  
+  /* dropdown container                                              */
+.profile-wrap{position:relative;display:flex;align-items:center}
+
+/* menu                                                             */
+.user-menu{
+  list-style:none;margin:0;padding:6px 0;
+  position:absolute;top:120%;right:0;min-width:140px;
+  background:#1a003c;border:1px solid #4d1f3f;border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,.35);
+  opacity:0;transform:translateY(-8px) scale(.95);pointer-events:none;
+  transition:opacity .25s,transform .25s;
+}
+.profile-wrap.open .user-menu{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+
+.user-menu li{padding:6px 16px;color:#fff;cursor:pointer}
+.user-menu li:hover{background:#2a005d;color:#fff}
+.user-menu a{color:#fff;text-decoration:none;display:block}
+
+/* white circle behind initial                                      */
+.user-badge{background:#fff !important;color:#1a0033}
+
+/* ░░░  Phones  (≤ 575 px)  ░░░  – show only icons in the bar */
+@media (max-width: 480px){
+  .nav-actions .nav-link.text-link{display:none!important;}
+}
+
+/* ░░░  Tablets & desktops  (≥ 576 px)  ░░░ – keep only “Sign out” in the dropdown */
+@media (min-width: 480px){
+  /* modern browsers – one powerful selector */
+  .user-menu li:has(> a[href$="index.html"]),        /* Home    */
+  .user-menu li:has(> a[href*="my-requests"]) {      /* Profile */
+    display:none!important;
+  }
+
+  /* fallback for browsers without :has() support */
+  .user-menu a[href$="index.html"     ],
+  .user-menu a[href*="my-requests"    ] {display:none!important;}
+}
+
+img {
+
+     border-radius: 0px !important; 
+}
+
+:root{
+  --cust-clr:#ffd94a;   /* yellow  – customised */
+  --call-clr:#ff4e6b;   /* red/pink – interested */
+}
+
+/* coloured pills that sit next to the game title */
+.tag-pill{
+  display:inline-block;padding:2px 10px;margin-left:8px;
+  font:600 .75rem/1 "Poppins",sans-serif;letter-spacing:.2px;
+  border-radius:12px;text-transform:uppercase;white-space:nowrap;
+}
+.tag-custom {background:var(--cust-clr);color:#000;}   /* yellow  */
+.tag-call   {background:var(--call-clr);color:#fff;}   /* pink/red */
+
+
+@media (max-width:480px){
+
+  /* hide the automatic “:” label on the pill row */
+  td.status-cell::before{ content:none; }
+
+  /* centre the pill & give it a little air */
+  td.status-cell{
+    text-align:center;
+    padding: .25rem 0 .4rem;
+  }
+
+  /* long game titles can wrap instead of overflowing */
+  td[data-label="Game"]{ white-space:normal; }
+  
+}
+@media (max-width:480px){
+  #tbl-all td{              /* or simply td{} if you only use this table */
+    white-space:normal;
+    word-break:break-word;
+  }
+}
+
+/* ░░░  HEADER COLOURS ░░░──────────────────────────────────────────── */
+/* dark-teal for “Game”, neon-pink for “Date / Time”                   */
+#tbl-all thead th:first-child  {             /* Game  column */
+  color:rgb(228 224 0);                  
+  font-size: 18px;
+  text-align: center;
+}
+#tbl-all thead th:last-child   {             /* Date / Time  */
+  color:rgb(228 224 0); 
+  font-size: 18px;
+  text-align: center;
+}
+
+/* make the small divider line under the header glow ever so slightly */
+#tbl-all thead tr::after{
+  content:"";display:block;height:1px;
+  background:linear-gradient(90deg,#1ef6ff,#ff5fd2);
+  animation: headerGlow 4s linear infinite;
+}
+@keyframes headerGlow{
+  0%,100%{filter:blur(0px) brightness(100%);}
+  50%   {filter:blur(2px) brightness(180%);}
+}
+
+/* ░░░  ROW ENTRANCE ANIMATION ░░░──────────────────────────────────── */
+@keyframes slideFadeIn{
+  0%   {opacity:0; transform:translateY(16px);}
+  100% {opacity:1; transform:none;}
+}
+/* each row pops in one after another on load                          */
+#tbl-all tbody tr{
+  animation:slideFadeIn .55s cubic-bezier(.25,.8,.25,1) both;
+}
+#tbl-all tbody tr:nth-of-type(2){animation-delay:.06s;}
+#tbl-all tbody tr:nth-of-type(3){animation-delay:.12s;}
+#tbl-all tbody tr:nth-of-type(4){animation-delay:.18s;}
+/* …add more nth-of-type if you expect very long tables                */
+
+/* ░░░  ROW HOVER – subtle lift & glow ░░░──────────────────────────── */
+#tbl-all tbody tr:hover{
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px rgba(0,255,255,.15),
+             0 4px 12px rgba(255,0,150,.15);
+  transition:.25s ease;
+}
+
+/* keep the hover/lift effect smooth even on touch screens             */
+@media (hover:none){
+  #tbl-all tbody tr:hover{transform:none;box-shadow:none;}
+}
+/* center the whole Date / Time column */
+#tbl-all td[data-label="Date / Time"],
+#tbl-all td:last-child{             /* fallback for desktop */
+  text-align:center;
+}
+
+
+ #tbl-all td[data-label="Game"],
+  #tbl-all tbody td:first-child{   /* fallback */
+    text-align:center;
+  }
+  
+  /* Requests column – make it match the other two */
+#tbl-all thead th:nth-child(2){
+  color: rgb(228 224 0);   /* same olive-gold tint */
+  font-size: 18px;
+  text-align: center;
+}
+
+  </style>
+</head>
+
+<body>
+  <!-- ░░░ NAVBAR ░░░ -->
+  <div class="navbar">
+    <a href="index.html" class="d-inline-block">
+  <img src="assets/images/logo.png" class="logo" alt="TG logo">
+</a>
+
+    <div class="nav-actions">
+      <!-- top-bar navigation (excerpt) -->
+<a class="nav-link text-link"         href="index.html">Home</a>
+<a class="nav-link text-link active"  href="#">My&nbsp;Profile</a>
+
+      <a class="nav-link position-relative cart-link" href="cart.html">
+        <i class="fas fa-shopping-cart cart-icon"></i>
+        <span id="cart-count" class="badge">0</span>
+      </a>
+
+      <!-- A-icon (hidden until we have a name) -->
+      <div class="profile-wrap">
+        <!-- circular badge once signed-in -->
+        <span id="nav-user"  class="user-badge d-none"></span>
+
+        <!-- guest icon while signed-out -->
+        <a   id="nav-guest" class="guest-link d-none text-decoration-none">
+          <i class="fa-solid fa-user"></i>
+        </a>
+
+        <!-- dropdown -->
+        <ul  id="user-menu" class="user-menu"></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ░░░ MAIN CONTENT ░░░ -->
+  <main>
+    <section class="container py-5">
+    <h3 class="mb-4 text-warning fw-semibold">
+  Hello&nbsp;<span id="hello-name"></span>!
+</h3>
+
+<!-- NEW: quick contact info -->
+<div id="user-info" class="mb-4">
+  <p class="mb-1">
+    <i class="fa-solid fa-envelope me-1"></i>
+    <span id="hello-email"></span>
+  </p>
+  <p class="mb-0">
+    <i class="fa-solid fa-phone me-1"></i>
+    <span id="hello-phone"></span>
+  </p>
+</div>
+
+     <!-- ONE table for everything ----------------------------------------->
+<h5 class="text-info mb-3">Your Recent Requests</h5>
+
+<div class="table-responsive">
+ <table id="tbl-all" class="table table-dark table-striped small mb-0">
+<thead>
+  <tr>
+    <th style="width:45%">Game</th>
+    <th style="width:10%" class="text-center">Requests</th>
+    <th style="width:45%" >Date / Time</th>   <!-- stays at the end -->
+  </tr>
+</thead>
+  <tbody></tbody>
+</table>
+</div>
+
+    </section>
+  </main>
+
+  <!-- ░░░ FOOTER ░░░ -->
+  <footer>
+    Copyright © 2025&nbsp;Thinking Grey<br>
+    Designed&nbsp;by Thinking Grey
+  </footer>
+
+  <!-- ░░░ JS ░░░ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  /*****  work out whose requests to show  *****/
+const params = new URLSearchParams(location.search);
+let phone    = params.get('user');
+
+/* if the query string is missing, try localStorage instead */
+if (!phone) {
+  const u = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  if (u && u.phone) {
+    phone = u.phone;
+    /* silently update the URL so refresh / share keeps working */
+    history.replaceState({}, '', `?user=${phone}`);
+  } else {
+    alert('Please sign in first.');
+    location.href = 'index.html';
+  }
+}
+
+/*  …continue with the rest of your page logic using `phone` … */
+
+  /* ---------- helpers already reused everywhere ---------- */
+  function getCart(){return JSON.parse(localStorage.getItem('tg_cart')||'[]')}
+  function syncBadge(){
+    const b=document.getElementById('cart-count');
+    const n=getCart().length;
+    b.textContent=n; b.style.display=n?'inline':'none';
+  }
+function paintUserBadge () {
+  const u = JSON.parse(localStorage.getItem('tg_user') || 'null');
+
+  // name badge + greeting
+  const badge = document.getElementById('nav-user');
+  const hello = document.getElementById('hello-name');
+  if (u && u.name) {
+    badge.textContent = u.name.trim()[0].toUpperCase();
+    badge.classList.remove('d-none');
+    hello.textContent = u.name.split(' ')[0];
+  }
+
+  // NEW: e-mail and phone under the greeting
+  document.getElementById('hello-email').textContent = u?.email || '—';
+  document.getElementById('hello-phone').textContent = u?.phone || '—';
+}
+
+
+  /* build each table row with data-labels → supports mobile card view */
+  function fillTable(id,rows){
+    const tbody=document.querySelector(`#${id} tbody`);
+    if(!rows.length){
+      tbody.innerHTML='<tr><td colspan="2" class="text-secondary fst-italic">Nothing&nbsp;yet…</td></tr>';
+      return;
+    }
+    tbody.innerHTML=rows.map(r=>`
+       <tr>
+         <td data-label="Game">${r.game}</td>
+         <td data-label="Date / Time">${r.requested_at}</td>
+       </tr>`).join('');
+  }
+
+
+/* ----------  profile dropdown & sign-out (copied from index.html) ---------- */
+
+/* ----------  profile dropdown & sign-out ---------- */
+function refreshProfileUI () {
+  const u         = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  const navUser   = document.getElementById('nav-user');
+  const navGuest  = document.getElementById('nav-guest');
+  const userMenu  = document.getElementById('user-menu');
+
+  userMenu.innerHTML = '';                       // clear previous items
+
+  if (u && u.phone) {
+     userMenu.insertAdjacentHTML('beforeend','<li><a href="index.html">Home</a></li>');
+  userMenu.insertAdjacentHTML('beforeend',`<li><a href="my-requests.html?user=${u.phone}">Profile</a></li>`);
+    
+    navUser.textContent = u.name.trim()[0].toUpperCase();
+    navUser.classList.remove('d-none');
+    navGuest.classList.add('d-none');
+
+    /* single “Sign out” item */
+    const liOut       = document.createElement('li');
+    liOut.textContent = 'Sign out';
+    liOut.onclick     = e => {
+      e.preventDefault();
+      localStorage.clear();
+      sessionStorage.clear();
+      document.cookie
+        .split(';')
+        .forEach(c => document.cookie = c.replace(/^ +/, '')
+                               .replace(/=.*/, '=;expires=' +
+                                        new Date(0).toUTCString() + ';path=/'));
+      location.href = 'index.html';              // back to home
+    };
+    userMenu.appendChild(liOut);
+
+  } else {                                       // ── guest ──
+    navUser.classList.add('d-none');
+    navGuest.classList.remove('d-none');
+
+    const liIn       = document.createElement('li');
+    liIn.textContent = 'Sign in';
+    liIn.onclick     = () => location.href = 'index.html';  // auth modal there
+    userMenu.appendChild(liIn);
+  }
+}
+
+/* toggle dropdown on badge / guest-icon click */
+document.addEventListener('click', e => {
+  const wrap = document.querySelector('.profile-wrap');
+  if (wrap && wrap.contains(e.target)) {
+    wrap.classList.toggle('open');   // inside → toggle
+  } else if (wrap) {
+    wrap.classList.remove('open');   // outside → close
+  }
+});
+
+/* initialise after DOM ready */
+document.addEventListener('DOMContentLoaded', () => {
+  refreshProfileUI();
+});
+
+  /* ----------  page init  ---------- */
+  document.addEventListener('DOMContentLoaded',()=>{
+      
+      const user = JSON.parse(localStorage.getItem('tg_user') || 'null');
+
+  /* 2️⃣  print it – nice and clear in DevTools  */
+  console.log('[TG] user data →', user);
+  
+    syncBadge(); paintUserBadge();refreshProfileUI();   
+
+    const phone=new URLSearchParams(location.search).get('user')||'';
+    if(!phone){alert('No phone supplied');return;}
+
+    fetch(`get_user_requests.php?user=${phone}`)
+      .then(r=>r.json())
+      .then(data=>{
+        if(!data.success){alert('Nothing found');return;}
+       fillBigTable(data.customise || [], data.calls || []);
+      })
+      .catch(err=>alert('Error: '+err));
+  });
+  
+  
+function prettifyGameField(g){
+  /* ① an *array* already → join */
+  if (Array.isArray(g))
+    return g.map(s => GAME_TITLE[s] || s).join(', ');
+
+  /* ② JSON-looking string → parse then join */
+  if (typeof g === 'string' && g.trim().startsWith('[')){
+    try{
+      const arr = JSON.parse(g);
+      if (Array.isArray(arr))
+        return arr.map(s => GAME_TITLE[s] || s).join(', ');
+    }catch{/* fall through */}
+    /* rudimentary cleanup fallback */
+    g = g.replace(/[[\]"]/g,'');
+  }
+
+  /* ③ plain slug (e.g. "collectthecoins") */
+  return GAME_TITLE[g] || g || '';
+}
+
+/* build each table row (card-view mobile friendly) */
+function fillTable(id, rows){
+  const tbody = document.querySelector(`#${id} tbody`);
+  if (!rows.length){
+    tbody.innerHTML =
+      '<tr><td colspan="2" class="text-secondary fst-italic">Nothing&nbsp;yet…</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(r => `
+      <tr>
+        <td data-label="Game">${prettifyGameField(r.game)}</td>
+        <td data-label="Date / Time">${r.requested_at}</td>
+      </tr>`).join('');
+}
+/* slug  ->  display title */
+const GAME_TITLE = {
+  skillslice      : 'Skill Slice',
+  islandconqueror : 'Island Conqueror',
+  colourstrike    : 'Color Strike',
+  skillarcade     : 'Skill Arcade',
+  knowledgekonnect: 'Knowledge Konnect',
+  ballpong        : 'Ball Pong',
+  collectthecoins : 'Collect The Coin',
+  treasurehunt    : 'Treasure Hunt',
+  spaceshooter    : 'Space Shooter',
+  spinthewheel    : 'Spin The Wheel'
+};
+
+
+/* prints a small coloured “sub-heading” inside the table body */
+function sectionRow(title, colour){
+  return `
+    <tr>
+      <td colspan="2"
+          style="background:rgba(255,255,255,.12);
+                 color:${colour};font-weight:700">
+        ${title}
+      </td>
+    </tr>`;
+}
+
+function fillBigTable (customRows = [], callRows = []) {
+  const tbody = document.querySelector('#tbl-all tbody');
+
+  if (!customRows.length && !callRows.length) {
+    tbody.innerHTML =
+      '<tr><td colspan="3" class="text-secondary fst-italic text-center">Nothing&nbsp;yet…</td></tr>';
+    return;
+  }
+
+const rowHTML = (rec, type) => `
+  <tr>
+    <td data-label="Game">${prettifyGameField(rec.game)}</td>
+
+    <td class="status-cell text-center" data-label="Status">
+      <span class="tag-pill ${type === 'custom' ? 'tag-custom' : 'tag-call'}">
+        ${type === 'custom' ? 'Customised' : 'Interested'}
+      </span>
+    </td>
+
+    <td data-label="Date / Time">${rec.requested_at}</td>
+  </tr>`;
+
+  /* build the full table */
+  tbody.innerHTML =
+      customRows.map(r => rowHTML(r,'custom')).join('') +
+      callRows   .map(r => rowHTML(r,'call'  )).join('');
+}
+
+  </script>
+</body>
+</html>

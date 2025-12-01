@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Product Detail – TG Gaming</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css" />
+    <link rel="stylesheet" href="assets/css/owl.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+
+    <style>
+      body {
+        background: url("assets/images/bg.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .nav-actions .nav-link {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      /* =====================  Animated underline on navbar links  ===================== */
+      .nav-actions .nav-link {
+        position: relative; /* 1 — anchor becomes the ref for ::after   */
+        padding-bottom: 3px; /* 2 — a little room for the underline      */
+      }
+
+      .nav-actions .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px; /* underline thickness                      */
+        background: linear-gradient(90deg, #ff00b8, #ffa300);
+        transform: scaleX(0); /* 3 — start hidden                         */
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .nav-actions .nav-link:hover::after,
+      .nav-actions .nav-link:focus::after,
+      .nav-actions .nav-link.active::after {
+        /* keep it visible on the active page      */
+        transform: scaleX(1); /* 4 — grow to full width on hover/focus    */
+      }
+
+      .cart-icon {
+        font-size: 25px;
+        color: #fff;
+        transition: transform 0.3s, color 0.3s;
+            margin-top: 5px;
+      }
+      .badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #ff4e6b;
+        color: #fff;
+        font-size: 0.7rem;
+        line-height: 1;
+        padding: 2px 5px;
+        border-radius: 50%;
+      }
+      .single-product.section {
+        padding-top: 60px !important;
+        margin-top: -10px !important;
+      }
+      /* ───── Shrink the “Back to Games” pill ─────────────────────── */
+      .back-pill {
+        font: 800 1rem / 1 "Poppins", sans-serif;
+        padding: 0.35rem 1rem;
+        gap: 8px;
+        top: -23px;
+        left: -97px;
+      }
+
+      .back-pill i {
+        /* keep arrow proportional      */
+        font-size: 1rem; /* was 1.15rem                  */
+      }
+
+      .back-pill span {
+        filter: drop-shadow(0 2.5px 0 #572802);
+      }
+      .scroll-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ffffff;
+        color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+      }
+      .scroll-indicator:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .scroll-indicator i {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+      /* Put the whole contact section closer to the navbar */
+      .contact-page.section {
+        padding-top: 50px !important;
+        margin-top: 0 !important;
+        padding-left: 140px;
+      }
+      .col-lg-7 {
+        flex: 0 0 auto;
+        margin-left: 50px;
+        width: 40.333333%;
+        margin-top: 35px;
+      }
+      .contact-page.section .container {
+        display: flex;
+        justify-content: center; /* horizontal centring */
+      }
+
+      .contact-page.section .row {
+        width: 100%; /* full width inside the flex container   */
+        flex-wrap: wrap; /* still wrap on narrow screens            */
+      }
+
+      .fw-semibold {
+        font-weight: 600 !important;
+        color: #fda5a5;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: #ffffff;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        font-weight: 700;
+        margin-top: 10px;
+      }
+/* grey-out + soften “Try your question bank” while disabled  */
+.pill-disabled{
+  opacity: .35;                     /* a bit lighter             */
+  filter : grayscale(1)
+           blur(1.0px)
+           brightness(1.4);         /* prevents the black look   */
+  pointer-events : none;            /* truly not clickable       */
+  user-select    : none;
+  transition: opacity .25s ease;
+}
+
+
+      /* Optional: trim extra gap above the big game image on phones */
+      @media (max-width: 576px) {
+        #game-img {
+          margin-top: 10px;
+        } /* was 20px in your mobile rules */
+      }
+
+      /* =========================================================
+   LIFT-AND-GLOW HOVER EFFECT FOR THE THREE ACTION PILLS
+   ========================================================= */
+      .pill-customise:hover,
+.pill-customise:focus,
+.pill-demo:hover,
+.pill-demo:focus,
+#cart-btn:hover,           /* yellow “I’m Interested” state  */
+#cart-btn:focus,
+#cart-btn.pill-added:hover,
+.pill-btn.small-pill:hover,
+.pill-btn:hover,
+#cart-btn.pill-added:focus {
+        transform: translateY(-3px); /* slight lift        */
+        box-shadow: 0 8px 32px rgba(255, 0, 184, 0.8),
+          /* purple glow  */ inset 0 0 0 4px var(--stroke),
+          /* keep rim      */ inset 0 4px 8px rgba(255, 255, 255, 0.35); /* inner shine  */
+      }
+
+      @media (max-width: 480px) {
+        .back-pill {
+          font-size: 0.78rem;
+          padding: 0.3rem 0.9rem;
+          gap: 6px;
+        }
+        .back-pill i {
+          font-size: 0.9rem;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+         ❸  ICON ANIMATIONS
+      ════════════════════════════════════════════════════════════════ */
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        50% {
+          transform: rotate(-12deg);
+        }
+      }
+      @keyframes rocketTilt {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        50% {
+          transform: rotate(-25deg) translateY(-2px);
+        }
+      }
+      @keyframes cartBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+
+      .pill-customise:hover i {
+        animation: wiggle 0.6s ease-in-out infinite;
+      }
+      .pill-demo:hover i {
+        animation: rocketTilt 0.8s ease-in-out infinite;
+      }
+      .pill-interest:hover i {
+        animation: cartBounce 0.9s ease-out infinite;
+      }
+
+      /* ──────────────────────────────────────────────────────────────
+            COMMON SHARED RULES
+            Every button-image gets these base styles first
+            ────────────────────────────────────────────────────────────── */
+      .button-img {
+        width: 240px; /* default desktop size */
+        height: 75px;
+        border-radius: 38px; /* pill ends match artwork */
+        display: block; /* makes the <a>/<button> clickable everywhere */
+        transition: transform 0.25s ease, filter 0.25s ease;
+      }
+
+      /* scale up & brighten on hover / focus */
+      .btn-group-custom a:hover .button-img,
+      .btn-group-custom a:focus .button-img,
+      #cart-btn:hover .button-img,
+      #cart-btn:focus .button-img {
+        transform: translateY(-3px) scale(1.05);
+      }
+
+      /* ─── Back-to-Games ⇦ arrow – smaller ───────────────────── */
+      #btn-back i {
+        font-size: 2rem; /* ↓ tweak this number to taste */
+        line-height: 1; /* keeps it vertically centred   */
+      }
+
+      /* ===============  UNIVERSAL PILL BASE  ====================== */
+      .pill-btn {
+        --pink1: #ff006a;
+        --pink2: #be0059;
+        --stroke: #9a0047;
+        --glow: rgba(255, 200, 0, 0);
+
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0.2rem 0.8rem;
+
+        border-radius: 4.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: transparent; /* we’ll paint text via gradient */
+        background: linear-gradient(180deg, var(--pink1), var(--pink2) 90%);
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      /* put this AFTER the existing .pill-btn rules */
+      .pill-btn.small-pill {
+        font: 800 1.5rem/1 "Poppins", sans-serif;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        padding: 0.6rem 1.8rem;
+        gap: 12px;
+      }
+
+      .pill-btn.small-pill span {
+        filter: drop-shadow(0 3px 0 #572800);
+      }
+      .pill-btn.small-pill i {
+        font-size: 1.5rem 24px;
+      }
+      .gap-3 {
+        gap: 1.2rem 19.2px !important;
+      }
+      .pill-btn span {
+        background: linear-gradient(
+          180deg,
+          #ffd94a 0%,
+          #ffbb0d 50%,
+          #d88a00 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* ---------- icon styling inside pills ---------- */
+      .pill-btn i {
+        font-size: 1.9rem; /* scales with button size  */
+        background: linear-gradient(
+          180deg,
+          #ffd94a 0%,
+          #ffbb0d 50%,
+          #d88a00 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent; /* gold gradient like text */
+        filter: drop-shadow(0 2px 0 #572800); /* dark inner edge         */
+      }
+
+      @media (max-width: 480px) {
+        /* keep icons in proportion */
+        .pill-btn i {
+          font-size: 1.4rem;
+        }
+      }
+
+      .pill-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        box-shadow: inset 0 0 0 4px var(--stroke),
+          inset 0 4px 8px rgba(255, 255, 255, 0), 0 6px 16px var(--glow);
+      }
+      /* hover / press */
+      .pill-btn:hover,
+      .pill-btn:focus {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 26px var(--glow);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(255, 0, 184, 0.8);
+      }
+      .pill-btn:active {
+        transform: translateY(-1px) scale(0.98);
+        box-shadow: 0 6px 15px var(--glow);
+      }
+      .pill-yellow:hover i {
+        animation: cartBounce 0.9s ease-out infinite;
+      }
+      /* ===============  COLOUR VARIANTS  ========================== */
+      .pill-magenta {
+        /* already inherits magenta settings */
+      }
+
+      .pill-cyan {
+        --pink1: #19cfff;
+        --pink2: #0093d6;
+        --stroke: #0075af;
+        --glow: rgba(0, 255, 255, 0.35);
+      }
+      .pill-yellow {
+        --pink1: #ff006a;
+        --pink2: #be0059;
+        --stroke: #9a0047;
+      }
+      .pill-btn:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        box-shadow: none !important;
+        transform: none !important;
+      }
+
+      #game-img {
+        box-shadow: 0 5px 25px rgba(255, 0, 184, 0.3);
+      }
+
+      /*  ⇢ Tablet & down tweaks */
+      @media (max-width: 768px) {
+        .customise-banner {
+          max-width: 100%;
+        }
+      }
+
+      /*  ⇢ Phone tweaks */
+      @media (max-width: 576px) {
+        .customise-banner {
+          padding: 1rem;
+        }
+        .banner-list li {
+          flex-wrap: wrap;
+        } /* text wraps nicely under icon */
+      }
+
+      /* ===== Breakpoints ===== */
+      @media (max-width: 768px) {
+        .customise-banner {
+          max-width: 100%;
+          border-radius: 0.75rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .customise-banner {
+          padding: 1rem;
+          text-align: left;
+        }
+        .customise-banner p {
+          flex-wrap: wrap;
+        } /* wraps long text under icons */
+      }
+
+      /* ===============  Responsive tweak  ========================= */
+      @media (max-width: 480px) {
+        .pill-btn {
+          font-size: 1.2rem;
+          padding: 0.6rem 2rem;
+        }
+        .pill-btn i {
+          font-size: 1.4rem;
+        }
+        .scroll-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 65px;
+    background-color: #ffffff;
+    color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+      }
+
+      /* ──────────────────────────────────────────────────────────────
+            RESPONSIVE  – shrink buttons on small screens
+            ────────────────────────────────────────────────────────────── */
+      @media (max-width: 576px) {
+        .button-img {
+          width: 190px; /* ~20 % smaller */
+          height: 60px;
+          border-radius: 30px;
+        }
+      }
+
+      footer {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        margin-top: 70px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #aaa;
+        text-align: center;
+        border-top: 1px solid #222;
+      }
+      .navbar img.logo {
+       width: 140px;
+    height: 60px;
+      }
+
+      @media (max-width: 428px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+         padding: 16px 20px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+            .nav-actions {
+        display: flex;
+        align-items: center;
+              gap: 25px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 40px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 40px;
+        }
+        #cart-btn .button-img {
+          width: 180px;
+          height: 40px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 0px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        #game-img {
+          max-width: 100%;
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px;
+          margin-top: -15px;
+        }
+        .contact-page.section {
+          padding-top: 50px !important;
+          margin-top: 0 !important;
+          padding-left: 0px;
+        }
+
+        #btn-back i {
+          font-size: 1.8rem;
+        }
+        .col-lg-7 {
+          flex: 0 0 auto;
+          margin-left: 0px;
+          width: 129.333333%;
+          margin-top: 10px;
+        }
+        /* ───── center the action-pills block ───── */
+        .btn-stack {
+          display: flex; /* make it a flex-column             */
+          flex-direction: column;
+          align-items: center; /* horizontal centering for pills    */
+          gap: 20px; /* space between the three buttons   */
+        }
+      }
+
+      @media (min-width: 428px) and (max-width: 576px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 15px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .contact-page.section {
+          padding-top: 50px !important;
+          margin-top: 0 !important;
+          padding-left: 0px;
+        }
+        .col-lg-7 {
+          flex: 0 0 auto;
+          margin-left: 0px;
+          width: 100%;
+          margin-top: 35px;
+        }
+      }
+      @media (min-width: 576px) and (max-width: 767.98px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 15px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .contact-page.section {
+          padding-top: 50px !important;
+          margin-top: 0 !important;
+          padding-left: 0px;
+        }
+        .col-lg-7 {
+          flex: 0 0 auto;
+          margin-left: 0px;
+          width: 100%;
+          margin-top: 35px;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 1199.98px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 15px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 80%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .contact-page.section {
+          padding-top: 50px !important;
+          margin-top: 0 !important;
+          padding-left: 0px;
+        }
+        .col-lg-7 {
+          flex: 0 0 auto;
+          margin-left: 0px;
+          width: 50%;
+          margin-top: 35px;
+        }
+
+        .col-lg-5 {
+          flex: 0 0 auto;
+          width: 50%;
+        }
+      }
+      @media (min-width: 1200px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 35px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -3px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 30px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 0px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 80%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .contact-page.section {
+          padding-top: 50px !important;
+          margin-top: 0 !important;
+          padding-left: 0px;
+        }
+        .col-lg-7 {
+          flex: 0 0 auto;
+          margin-left: 0px;
+          width: 50%;
+          margin-top: 35px;
+        }
+        .col-lg-5 {
+          flex: 0 0 auto;
+          width: 50%;
+        }
+      }
+      /* ========= Green pulse for "ADDED" ========= */ /* ① subtle breathing glow */
+      @keyframes addedPulse {
+        0%,
+        100% {
+          transform: translateY(-4px); /* sits slightly “lifted”   */
+          box-shadow: inset 0 0 0 4px var(--stroke),
+            /* rim                      */ inset 0 4px 8px
+              rgba(255, 255, 255, 0.35),
+            /* inner highlight          */ 0 10px 26px var(--glow); /* outer glow               */
+        }
+        50% {
+          transform: translateY(-2px); /* tiny dip                 */
+          box-shadow: inset 0 0 0 4px var(--stroke),
+            inset 0 4px 8px rgba(255, 255, 255, 0.35), 0 4px 38px var(--glow); /* brighter mid-pulse       */
+        }
+      }
+
+      @media (max-width: 382px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+              padding: 16px 20px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+          margin-right: 5px;
+        }
+        footer {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          margin-top: 70px;
+          padding: 30px 20px;
+          font-size: 1rem;
+          color: #aaa;
+          text-align: center;
+          border-top: 1px solid #222;
+          margin-right: -20px;
+        }
+      }
+      @media (max-width: 342px) {
+        .nav-actions .nav-link {
+          color: white;
+          font-size: 0.8rem;
+          font-weight: 500;
+          text-decoration: none;
+        }
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 9px 5px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+          margin-right: -10px;
+        }
+        footer {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          margin-top: 70px;
+          padding: 30px 20px;
+          font-size: 1rem;
+          color: #aaa;
+          text-align: center;
+          border-top: 1px solid #222;
+          margin-right: -20px;
+        }
+      }
+      /* back-btn */
+      @media (max-width: 300px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -5px;
+          left: -20px;
+        }
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 9px 5px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+      }
+      @media (min-width: 300px) and (max-width: 400px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -30px;
+          left: -20px;
+        }
+      }
+      @media (min-width: 400px) and (max-width: 428px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -35px;
+          left: -35px;
+        }
+      }
+      @media (min-width: 428px) and (max-width: 500px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -20px;
+          left: -50px;
+        }
+      }
+      @media (min-width: 500px) and (max-width: 599px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -20px;
+          left: -95px;
+        }
+      }
+
+      @media (min-width: 600px) and (max-width: 768px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -25px;
+          left: -95px;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -5px;
+        }
+      }
+      @media (min-width: 991px) and (max-width: 1200px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -50px;
+        }
+      }
+      @media (min-width: 1200px) and (max-width: 1400px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -85px;
+        }
+      }
+      @media (min-width: 1400px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -120px;
+        }
+      }
+
+      .pill-added {
+        --pink1: #1e894e; /* fill-top  */
+        --pink2: #3eaa6e; /* fill-bottom */
+        --stroke: #066b2f; /* dark rim  */
+        --glow: rgba(32, 217, 113, 0.45);
+      }
+      /* run while the cursor is over the green “Added” pill */
+      .pill-added:hover i {
+        animation: checkPop 0.8s ease-in-out infinite;
+      }
+      /* ✔️  little “pop” for the green Added check-mark */
+      @keyframes checkPop {
+        0%,
+        100% {
+          transform: rotate(0) scale(1);
+        }
+        40% {
+          transform: rotate(-8deg) scale(1.15);
+        }
+        70% {
+          transform: rotate(5deg) scale(1.05);
+        }
+      }
+      /* --- kill the residual dark rim on the Upload-Excel pill --- */
+      #upload-btn {
+        border-bottom: 0 !important; /* remove bottom border */
+        border-right: 0 !important;
+      }
+      .text-primary {
+        --bs-text-opacity: 1;
+        color: #ffd94a !important;
+      }
+      
+/* profile badge + dropdown */
+.profile-wrap   { position: relative; }
+.user-badge     { display:inline-flex;align-items:center;justify-content:center;
+                  width:34px;height:34px;border-radius:50%;
+                  background:#fff;color:#1a0033;
+                  font:700 1rem/1 "Poppins",sans-serif;
+                  cursor:pointer;user-select:none; }
+.user-menu {
+  list-style: none; margin: 0; padding: 6px 0;
+  position: absolute; top: 145%; right: 0;
+  min-width: 140px;
+  background: #1a003c; border: 1px solid #4d1f3f;
+  border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.35);
+  opacity: 0; transform: translateY(-8px) scale(.95);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+.user-menu li   { padding:6px 16px;color:#fff;cursor:pointer; }
+.user-menu li:hover { background:#2a005d;color:#fff; }
+.user-menu a    { color:inherit;text-decoration:none;display:block; }
+
+.profile-wrap.open .user-menu,
+.profile-wrap:focus-within .user-menu {
+  opacity:1;transform:translateY(0) scale(1);pointer-events:auto;
+}
+
+.fa-user::before {
+    content: "\f007";
+    font-size: 26px;
+    color: #fff;
+}
+@media screen and (max-width: 428px) {
+    .navbar img.logo {
+           width: 140px;
+    height: 60px;
+    }
+}
+/* phones / very narrow tablets */
+@media (max-width:480px){
+  .nav-actions .text-link{          /* Home + Customise */
+    display:none !important;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="https://thinkinggrey.in/gameweb/index.html" class="d-inline-block">
+  <img src="assets/images/logo.png" alt="TG Gaming logo" class="logo">
+</a>
+
+      <div class="nav-actions">
+<a class="nav-link text-link"           href="index.html">Home</a>
+  <a class="nav-link text-link nav-customise active" href="#">Customise</a>
+
+  <a class="nav-link cart-link position-relative" href="cart.html">
+    <i class="fas fa-shopping-cart cart-icon"></i>
+    <span id="cart-count" class="badge">0</span>
+  </a>
+
+  <!-- PROFILE badge + dropdown -->
+<div class="profile-wrap">
+  <!-- signed-in badge -->
+  <span id="nav-user"  class="user-badge d-none"></span>
+
+  <!-- guest badge (unused once the user is signed-in) -->
+  <a id="nav-guest" class="guest-link d-none text-decoration-none">
+    <i class="fa-solid fa-user"></i>
+  </a>
+
+  <!-- dropdown list -->
+  <ul id="user-menu" class="user-menu"></ul>
+</div>
+
+</div>
+
+    </div>
+    <!-- ***** MAIN BLOCK ***** -->
+    <div class="contact-page section center-wrap">
+      <div class="container">
+        <div class="row align-items-start **justify-content-center mt-3**">
+          <!-- LEFT: Game Preview & Try -->
+          <div class="col-lg-5 text-center">
+            <div class="thumb-wrap position-relative d-inline-block">
+              <!-- overlay anchor goes *inside* -->
+              <!-- leave the element as-is -->
+              <a
+                id="btn-back"
+                href="#"
+                class="pill-btn pill-yellow back-pill text-decoration-none"
+              >
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back&nbsp;to&nbsp;Game&nbsp;Detail</span>
+              </a>
+
+              <img
+                id="game-img"
+                src=""
+                alt="Game Cover"
+                class="game-cover mb-3"
+              />
+            </div>
+            <h5>
+              <span style="font-weight: normal">Game Name:</span>
+              <span id="game-name" style="font-weight: bold"></span>
+            </h5>
+            <h4 id="game-title" class="d-none"></h4>
+
+            <a
+              id="try-game-btn"
+              href="#"
+              target="_blank"
+              class="pill-btn small-pill pill-customise text-decoration-none d-inline-flex mb-4 mt-3"
+            >
+              <i class="fa-solid fa-up-right-from-square"></i>
+              <span>Try&nbsp;Our&nbsp;Demo</span>
+            </a>
+            <!-- Responsive customise-banner -->
+          </div>
+
+          <!-- RIGHT: Steps -->
+          <div class="col-lg-7 step-box">
+            <h4 class="custom-font fw-semibold mb-3">
+              Steps to customise your Game:
+            </h4>
+
+            <br />
+            <p class="mb-1 fw-semibold">Step&nbsp;1</p>
+            <p
+              class="mb-2"
+              class="pill-btn small-pill pill-customise text-decoration-none"
+            >
+              Download the assessment sample file
+            </p>
+            <!-- PDF download button -->
+            <a
+              id="dl-sample"
+              href="assets/files/assessment-sample.pdf"
+              download
+              aria-label="Download assessment sample"
+              class="pill-btn pill-yellow small-pill btn-dl-sample d-inline-flex align-items-center justify-content-center gap-2 text-decoration-none"
+            >
+              <i class="fa-solid fa-download"></i>
+              <span>Download&nbsp;sample</span>
+            </a>
+
+            <p class="mb-1 fw-semibold">Step 2</p>
+            <p class="mb-2">Add questions in sample Excel file</p>
+            <p class="small mb-4">
+              <span class="text-primary">
+                - Add two questions of 105 characters each and limit each set of
+                answer options to 50 characters. <br />- Do not add extra
+                columns or rename headers <br />
+                - Use same name & mobile number on the game login page that you
+                entered on the customization form. <br />
+              </span>
+            </p>
+
+            <!-- STEP 3 ******************************************************************************** -->
+            <p class="mb-1 fw-semibold">Step&nbsp;3</p>
+            <p class="mb-2">Upload file</p>
+
+            <input type="file" id="excel-input" accept=".xlsx,.xls" hidden />
+            <!-- filename display -->
+            <p id="file-label" class="small mt-2" style="display: none"></p>
+            <!-- new Browse -->
+            <button
+              type="button"
+              id="browse-btn"
+              class="pill-btn pill-yellow small-pill d-inline-flex align-items-center gap-2 text-decoration-none border-0"
+            >
+              <i class="fa-solid fa-folder-open"></i>
+              <span>Browse</span>
+            </button>
+
+            <!-- existing Upload (starts **disabled**) -->
+           <button
+  type="button"
+  id="upload-btn"
+  class="pill-btn pill-yellow small-pill …"
+  aria-label="Upload Excel file"
+  style="display:none;"          
+>
+              <i class="fa-solid fa-upload"></i>
+              <span>Upload&nbsp;Excel&nbsp;File</span>
+            </button>
+
+            <p class="mb-1 fw-semibold">Step 4</p>
+            <p class="mb-2">
+              You’ve finished uploading. Now, try the demo with the updated
+              assessments.
+            </p>
+            
+<!--  Step-4 button  -->
+<a id="try-qb-btn"
+   href="#"
+   target="_blank"
+   class="pill-btn small-pill pill-customise d-inline-flex mb-4 pill-disabled">
+  <i class="fa-solid fa-up-right-from-square"></i>
+  <span>Try&nbsp;your&nbsp;question&nbsp;bank</span>
+</a>
+
+            <p class="mb-1 fw-semibold">Step 5</p>
+            <p class="mb-2">Add this customised game to your cart</p>
+            <button
+              id="cart-btn"
+              class="pill-btn pill-yellow small-pill border-0 bg-transparent"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>I’m&nbsp;Interested</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="scroll-indicator"
+      class="scroll-indicator"
+      onclick="toggleScroll()"
+      title="Scroll for more"
+    >
+      <i id="scroll-icon" class="fas fa-chevron-down"></i>
+    </div>
+
+    <footer>
+      Copyright © 2025 Thinking Grey<br />
+      Designed By Thinking Grey
+    </footer>
+
+    <script>
+    
+    /* ───────────────────────────────────────── profile menu ───────────────────────────────────────── */
+const navUser   = document.getElementById('nav-user'),
+      navGuest  = document.getElementById('nav-guest'),
+      userMenu  = document.getElementById('user-menu'),
+      profile   = document.querySelector('.profile-wrap');
+
+/* ───── sign-out handler ────────────────────────────────── */
+function signOut (e){
+  if (e) e.preventDefault();        // keep links from navigating
+
+  localStorage.clear();             // wipe saved data
+  sessionStorage.clear();
+  refreshProfileUI();               // repaint the navbar/drop-down
+  closeMenu();                      // collapse the menu if it’s open
+
+  /* optional – take the user back to the landing page */
+  window.location.replace('index.html');
+}
+
+
+/* paint the menu for either state */
+function refreshProfileUI () {
+  const u = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  userMenu.innerHTML = '';
+
+  /* ➊ always add Home (first row) */
+  userMenu.insertAdjacentHTML('beforeend',
+    '<li><a href="index.html">Home</a></li>');
+
+  if (u && u.phone){                       // signed-in  …
+    userMenu.insertAdjacentHTML('beforeend',
+      `<li><a href="my-requests.html?user=${u.phone}">Profile</a></li>`);
+
+    const out = document.createElement('li');
+    out.innerHTML = '<a href="#">Sign out</a>';
+    out.onclick = signOut;
+    userMenu.appendChild(out);
+
+  }else{                                   // guest …
+    const li = document.createElement('li');
+    li.textContent = 'Sign in';
+    li.onclick = () => { closeMenu(); showAuth(); };
+    userMenu.appendChild(li);
+  }
+}
+
+refreshProfileUI();
+window.addEventListener('storage', e => { if (e.key === 'tg_user') refreshProfileUI(); });
+
+/* togglers */
+function closeMenu() { profile.classList.remove('open'); }
+navUser .addEventListener('click', e => { e.stopPropagation(); profile.classList.toggle('open'); });
+navGuest.addEventListener('click', e => { e.stopPropagation(); profile.classList.toggle('open'); });
+document.body.addEventListener('click', closeMenu);
+
+/* ───────────────────────── helpers ───────────────────────── */
+const getCart   = () => JSON.parse(localStorage.getItem('tg_cart') || '[]');
+const setCart   = c   => localStorage.setItem('tg_cart', JSON.stringify(c));
+const syncBadge = () => {
+  const n = getCart().length;
+  const b = document.getElementById('cart-count');
+  b.textContent = n;
+  b.style.display = n ? 'inline' : 'none';
+};
+
+/* ───────────────────────── main ──────────────────────────── */
+document.addEventListener("DOMContentLoaded", () => {
+
+  /* 0 ── read query-string */
+const qs        = new URLSearchParams(location.search);
+const savedUser = JSON.parse(localStorage.getItem("tg_user") || "null");
+const slug      = (qs.get("game") || "skillslice").toLowerCase();   //  ← NEW
+function fileMatchesGame(file) {
+  const expect = slug.toLowerCase();
+  return file.name.toLowerCase().startsWith(expect);
+}
+let   userPhone = qs.get("user")  || (savedUser ? savedUser.phone : "");
+userPhone       = (userPhone || "").replace(/\D/g,"").slice(-10);
+
+  /* 🔹 build Back-link that preserves ?game & ?user */
+  const backBtn = document.getElementById("btn-back");
+  const params  = new URLSearchParams({ game: slug });
+  if (userPhone) params.append("user", userPhone);
+  backBtn.href = `product-details.html?${params.toString()}`;
+
+  /* 1 ── lookup tables */
+  const nameMap = {
+    skillslice       : "Skill Slice",
+    islandconqueror  : "Island Conqueror",
+    colourstrike     : "Color Strike",
+    skillarcade      : "Skill Arcade",
+    knowledgekonnect : "Knowledge Konnect",
+    ballpong         : "Ball Pong",
+    collectthecoins  : "Collect The Coin",
+    treasurehunt     : "Treasure Hunt",
+    spaceshooter     : "Space Shooter",
+    spinthewheel     : "Spin The Wheel",
+  };
+  const imgMap = {
+    skillslice       : "skillSlice.png",
+    islandconqueror  : "islandconqueror.png",
+    colourstrike     : "colorstrike.png",
+    skillarcade      : "skillarcade.png",
+    knowledgekonnect : "knowledgekonnect.png",
+    ballpong         : "ballpong.png",
+    collectthecoins  : "coincollect.png",
+    treasurehunt     : "treasurehunt.png",
+    spaceshooter     : "spaceshooter.png",
+    spinthewheel     : "spinthewheel.png",
+  };
+  const demoMap = {
+    skillslice       : "https://thinkinggrey.in/skillslice",
+    islandconqueror  : "https://thinkinggrey.in/islandconqueror",
+    colourstrike     : "https://thinkinggrey.in/colourstrike",
+    skillarcade      : "https://thinkinggrey.in/skillarcade",
+    knowledgekonnect : "https://thinkinggrey.in/knowledgekonnect/",
+    ballpong         : "https://thinkinggrey.in/ballpong",
+    collectthecoins  : "https://thinkinggrey.in/collectthecoins",
+    treasurehunt     : "https://thinkinggrey.in/treasurehunt",
+    spaceshooter     : "https://thinkinggrey.in/spaceshooter",
+    spinthewheel     : "https://thinkinggrey.in/spinthewheel",
+  };
+
+  /* 2 ── hero area & links */
+  const name     = nameMap[slug]  || slug;
+  const coverImg = imgMap[slug]  || "placeholder.png";
+  const demoURL  = demoMap[slug] || "#";
+
+  document.getElementById("game-title").textContent = name;
+  document.getElementById("game-name" ).textContent = name;
+  document.getElementById("game-img"  ).src  = "assets/images/" + coverImg;
+  document.getElementById("game-img"  ).alt  = name;
+
+  /* download sample */
+  const dl = document.getElementById("dl-sample");
+  dl.href     = "samples/" + slug + ".xlsx";
+  dl.download = slug + ".xlsx";
+
+  /* demo buttons */
+  document.querySelectorAll("#try-game-btn")
+          .forEach(a => a.href = demoURL);
+
+  /* 3 ── cart widget */
+  const cartBtn  = document.getElementById("cart-btn");
+  const cartIcon = cartBtn.querySelector("i");
+  const cartTxt  = cartBtn.querySelector("span");
+
+  const paintCart = (inCart) => {
+    cartIcon.classList.toggle("fa-cart-shopping", !inCart);
+    cartIcon.classList.toggle("fa-check",          inCart);
+    cartTxt.textContent = inCart ? "Added" : "I’m Interested";
+    cartBtn.classList.toggle("pill-yellow", !inCart);
+    cartBtn.classList.toggle("pill-added",  inCart);
+  };
+
+  paintCart(getCart().includes(name));
+  syncBadge();
+
+  cartBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    let cart = getCart();
+    const inCart = cart.includes(name);
+    cart = inCart ? cart.filter(x => x !== name) : [...cart, name];
+    setCart(cart); paintCart(!inCart); syncBadge();
+  });
+
+  /* 4 ── show user initial in navbar & log the data */
+const badge = navUser;   // ← add this line (or: const badge = document.getElementById("nav-user");)
+
+  if (savedUser && savedUser.name) {
+    badge.textContent = savedUser.name.trim()[0].toUpperCase();
+    badge.classList.remove("d-none");
+  }
+
+  /* 👉  HERE’S THE NEW CONSOLE LOG  */
+  console.log("[TG] user data →", savedUser);
+
+  /* 5 ── Excel upload widgets */
+  const excelInput = document.getElementById("excel-input");
+  const browseBtn  = document.getElementById("browse-btn");
+  const uploadBtn  = document.getElementById("upload-btn");
+  const fileLabel  = document.getElementById("file-label");
+
+  const tryQBtn = document.getElementById("try-qb-btn");
+  tryQBtn.dataset.demo = demoURL;
+
+  const resetTryBtn = () => {
+    tryQBtn.href = "#";
+    tryQBtn.classList.add("pill-disabled");
+  };
+  const enableTryBtn = () => {
+    tryQBtn.href = tryQBtn.dataset.demo;
+    tryQBtn.classList.remove("pill-disabled");
+  };
+
+  browseBtn.addEventListener("click", () => excelInput.click());
+
+  excelInput.addEventListener("change", () => {
+    if (!excelInput.files.length) return;
+
+if (!fileMatchesGame(excelInput.files[0])) {
+    alert(`That file doesn’t belong to ${name}. Please choose ${slug}.xlsx`);
+    excelInput.value = "";                       // clear the <input type=file>
+    return;
+  }
+
+    fileLabel.textContent   = "Selected file: " + excelInput.files[0].name;
+    fileLabel.style.display = "block";
+
+    uploadBtn.style.display = "inline-flex";
+    uploadBtn.disabled      = false;
+
+    enableTryBtn();
+  });
+
+uploadBtn.addEventListener('click', () => {
+  if (!excelInput.files.length) return;
+
+  /* gather form-data */
+  const fd = new FormData();
+  fd.append('uploaded_file',   excelInput.files[0]);
+  fd.append('productName',     slug);
+  fd.append('userPhoneNumber', userPhone);
+
+  const u = JSON.parse(localStorage.getItem('tg_user') || '{}');
+  if (!u.name || !u.email) {
+    alert('Please sign in before uploading.');
+    return;
+  }
+  fd.append('userName',  u.name);
+  fd.append('userEmail', u.email);
+
+  /* ---------- POST to server ---------- */
+ fetch('https://thinkinggrey.in/appgameweb/insert_question.php', {
+    method: 'POST',
+    body:   fd,
+  })
+  .then(async r => {
+    const txt  = await r.text();     // may be JSON or plain text
+    let   data = {};
+    try { data = JSON.parse(txt); } catch {/* not JSON → treat as fatal */}
+
+    if (!r.ok || !data.success) {
+      // surface server’s explanation when available
+      const reason = data.error || data.message || txt || `HTTP ${r.status}`;
+      throw new Error(reason);
+    }
+    return data;
+  })
+.then(data => {
+  alert(data.message);
+  uploadBtn.style.display  = 'none';
+  fileLabel.textContent    = 'Uploaded file: ' + excelInput.files[0].name;
+  fileLabel.style.display  = 'block';
+  enableTryBtn();
+  excelInput.value = '';
+
+  /*  NEW: ping submit_user.php  */
+  fetch('submit_user.php', {
+    method : 'POST',
+    headers: { 'Content-Type':'application/json' },
+    body   : JSON.stringify({
+      name : u.name,
+      email: u.email,
+      phone: u.phone || userPhone,
+      game : slug              // e.g. "ballpong"
+    })
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (!res.success) console.error('[submit_user] failed:', res.error);
+  })
+  .catch(err => console.error('[submit_user] fetch error:', err));
+});
+});
+  /* 6 ── half-page scroll indicator */
+  window.toggleScroll = () => {
+    const y   = window.scrollY;
+    const h   = window.innerHeight;
+    const max = document.body.offsetHeight;
+    window.scrollTo({ top: y + h * 0.5 >= max ? 0 : y + h * 0.5, behavior: "smooth" });
+  };
+  window.addEventListener("scroll", () => {
+    const ico = document.getElementById("scroll-icon");
+    const y   = window.scrollY;
+    const h   = window.innerHeight;
+    const max = document.body.offsetHeight;
+    ico.className = y + h >= max - 10 ? "fas fa-chevron-up" : "fas fa-chevron-down";
+  });
+  window.dispatchEvent(new Event("scroll"));   // set initial arrow
+});
+</script>
+
+
+  </body>
+  
+</html>

@@ -1,0 +1,77 @@
+<!-- /signin.html -->
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in – TG Gaming</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body{background:url("assets/images/bg.png") center/cover fixed;
+     font-family:"Poppins",sans-serif;color:#fff;display:flex;
+     justify-content:center;align-items:center;min-height:100vh;margin:0}
+.form-box{width:90%;max-width:540px;padding:30px;border-radius:16px;
+          background:rgba(0,0,0,.55);box-shadow:0 6px 28px rgba(0,0,0,.45)}
+.form-box h2{margin:0 0 26px;font-weight:700;text-align:center}
+.input-row{display:flex;gap:16px;margin-bottom:18px}
+.input-row input,.form-box input{flex:1 1 0;padding:12px 18px;border:none;
+          border-radius:8px;font:500 1rem "Poppins",sans-serif;color:#000}
+button{display:block;margin:18px auto 0;padding:12px 48px;border:none;
+       border-radius:30px;font:700 1rem/1 "Poppins",sans-serif;cursor:pointer;
+       background:linear-gradient(180deg,#ff006a,#be0059 90%);
+       color:#ffd94a;letter-spacing:.3px;box-shadow:0 6px 22px rgba(255,0,184,.4)}
+button:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(255,0,184,.6)}
+</style></head><body>
+
+<form class="form-box" id="signin-form">
+  <h2>Create / Access your account</h2>
+
+  <div class="input-row">
+    <input id="first"  name="first_name" placeholder="First Name"  required>
+    <input id="last"   name="last_name"  placeholder="Last Name"   required>
+  </div>
+
+  <input id="email"  name="email"  placeholder="Email Address"  type="email" required>
+  <input id="phone"  name="phone"  placeholder="+91 10-digit mobile" required pattern="^\+91\s\d{10}$" value="+91 ">
+
+  <button type="submit"><i class="fa-solid fa-paper-plane"></i>&nbsp;Continue</button>
+</form>
+
+<script>
+// helper to strip non-digits
+const num=(s)=>s.replace(/\D/g,'').slice(-10);
+
+document.getElementById('phone').addEventListener('input',e=>{
+  e.target.value='+91 '+num(e.target.value);
+});
+
+document.getElementById('signin-form').addEventListener('submit',async e=>{
+  e.preventDefault();
+
+  const user={
+    first :first.value.trim(),
+    last  :last.value.trim(),
+    email :email.value.trim(),
+    phone :num (phone.value)
+  };
+  if(!user.first||!user.last||!user.email||user.phone.length!==10){
+    alert('Please fill every field correctly.');return;
+  }
+
+  // 1) save in localStorage so UI updates immediately
+  localStorage.setItem('tg_user',JSON.stringify({
+    name:`${user.first} ${user.last}`.trim(),
+    email:user.email,
+    phone:user.phone
+  }));
+
+  // 2) POST to server (no page refresh)
+  try{
+    await fetch('auth.php',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(user)});
+  }catch(err){console.error(err);}   // fail-soft for now
+
+  // 3) back to home
+  location.href='index.html';
+});
+</script>
+</body></html>

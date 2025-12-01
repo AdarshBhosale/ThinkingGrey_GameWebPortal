@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Games</title>
+
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background: url("assets/images/bg.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        overflow-x: hidden;
+      }
+
+      /* NAVBAR */
+      .navbar {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        /* existing properties */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+         gap: 16px;    
+  padding: 16px 35px;
+        border-bottom: 1px solid #222;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+      }
+
+      footer {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        margin-top: 70px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #aaa;
+        border-top: 1px solid #222;
+      }
+
+      /* ───── BADGE STYLES FROM OLD INDEX ───── */
+
+      /* Green "✓ Added" badge on game cards */
+      .badge-added {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        background: #28a745;
+        color: white;
+        padding: 4px 10px;
+        font-size: 0.75rem;
+        border-radius: 12px;
+        font-weight: 600;
+        z-index: 9;
+      }
+
+      /* Positioning for cart icon badge */
+      .cart-li {
+        position: relative;
+        margin-left: auto;
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+
+      /* Cart icon badge (red circle with number) */
+      .cart-li .badge,
+      .badge {
+        position: absolute;
+        top: -6px;
+        right: 12px;
+        background: #ff4e6b;
+        color: #fff;
+        font-size: 0.7rem;
+        line-height: 1;
+        padding: 2px 5px;
+        border-radius: 50%;
+      }
+
+      /* Hover effect for cart icon */
+      .cart-li > a:hover {
+        background-color: transparent;
+        transform: scale(1.08);
+      }
+
+      .cart-li > a:hover .fa-shopping-cart {
+        color: #ffffff;
+        transition: color 0.3s ease, transform 0.3s ease;
+        transform: scale(1.15);
+      }
+
+      .navbar img.logo {
+        height: 60px;
+      }
+
+      .navbar .cart-icon {
+        font-size: 25px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.3s, color 0.3s;
+            margin-right: 20px;
+      }
+
+      .navbar .cart-icon:hover {
+        transform: scale(1.);
+      }
+
+      /* HEADING */
+      .heading-img {
+        width: 90%;
+        max-width: 600px;
+        margin: 30px auto 40px;
+        display: block;
+        animation: floatIn 1s ease-out;
+      }
+
+      /* GAME GRID */
+      .game-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 24px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        animation: fadeIn 1s ease-in;
+      }
+
+      .game-card {
+        position: relative; /* ← new */
+        background: linear-gradient(145deg, #1a003c, #2a005d);
+        border: 2px solid #4d1f3f;
+        border-radius: 20px;
+        overflow: hidden;
+        text-align: center;
+        box-shadow: 0 5px 25px rgba(255, 0, 184, 0.3);
+        transition: transform 0.4s, box-shadow 0.4s;
+      }
+
+      .game-card:hover {
+        transform: scale(1.06);
+        box-shadow: 0 0 30px #ff00b8;
+      }
+
+      .game-card img {
+        width: 100%;
+        height: auto;
+      }
+
+      .game-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 10px 0 0;
+      }
+
+      /* ── MEDIUM explore pill – drop these three vars right under :root ── */
+      :root {
+        /* medium font: 0.9 rem on small phones → 1.55 rem on large monitors  */
+        --explore-font: clamp(0.9rem, 0.55rem + 1vw, 1.55rem);
+
+        /* slimmer capsule: 0.35 – 0.7 rem vertical, 1.1 – 2.4 rem horizontal */
+        --explore-pad-y: clamp(0.35rem, 0.25rem + 0.4vw, 0.7rem);
+        --explore-pad-x: clamp(1.1rem, 0.8rem + 1.4vw, 2.4rem);
+      }
+
+      /* OPTIONAL: only keep width tweaks where you truly need them */
+      .game-card .explore-btn {
+        width: max-content; /* remove the global 40 % rule */
+        justify-content: center;
+      }
+
+      /* keep (or simplify) any breakpoint-specific widths you still like */
+      @media (max-width: 480px) {
+        .game-card .explore-btn {
+          width: 40%;
+        }
+      }
+
+      @media (min-width: 481px) and (max-width: 505px) {
+        .game-card .explore-btn {
+          width: 25%;
+          justify-content: center;
+        }
+      }
+      @media (min-width: 748px) and (max-width: 900px) {
+        .game-card .explore-btn {
+          width: 50%;
+          justify-content: center;
+        }
+      }
+      @media (min-width: 900px) and (max-width: 991px) {
+        .game-card .explore-btn {
+          width: 45%;
+          justify-content: center;
+        }
+      }
+      @media (min-width: 991px) and (max-width: 1200px) {
+        .game-card .explore-btn {
+          width: 50%;
+          justify-content: center;
+        }
+      }
+      @media (min-width: 1200px) and (max-width: 1500px) {
+        .game-card .explore-btn {
+          width: 50%;
+          justify-content: center;
+        }
+      }
+      @media (min-width: 1500px) {
+        .game-card .explore-btn {
+          width: 80%;
+          justify-content: center;
+        }
+      }
+      @media (min-width: 505px) and (max-width: 600px) {
+        .game-card .explore-btn {
+          width: 50%;
+          justify-content: center;
+        }
+      }
+      /* 3️⃣  tiny screens sometimes still need a bump */
+      @media (max-width: 780px) {
+        :root {
+          --explore-font: 1.15rem; /* small devices, fixed fallback */
+        }
+      }
+
+      .explore-btn {
+        /* geometry */
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4em;
+        padding: var(--explore-pad-y) var(--explore-pad-x);
+        border-radius: 4rem;
+        width: max-content; /* never stretch full-width inside grid cell */
+        text-decoration: none;
+
+        /* typography */
+        font: 800 var(--explore-font) / 1 "Poppins", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+
+        /* colours / effects */
+        --pink1: #ff006a;
+        --pink2: #be0059;
+        --stroke: #9a0047;
+        --glow: rgba(255, 200, 0, 0);
+
+        color: transparent;
+        background: linear-gradient(180deg, var(--pink1), var(--pink2) 90%);
+        position: relative;
+        user-select: none;
+        cursor: pointer;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+
+        margin-top: 15px;
+        margin-bottom: 20px;
+      }
+
+      .explore-btn::after {
+        /* rim + subtle glow */
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        box-shadow: inset 0 0 0 4px var(--stroke),
+          /* magenta rim  */ inset 0 4px 8px rgba(255, 255, 255, 0.35),
+          0 6px 18px var(--glow); /* outer glow   */
+        pointer-events: none;
+      }
+
+      .explore-btn span {
+        background: linear-gradient(
+          180deg,
+          #ffd94a 0%,
+          #ffbb0d 50%,
+          #d88a00 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 2px 0 #572800);
+      }
+
+      .explore-btn:hover,
+      .explore-btn:focus {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(255, 0, 184, 0.45), 0 10px 28px var(--glow);
+      }
+
+      .explore-btn:hover i,
+      .explore-btn:focus i {
+        animation: rocketTilt 0.8s ease-in-out infinite;
+      }
+      .explore-btn span,
+      .explore-btn i {
+        letter-spacing: 0em;
+        background: linear-gradient(
+          180deg,
+          #ffd94a 0%,
+          #ffbb0d 50%,
+          #d88a00 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-fill-color: transparent;
+        filter: drop-shadow(0 2px 0 #572800);
+      }
+
+      /* keep the button from stretching full-width inside the card */
+      .game-card .pill-btn {
+        margin: 12px auto 20px;
+        text-decoration: none;
+      }
+
+      .scroll-indicator {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #ffffff;
+        color: #007bff;
+        border: 2px solid #007bff;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: background-color 0.3s ease;
+      }
+      .scroll-indicator:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+      .scroll-indicator i {
+        font-size: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      /* ANIMATIONS */
+      @keyframes floatIn {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* FOOTER */
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 12px 16px;
+        }
+
+        .navbar img.logo {
+              width: 140px;
+    height: 60px;
+        }
+
+        .heading-img {
+          max-width: 90%;
+        }
+
+        .game-title {
+          font-size: 1rem;
+        }
+
+        .explore-btn {
+          width: 100px;
+          height: 36px;
+        }
+      }
+
+      @media (max-width: 480px) {
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+      }
+      
+/* put this AFTER your media-query section (or anywhere outside it)  */
+.user-badge{
+  display:inline-flex;                 /* centre the initial */
+  align-items:center;
+  justify-content:center;
+margin-left: 15px;
+    margin-top: 12px;
+  width:34px;
+  height:34px;                         /* ← equal W/H = circle */
+  border-radius:50%;
+  color:#1a0033;
+  font:700 1rem/1 "Poppins",sans-serif;
+  text-transform:uppercase;
+  user-select:none;
+  cursor:pointer;
+}
+
+/* 2) Style the badge itself */
+.user-badge, .guest-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: #1a0033;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  user-select: none;
+  /* drop a tiny shadow so it floats above the navbar */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+
+.profile-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* a little breathing room between the cart & the badge */
+  margin-left: -2rem;
+}
+
+.user-menu {
+  /* instead of top:120%; drop the gap so there’s no “hover gap” */
+  top: 100%;
+  right: 0;
+  /* … */
+  opacity: 0;
+  transform: translateY(-8px) scale(.95);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+
+.profile-wrap.open .user-menu{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.user-menu a       {color:inherit;text-decoration:none;display:block;}
+
+/* ② add somewhere in your global css (after .user-badge) */
+/* ─── stacked “Sign-in” badge ───────────────────────── */
+.guest-link{
+  display:flex;                 /* stack icon & text      */
+  flex-direction:column;
+  align-items:center;
+  gap:4px;                      /* little spacing         */
+  color:#fff !important;        /* white for both states  */
+  font:600 .9rem/1 "Poppins",sans-serif;
+  text-decoration:none;
+}
+
+.guest-link i{                  /* user icon              */
+  font-size:25px;               /* keep proportionate     */
+  color:#fff;                   /* white icon             */
+}
+
+.guest-text{                    /* the “Sign in” label    */
+  line-height:1;
+  color:#fff;                   /* white text             */
+}
+
+/* ─────── NEW: tiny helpers ─────── */
+.d-none{display:none!important}
+
+/* ─────────────────────────────────────────────────────────────
+      ① AUTHENTICATION MODAL  (same neon-galaxy style)
+   ───────────────────────────────────────────────────────────── */
+.auth-backdrop{
+  position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
+  background:rgba(0,0,0,.75);z-index:1100}
+.auth-dialog{
+  width:90%;max-width:540px;border-radius:18px;padding:36px 32px;
+  background:url("assets/images/nav-foot-bg.png") center/cover;
+  box-shadow:0 8px 32px rgba(255,0,184,.6);position:relative}
+.auth-dialog h3{margin:0 0 22px;font:700 1.4rem/1 "Poppins",sans-serif;color:#fff}
+.auth-close{
+  position:absolute;top:18px;right:22px;font-size:1.4rem;cursor:pointer;color:#ffd94a}
+.auth-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font: 600 1rem "Poppins", sans-serif;
+  color: #ffd94a;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.auth-tab.active {
+  color: #fff;
+  border-bottom: 2px solid #ffd94a;
+}
+
+/* tabs */
+.auth-tabs{display:flex;margin-bottom:28px}
+.auth-tabs button{
+  flex:1;border:none;background:transparent;padding:12px 0;
+  font:600 1rem "Poppins",sans-serif;color:#ffd94a;cursor:pointer}
+.auth-tabs .active{color:#fff;border-bottom:2px solid #ffd94a}
+
+/* ─── AUTH FORM GRID ─── */
+.auth-pane {
+  display: grid;
+  /* two columns of equal weight, with a 16px gap */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  /* center all items horizontally if they don't fill */
+  justify-items: stretch;
+}
+
+/* any element you give class="full" will stretch across both columns */
+.auth-pane > .full {
+  grid-column: 1 / -1;
+}
+
+/* make sure inputs fill their cell */
+.auth-pane input {
+  width: 100%;
+}
+
+/* phone prefix styling (optional: narrower) */
+.auth-pane .phone-prefix {
+  max-width: 60px; /* so “+91” isn’t huge */
+}
+
+/* button already styled by .auth-btn; stretch it full-width */
+.auth-pane .auth-btn {
+  justify-self: center; /* keep centering the button */
+}
+
+
+.row2{display:flex;gap:16px}
+.auth-pane input{
+  flex:1;padding:12px 0px;border:none;border-radius:8px;
+  font:500 1rem "Poppins",sans-serif;color:#000}
+/* ─── Auth button styled exactly like .explore-btn ───────────── */
+/* centre everything inside the form */
+.auth-pane{align-items:center;}                     /* already present – keep */
+
+/* ─── AUTH PILL: identical skin to .explore-btn ─── */
+.auth-btn{
+  /* geometry */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4em;
+  padding:var(--explore-pad-y) var(--explore-pad-x);
+  border-radius:4rem;
+  border:none;
+  width:max-content;
+  margin:0px auto 0;             /* ⬅ centres the pill */
+
+  /* type */
+  font:800 var(--explore-font)/1 "Poppins",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+
+  /* colours / effects  */
+  --pink1:#ff006a;
+  --pink2:#be0059;
+  --stroke:#9a0047;
+  --glow:rgba(255,200,0,0);
+
+  background:linear-gradient(180deg,var(--pink1),var(--pink2) 90%);
+  color:#ffd94a;                                   /* gold text     */
+  cursor:pointer;
+  user-select:none;
+  position:relative;
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+
+/* neon rim + outer glow */
+.auth-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:
+    inset 0 0 0 4px var(--stroke),
+    inset 0 4px 8px rgba(255,255,255,.35),
+    0 6px 18px var(--glow);
+}
+
+/* golden, 3-colour gradient text (only the inside <span>) */
+.auth-btn span{
+  background:linear-gradient(180deg,#ffd94a 0%,#ffbb0d 50%,#d88a00 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 0 #572800);
+}
+
+/* lift on hover / focus */
+.auth-btn:hover,
+.auth-btn:focus{
+  transform:translateY(-4px);
+  box-shadow:0 8px 32px rgba(255,0,184,.45),0 10px 28px var(--glow);
+}
+/* 1) Make the sign-in form stack its children vertically and center them */
+/* override the two-column grid for sign-in only */
+#form-in.auth-pane {
+  /* switch to a single column */
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 0px;            /* space between input & button */
+  padding-top: 10px;    /* optional */
+}
+
+/* make the input full-width (up to 300px) */
+#form-in.auth-pane input {
+  width: 80%;
+  max-width: 300px;
+  margin: 0;
+}
+
+/* Base rule – big screens */
+#form-in .auth-pane .auth-btn{
+  width:35%;
+  max-width:300px;
+  justify-self:center;
+}
+
+/* Small screens ≤ 480 px */
+@media screen and (max-width:480px){
+  #form-in .auth-pane .auth-btn{
+    width:42%;       /* or 100% if you want it full-width            */
+    height:45px;
+    max-width:305px;
+    justify-self:center;
+  }
+}
+
+/* make any .phone-group a two-column grid */
+.phone-group {
+  display: grid;
+  grid-template-columns: auto 1fr;  /* prefix is auto-sized, phone field fills remaining */
+  gap: 16px;
+  width: 100%;
+}
+
+/* fix the prefix to a nice width */
+.phone-prefix {
+  width: 80px;       /* or whatever fixed width you like */
+  flex: none;        /* cancel any flex:1 if it was inherited */
+  text-align: center;
+}
+
+/* ensure the phone number input fills its cell */
+.phone-number {
+  width: 100%;
+}
+
+/* 1) Remove the old 80px prefix and 16px gap, and give the Sign-in group its own layout */
+#form-in .phone-group {
+  display: grid;
+  grid-template-columns: 50px 1fr;   /* 50px for +91, rest for the number */
+  gap: 8px;                          /* smaller gap between fields */
+  max-width: 360px;                  /* optional: constrain total width */
+  margin: 0 auto 20px;               /* center it and add some bottom margin */
+}
+
+/* 2) Shrink the prefix */
+#form-in .phone-prefix {
+  width: 50px;                       /* matches the grid-template-columns */
+}
+
+/* 3) Make sure the number input fills its column */
+#form-in .phone-number {
+  width: 100% !important;            /* override any earlier width rules */
+  max-width: none  !important;
+}
+
+/* 4) Reset the generic #form-in input sizing so it doesn’t shrink your phone-group */
+#form-in.auth-pane input {
+  /*width: auto !important;*/
+  max-width: none !important;
+      padding-left: 7px;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;  /* align vertically */
+  gap: 15px;
+}
+
+.nav-actions .nav-link {
+  display: inline-flex;  /* force horizontal alignment */
+  align-items: center;
+ color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 3px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.nav-actions .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg,#ff00b8,#ffa300);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.nav-actions .nav-link:hover::after,
+.nav-actions .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* profile badge + dropdown */
+.profile-wrap { position: relative; }
+
+.user-badge {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+   background:#fff !important;  color: #1a0033;
+  font: 700 1rem/1 "Poppins", sans-serif;
+  cursor: pointer; user-select: none;
+   margin-top: 0; /* or remove entirely */
+   
+}
+
+.user-menu {
+  list-style: none; margin: 0; padding: 6px 0;
+  position: absolute; top: 120%; right: 0;
+  min-width: 140px;
+  background: #1a003c; border: 1px solid #4d1f3f;
+  border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.35);
+  opacity: 0; transform: translateY(-8px) scale(.95);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+
+.user-menu li {
+  padding: 6px 16px; color: #fff; cursor: pointer;
+}
+.user-menu li:hover {
+  background: #2a005d; color: #fff;
+}
+.user-menu a {
+  color: #fff !important; display: block; text-decoration: none;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <!-- SCROLL INDICATOR -->
+    <div
+      id="scroll-indicator"
+      class="scroll-indicator"
+      onclick="toggleScroll()"
+      title="Scroll for more"
+    >
+      <i id="scroll-icon" class="fas fa-chevron-down"></i>
+    </div>
+
+    <!-- NAVBAR -->
+  <div class="navbar">
+<a href="index.html" class="d-inline-block">
+  <img src="assets/images/logo.png" class="logo" alt="Logo">
+</a>
+
+  <div class="nav-actions">
+    <!-- Home link -->
+    <a href="index.html" class="nav-link active">Home</a>
+
+    <!-- Cart icon + badge -->
+    <a href="cart.html" class="nav-link cart-link position-relative">
+      <i class="fas fa-shopping-cart cart-icon"></i>
+      <span id="cart-count" class="badge">0</span>
+    </a>
+
+    <!-- Profile badge + dropdown -->
+    <div class="profile-wrap">
+      <!-- initial / signed-in badge -->
+      <span id="nav-user" class="user-badge d-none"></span>
+      <!-- guest icon if not signed in -->
+      <a id="nav-guest" class="guest-link d-none text-decoration-none">
+        <i class="fa-solid fa-user"></i>
+      </a>
+      <ul id="user-menu" class="user-menu"></ul>
+    </div>
+  </div>
+</div>
+
+
+    <!-- HEADING -->
+    <img
+      src="assets/images/exp.png"
+      alt="Explore Our Learning Games"
+      class="heading-img"
+    />
+
+    <!-- GAME GRID -->
+    <div class="game-grid">
+      <!-- Repeat for all games -->
+
+      <!-- 1 knowledgekonnect:  -->
+      <div class="game-card">
+        <img src="assets/images/trending-05.png" alt="KK Konnect" />
+        <div class="game-title">Knowledge Konnect</div>
+        <!-- Pill button -->
+        <a
+          href="product-details.html?game=knowledgekonnect"
+          class="explore-btn"
+        >
+          <span>Explore</span>
+        </a>
+      </div>
+
+      <!-- 2 coincollect: -->
+      <div class="game-card">
+        <img src="assets/images/trending-07.png" alt="Collect The Coin" />
+        <div class="game-title">Collect The Coin</div>
+        <a href="product-details.html?game=collectthecoins" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 3 spinthewheel: -->
+      <div class="game-card">
+        <img src="assets/images/trending-10.png" alt="Spin The Wheel" />
+        <div class="game-title">Spin The Wheel</div>
+        <a href="product-details.html?game=spinthewheel" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 4  colorstrike: -->
+      <div class="game-card">
+        <img src="assets/images/trending-03.png" alt="Color Strike" />
+        <div class="game-title">Color Strike</div>
+        <a href="product-details.html?game=colourstrike" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 5 islandconqueror: -->
+      <div class="game-card">
+        <img src="assets/images/trending-02.png" alt="Island Conqueror" />
+        <div class="game-title">Island Conqueror</div>
+        <a href="product-details.html?game=islandconqueror" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 6 - ballpong:   -->
+      <div class="game-card">
+        <img src="assets/images/trending-06.png" alt="Ball Pong" />
+        <div class="game-title">Ball Pong</div>
+        <a href="product-details.html?game=ballpong" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 7 - spaceshooter: -->
+      <div class="game-card">
+        <img src="assets/images/trending-09.png" alt="Space Shooter" />
+        <div class="game-title">Space Shooter</div>
+        <a href="product-details.html?game=spaceshooter" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 8 - skillarcade: -->
+      <div class="game-card">
+        <img src="assets/images/trending-04.png" alt="Skill Arcade" />
+        <div class="game-title">Skill Arcade</div>
+        <a href="product-details.html?game=skillarcade" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 9 - treasurehunt: -->
+      <div class="game-card">
+        <img src="assets/images/trending-08.png" alt="Treasure Hunt" />
+        <div class="game-title">Treasure Hunt</div>
+        <a href="product-details.html?game=treasurehunt" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 10 - skillslice: -->
+      <div class="game-card">
+        <img src="assets/images/trending-01.png" alt="Skill Slice" />
+        <div class="game-title">Skill Slice</div>
+        <a href="product-details.html?game=skillslice" class="explore-btn"
+          ><span>Explore</span></a
+        >
+      </div>
+
+      <!-- 11 - matchthecard: -->
+      <div class="game-card">
+        <img src="assets/images/trending-11.png" alt="Match The Card" />
+        <div class="game-title">Match The Card</div>
+        <a href="#" class="explore-btn"><span>Upcoming</span></a>
+      </div>
+
+      <!-- 12 - matchthecard: -->
+      <div class="game-card">
+        <img src="assets/images/trending-12.png" alt="Superstar Manager" />
+        <div class="game-title">Superstar Manager</div>
+        <a href="#" class="explore-btn"><span>Upcoming</span></a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      Copyright © 2025 Thinking Grey<br />
+      Designed By Thinking Grey
+    </footer>
+
+ <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const navUser     = document.getElementById('nav-user');
+  const navGuest    = document.getElementById('nav-guest');
+  const userMenu    = document.getElementById('user-menu');
+  const profileWrap = document.querySelector('.profile-wrap');
+
+  /* 1️⃣  get the user once, then log it */
+  const savedUser = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  console.log('[TG] user data →', savedUser);        //  ←←  NEW LINE
+  
+/***** CLICK-TOGGLE FOR EITHER BADGE *****/
+function toggleMenu(e){
+  e.stopPropagation();               // keep click from bubbling to <body>
+  profileWrap.classList.toggle('open');
+}
+navUser .addEventListener('click', toggleMenu);
+navGuest.addEventListener('click', toggleMenu);
+
+
+  // ─── CART + GAME-CARD BADGES ─────────────────────────────────
+  const getCart = () => JSON.parse(localStorage.getItem('tg_cart') || '[]');
+  const setCart = c  => localStorage.setItem('tg_cart', JSON.stringify(c));
+  const cartCountEl = document.getElementById('cart-count');
+
+  function updateCartBadge() {
+    const n = getCart().length;
+    cartCountEl.textContent = n;
+    cartCountEl.style.display = n ? 'inline-block' : 'none';
+  }
+  function updateCardBadges() {
+    const cart = getCart();
+    document.querySelectorAll('.game-card').forEach(card => {
+      const title = card.querySelector('.game-title').textContent.trim();
+      let badge = card.querySelector('.badge-added');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'badge-added';
+        badge.textContent = '✓ Added';
+        card.appendChild(badge);
+      }
+      badge.style.display = cart.includes(title) ? 'inline-block' : 'none';
+    });
+  }
+  updateCartBadge();
+  updateCardBadges();
+  window.addEventListener('storage', e => {
+    if (e.key === 'tg_cart')      updateCartBadge(), updateCardBadges();
+    if (e.key === 'tg_user')      refreshProfileUI();
+  });
+
+  // ─── PROFILE BADGE + DROPDOWN ─────────────────────────────────
+
+
+function refreshProfileUI() {
+  const u = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  userMenu.innerHTML = '';
+
+  if (u && u.phone) {
+    navUser.textContent = u.name.trim()[0].toUpperCase();
+    navUser.classList.remove('d-none');
+    navGuest.classList.add('d-none');
+
+    // Profile
+    const profileLi = document.createElement('li');
+    const profileLink = document.createElement('a');
+    profileLink.textContent = 'Profile';
+    profileLink.href = `https://thinkinggrey.in/gameweb/my-requests.html?user=${u.phone}`;
+    profileLi.appendChild(profileLink);
+    userMenu.appendChild(profileLi);
+
+    // Sign Out
+    const signoutLi = document.createElement('li');
+    const signoutLink = document.createElement('a');
+    signoutLink.textContent = 'Sign out';
+    signoutLink.href = '#';
+    signoutLink.onclick = (e) => {
+      e.preventDefault();
+      // Clear everything
+      localStorage.clear();
+      sessionStorage.clear();
+      document.cookie.split(";").forEach(c => {
+        document.cookie = c
+          .replace(/^ +/, "")
+          .replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
+      });
+      refreshProfileUI();
+      location.reload();
+    };
+    signoutLi.appendChild(signoutLink);
+    userMenu.appendChild(signoutLi);
+  } else {
+    navUser.classList.add('d-none');
+    navGuest.classList.remove('d-none');
+
+   // guest state → build “Sign in” item
+const li = document.createElement('li');
+li.textContent = 'Sign in';
+li.onclick = () => {
+  profileWrap.classList.remove('open');   // hide dropdown
+  tabIn.click();                          // ⬅ show Sign-in pane
+  authModal.classList.remove('d-none');   // then open modal
+};
+userMenu.appendChild(li);
+  }
+}
+
+  refreshProfileUI();
+
+  // ─── AUTH MODAL LOGIC ─────────────────────────────────────────────
+  const authModal  = document.getElementById('auth-modal');
+  const authClose  = document.getElementById('auth-close');
+  const tabIn      = document.getElementById('tab-in');
+  const tabUp      = document.getElementById('tab-up');
+  const formIn     = document.getElementById('form-in');
+  const formUp     = document.getElementById('form-up');
+  const loginPhone = document.getElementById('login-phone');
+  const upFirst    = document.getElementById('up-first');
+  const upLast     = document.getElementById('up-last');
+  const upEmail    = document.getElementById('up-email');
+  const upPhone    = document.getElementById('up-phone');
+
+  authClose.addEventListener('click', () => authModal.classList.add('d-none'));
+
+  tabIn.addEventListener('click', () => {
+    tabIn.classList.add('active');
+    tabUp.classList.remove('active');
+    formIn.classList.remove('d-none');
+    formUp.classList.add('d-none');
+  });
+  tabUp.addEventListener('click', () => {
+    tabUp.classList.add('active');
+    tabIn.classList.remove('active');
+    formUp.classList.remove('d-none');
+    formIn.classList.add('d-none');
+  });
+
+  // only digits in sign-in
+  loginPhone.addEventListener('input', () => {
+    loginPhone.value = loginPhone.value.replace(/\D/g, '').slice(0, 10);
+  });
+
+  /* ---------- SIGN-UP ---------- */
+formUp.addEventListener('submit', async e => {
+  e.preventDefault();
+  const first  = upFirst.value.trim(),
+        last   = upLast.value.trim(),
+        email  = upEmail.value.trim(),
+        phone  = upPhone.value.replace(/\D/g,'').slice(-10);
+
+  if (!first || !last || !email || phone.length!==10) {
+    alert('Please fill every field correctly (10-digit mobile).');
+    return;
+  }
+
+  const res  = await fetch('signup.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({first,last,email,phone})
+  }).then(r=>r.json());
+
+  if (res.status === 'exists') {
+    alert('User already exists – please Sign-in.');
+    tabIn.click();
+    return;
+  }
+  if (res.status !== 'ok') { alert('Server error, try again.'); return; }
+
+  localStorage.setItem('tg_user',
+      JSON.stringify({name:res.name, phone, email}));
+  authModal.classList.add('d-none');
+  refreshProfileUI();
+});
+
+/* ---------- SIGN-IN ---------- */
+formIn.addEventListener('submit', async e => {
+  e.preventDefault();
+  const phone = loginPhone.value.trim();
+  if (phone.length !== 10) { alert('Enter a valid 10-digit mobile'); return; }
+
+  const res = await fetch('signin.php', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({phone})
+  }).then(r=>r.json());
+
+  if (res.status === 'not_found') {
+    alert('No account found — please Sign-up.');
+    tabUp.click();
+    return;
+  }
+  if (res.status !== 'ok') { alert('Server error, try again.'); return; }
+
+  localStorage.setItem('tg_user',
+      JSON.stringify({name:res.name, phone, email:res.email}));
+  authModal.classList.add('d-none');
+  refreshProfileUI();
+});
+
+
+  // ─── SCROLL INDICATOR ─────────────────────────────────────────────
+  const scrollIcon = document.getElementById('scroll-icon');
+  window.addEventListener('scroll', () => {
+    const y  = window.scrollY,
+          wh = window.innerHeight,
+          dh = document.body.offsetHeight;
+    if (y <= 10) {
+      scrollIcon.classList.remove('fa-chevron-up');
+      scrollIcon.classList.add('fa-chevron-down');
+    } else if (y + wh >= dh - 10) {
+      scrollIcon.classList.remove('fa-chevron-down');
+      scrollIcon.classList.add('fa-chevron-up');
+    } else {
+      scrollIcon.classList.remove('fa-chevron-up');
+      scrollIcon.classList.add('fa-chevron-down');
+    }
+  });
+  window.dispatchEvent(new Event('scroll'));
+});
+</script>
+
+    
+    <div id="auth-modal" class="auth-backdrop d-none">
+  <div class="auth-dialog">
+    <i id="auth-close" class="fa-solid fa-xmark auth-close"></i>
+
+    <h3>Welcome to TG Gaming</h3>
+
+   <nav class="auth-tabs">
+  <button id="tab-in"  type="button" class="auth-tab active">Sign in</button>
+  <button id="tab-up"  type="button" class="auth-tab">Sign up</button>
+</nav>
+
+
+    <form id="form-in" class="auth-pane">
+  <div class="phone-group full">
+    <!-- static country code -->
+    <input
+      id="login-phone-prefix"
+      class="phone-prefix"
+      value="+91 "
+      readonly
+    />
+    <!-- only the 10-digit number -->
+    <input
+      id="login-phone"
+      class="phone-number"
+      type="tel"
+      placeholder="10-digit mobile number"
+      pattern="\d{10}" 
+      maxlength="10"
+      inputmode="numeric"
+      required
+    />
+  </div>
+  <button type="submit" class="auth-btn">Sign in</button>
+</form>
+
+
+    <form id="form-up" class="auth-pane d-none">
+  <!-- 1st row: first + last -->
+  <input id="up-first"  placeholder="First Name"  required>
+  <input id="up-last"   placeholder="Last Name"   required>
+
+  <!-- 2nd row: email, full-width -->
+  <input id="up-email" class="full" placeholder="Email Address" type="email" required>
+
+ <!-- 3rd row: phone split -->
+  <div class="phone-group full">
+    <!-- static country code -->
+    <input 
+      id="up-phone-prefix" 
+      class="phone-prefix" 
+      value="+91" 
+      readonly
+    >
+    <!-- only the 10-digit number, never more -->
+    <input
+      id="up-phone"
+      class="phone-number"
+      type="tel"
+      placeholder="10-digit mobile number"
+      pattern="\d{10}"
+      maxlength="10"
+      inputmode="numeric"
+      required
+    >
+  </div>
+
+  <!-- 4th row: submit, full-width -->
+  <button type="submit" class="auth-btn full">Sign up</button>
+</form>
+
+  </div>
+</div>
+
+  </body>
+</html>

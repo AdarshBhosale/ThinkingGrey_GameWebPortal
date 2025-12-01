@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Your Cart – TG Gaming</title>
+
+    <!-- Bootstrap + Font-Awesome -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Fonts & Bootstrap -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css" />
+    <link rel="stylesheet" href="assets/css/owl.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+    <style>
+        .navbar {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 35px;
+        border-bottom: 1px solid #222;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+      }
+    footer {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        margin-top: 70px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #aaa;
+        border-top: 1px solid #222;
+        text-align: center;
+      }
+        .navbar img.logo {
+       width: 140px;
+    height: 60px;
+      }
+      .navbar .cart-icon {
+        font-size: 26px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.3s, color 0.3s;
+      }
+
+   /* ─────────  Animated trash can  ───────── */
+.trash-btn{
+  background:none;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  outline:none;            /* we’ll handle focus glow */
+}
+
+/* base look */
+.trash-btn i{
+  font-size:1.4rem;
+  color:#ff4e6b;
+  transition:transform .25s ease, filter .25s ease;
+}
+
+/* glow + wiggle on hover/focus */
+.trash-btn:hover i,
+.trash-btn:focus i{
+  animation: binShake .6s ease-out 1;
+  filter:drop-shadow(0 0 6px rgba(255,78,107,.65));
+}
+
+/* small press-in when clicked */
+.trash-btn:active i{
+  transform:translateY(1px) scale(.95);
+}
+
+/* keyframes: quick left-right shake */
+@keyframes binShake{
+  0%,100%{transform:rotate(0);}
+  20%   {transform:rotate(-15deg);}
+  40%   {transform:rotate(12deg);}
+  60%   {transform:rotate(-9deg);}
+  80%   {transform:rotate(5deg);}
+}
+
+  .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .nav-actions .nav-link {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      /* =====================  Animated underline on navbar links  ===================== */
+      .nav-actions .nav-link {
+        position: relative; /* 1 — anchor becomes the ref for ::after   */
+        padding-bottom: 3px; /* 2 — a little room for the underline      */
+      }
+
+      .nav-actions .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px; /* underline thickness                      */
+        background: linear-gradient(90deg, #ff00b8, #ffa300);
+        transform: scaleX(0); /* 3 — start hidden                         */
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .nav-actions .nav-link:hover::after,
+      .nav-actions .nav-link:focus::after,
+      .nav-actions .nav-link.active::after {
+        /* keep it visible on the active page      */
+        transform: scaleX(1); /* 4 — grow to full width on hover/focus    */
+      }
+      .nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 35px; /* Adjust spacing between items */
+}
+
+.nav-actions .nav-link {
+  color: white;
+  font-size: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* ===== BLUE “CUSTOMISE” PILL ===== */
+.btn-customise{
+  /* palette */
+  --blue-top: #1da3ff;
+  --blue-bot: #0278ff;
+  --rim:      #015bcc;
+  --glow:     rgba(0,105,255,.35);
+
+  padding: .5rem 1.4rem;
+  border-radius: 1.7rem;
+  background: linear-gradient(180deg,var(--blue-top),var(--blue-bot) 90%);
+  border: 2px solid var(--rim);
+
+  font: 700 .95rem/1 "Poppins",sans-serif;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  text-decoration: none;
+
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+/* wrench sized slightly larger than text */
+.btn-customise i{ font-size: 1.2rem; }
+
+/* lift + glow on hover • wrench spins once */
+.btn-customise:hover,
+.btn-customise:focus{
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.16),
+    inset 0 -4px 6px rgba(0,0,0,.25),
+    0 8px 22px var(--glow);
+}
+.btn-customise:hover i,
+.btn-customise:focus i{
+  animation: wrenchSpin .8s ease-out 1;
+}
+
+/* tiny press-in */
+.btn-customise:active{
+  transform: translateY(-1px) scale(.98);
+}
+
+/* wrench 360° swing */
+@keyframes wrenchSpin{
+  0%   {transform:rotate(0);}
+  40%  {transform:rotate(-200deg);}
+  100% {transform:rotate(360deg);}
+}
+
+
+.badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #ff4e6b;
+        color: #fff;
+        font-size: 0.7rem;
+        line-height: 1;
+        padding: 2px 5px;
+        border-radius: 50%;
+      }
+      /* ===== Hover Effect for Customise Button ===== */
+.btn-primary {
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== Hover Effect for Request For Call Button ===== */
+.btn-checkout {
+  transition: transform 0.2s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background: #d94c55;
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-checkout:active {
+  transform: scale(0.96);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+      .py-5 {
+        padding-top: 0rem 0px !important;
+        padding-bottom: 3rem !important;
+      }
+
+
+
+       body {
+        background: url("assets/images/bg.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .cart-li {
+        position: relative;
+        margin-left: auto;
+      }
+      .cart-li .badge {
+            position: absolute;
+    top: -1px;
+    right: 1px;
+    background: #ff4e6b;
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 3px 6px;
+    border-radius: 50%;
+      }
+      .cart-table thead th {
+        border-bottom: 2px solid #e9ecef;
+        font-weight: 600;
+      }
+      .cart-item-img {
+        width: 90px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 0.25rem;
+      }
+      .totals-box {
+        border: 1px solid #e9ecef;
+        border-radius: 0.25rem;
+        padding: 1.5rem;
+      }
+      .totals-box h5 {
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+      .totals-box td {
+        padding: 0.25rem 0;
+      }
+      .totals-box td:last-child {
+        text-align: right;
+      }
+      .info-head {
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+      }
+      .info-head::after {
+        content: "";
+        display: inline-block;
+        width: 50px;
+        height: 2px;
+        background: #006dfc;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+      .info-form .form-control {
+        height: 48px;
+        border-radius: 0.25rem;
+        font-size: 0.9rem;
+      }
+  .btn-checkout {
+  display: block;
+  margin: 1.5rem auto 0;    /* center it with top margin */
+  padding: 0 22px;          /* keeps your left/right padding */
+  height: 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  background: #ee626b;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  transition: 0.3s;
+
+  /* new width rules: */
+  width: auto;              /* grow only to fit padding + text */
+  min-width: 180px;         /* never smaller than this */
+  max-width: 260px;         /* never larger than this */
+}
+
+      .btn-checkout:hover {
+        background: #d94c55;
+      }
+      /* toast container */
+      #toast-container {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        z-index: 1055;
+      }
+      .btn-checkout {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.9rem;
+        border-radius: 20px;
+      }
+
+.mt-4 {
+    font-size: 1rem;
+    margin-top: -0.5rem
+}
+      
+.call-btn{ margin-left:auto; margin-right:auto; }
+
+.cta-group{
+  margin-top: 2rem;           /* space above the pair                */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ gap: 1.75rem !important;          
+  flex-wrap: nowrap;          /* <— NO WRAPPING – they stay side-by-side */
+}
+.or-spacer        { margin: .75rem 0 !important; }
+.or-spacer + p    { margin-top: .5rem !important; }
+/* keep the main pill on one line and let it shrink if needed */
+.call-btn{
+  white-space: nowrap;
+  flex: 1 1 auto;             /* may shrink on tiny screens           */
+}
+
+/* ---- WhatsApp pill ---------------------------------------------- */
+.wa-btn{
+  flex: 0 0 auto;             /* never grabs extra width              */
+  width: 62px;
+  height: 62px;
+}
+@media (max-width:460px){
+  .call-btn{
+    padding:.50rem .75rem !important;
+    font-size:1rem !important;
+  }
+}
+
+/* ---------- responsive tweaks ---------- */
+@media(max-width: 460px){          /* narrow phones */
+
+
+  .wa-btn{
+    width: 50px; height: 50px;    /* smaller badge */
+  }
+}
+
+@media(max-width: 340px){          /* ultra-narrow */
+  .call-btn{
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    gap: .5rem;
+  }
+  .wa-btn{
+    width: 44px; height: 44px;
+  }
+}
+
+/* keep the call button flush-centred */
+/* --- CTA pair layout ------------------------------------------ */
+.cta-group .call-btn{
+  flex: 0 1 auto;       /* ❶ don’t grow, but allow it to shrink   */
+  max-width: 320px;     /* ❷ optional – keep it from ever over-growing
+                           (tweak or remove this line if you like) */
+}
+
+/* ───────────────────────────
+   REQUEST-FOR-CALL pill
+   ─────────────────────────── */
+.call-btn{
+  --pink-top:#ff006a;          /* … all the shared tokens … */
+  --pink-bot:#be0059;
+  --rim:#9a0047;
+  --gold:#d7a137;
+
+  margin-top:25px;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  padding:.65rem 1.4rem;       /* ← desktop padding         */
+  border:3px solid var(--rim);
+  border-radius:50rem;
+  background:linear-gradient(180deg,var(--pink-top),var(--pink-bot) 90%);
+  color:var(--gold);
+  font:800 1.4rem/1 "Poppins",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  cursor:pointer;
+  user-select:none;
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+
+/* stacked two-line label */
+.call-text{
+  display: inline-block;
+  line-height: 1.1;
+}
+/* === Gold gradient for the REQUEST-FOR-CALL pill === */
+.call-btn i,
+.call-btn span {                       /* icon  + both text lines  */
+  background: linear-gradient(
+              180deg,
+              #ffd94a 0%,
+              #ffbb0d 50%,
+              #d88a00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;   /* makes the gradient show */
+  filter: drop-shadow(0 2px 0 #572800);   /* dark inner edge */
+}
+
+/* keep the handset a touch larger (optional) */
+.call-btn i{ font-size:1.65rem; }
+
+/* ——— interactions ——— */
+.call-btn:hover,
+.call-btn:focus{
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.18),
+    inset 0 -3px 6px rgba(0,0,0,.25),
+    0 8px 26px rgba(255,0,184,.55);
+}
+.call-btn:active{
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.18),
+    inset 0 -3px 6px rgba(0,0,0,.25),
+    0 4px 16px rgba(255,0,184,.35);
+}
+/* ══════════════════════════════════════════════════════════════════
+   ❶  Customise-modal “space” look (copied from product-details.html)
+   ══════════════════════════════════════════════════════════════════ */
+
+/* gold labels & tidier placeholders */
+#customise-modal .form-label      { color:#ffd94a; font-weight:600; }
+#customise-modal ::placeholder    { color:#888; opacity:1; }
+
+/* nebula backdrop, white text, rounded corners, glow */
+#customise-modal .modal-content{
+  background:url("assets/images/nav-foot-bg.png") center/cover no-repeat;
+  border:none;
+  border-radius:1rem;
+  color:#fff;
+  box-shadow:0 5px 25px rgba(255,0,184,.50);
+}
+
+/* title centred, divider & X-button refinements */
+#customise-modal .modal-header{
+  justify-content:center;
+  position:relative;
+  border-bottom:none;
+}
+#customise-modal .modal-title{ margin:0 auto; font-weight:700; text-align:center; }
+#customise-modal .btn-close{
+  position:absolute; right:1rem; top:50%; transform:translateY(-50%);
+  filter:invert(1); opacity:.85;
+}
+#customise-modal .btn-close:hover{ opacity:1; }
+
+/* centre footer button, shrink pill a touch */
+#customise-modal .modal-footer{ justify-content:center; border-top:none; }
+#modal-submit{ margin-top:-15px; font-size:1.2rem; padding:.45rem 1.9rem;     margin-bottom: 15px;}
+
+
+
+/* --- little paper-plane glide on hover/focus (same as product page) */
+@keyframes planeGlide{
+  0%,100%{ transform:translateX(0) rotate(0); }
+  50%    { transform:translateX(4px) rotate(6deg); }
+}
+#modal-submit:hover i,
+#modal-submit:focus i{ animation:planeGlide .9s ease-in-out infinite; }
+
+/* ─── centring helpers (fallback if you skip the Bootstrap classes) ─── */
+.call-btn{
+  margin-left:auto;
+  margin-right:auto;           /* horizontal centring */
+}
+
+/* ─── handset “ring” animation ─── */
+@keyframes phoneRing {
+  0%,100% { transform: rotate(0); }
+  10%     { transform: rotate(18deg); }
+  20%     { transform: rotate(-14deg); }
+  30%     { transform: rotate(12deg); }
+  40%     { transform: rotate(-8deg); }
+  50%     { transform: rotate(6deg); }
+  60%     { transform: rotate(-4deg); }
+  70%     { transform: rotate(2deg); }
+  80%     { transform: rotate(-1deg); }
+  90%     { transform: rotate(1deg); }
+}
+
+/* run the ring + brighten the glow on hover/focus */
+.call-btn:hover i,
+.call-btn:focus i{
+  animation: phoneRing 1.1s ease-in-out both;
+}
+
+.call-btn:hover,
+.call-btn:focus{
+  box-shadow:
+    inset 0 2px 4px rgba(255,255,255,.18),
+    inset 0 -3px 6px rgba(0,0,0,.25),
+    0 10px 32px rgba(255,0,184,.60);      /* brighter outer glow */
+}
+
+/* ════════════════════════════════════════════════════════════════
+   “SUBMIT & CONTINUE” MAGENTA PILL + ANIMATIONS   (same as product page)
+   ════════════════════════════════════════════════════════════════ */
+
+/* ---------- universal pill base ---------- */
+.pill-btn{
+  --pink-top:   #ff006a;
+  --pink-bot:   #be0059;
+  --rim:        #9a0047;
+  --glow:       rgba(255,0,184,.35);          /* purple outer glow      */
+
+  display:inline-flex; align-items:center; gap:14px;
+  padding:.25rem .9rem;
+  border-radius:50rem;
+  position:relative;
+  cursor:pointer; user-select:none; text-decoration:none;
+
+  font:800 1.35rem/1 "Poppins",sans-serif;
+  letter-spacing:.3px; text-transform:uppercase;
+  color:transparent;                           /* painted with gradient */
+  background:linear-gradient(180deg,var(--pink-top),var(--pink-bot) 90%);
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+
+/* inset rim + outer glow */
+.pill-btn::after{
+  content:""; position:absolute; inset:0; border-radius:inherit;
+  box-shadow:
+    inset 0 0 0 4px var(--rim),                 /* dark rim             */
+    inset 0 4px 8px rgba(255,255,255,.35),      /* inner highlight      */
+    0 6px 16px var(--glow);                     /* outer glow           */
+  pointer-events:none;
+}
+
+/* gradient-gold icon & text */
+.pill-btn i,
+.pill-btn span{
+  background:linear-gradient(180deg,#ffd94a 0%,#ffbb0d 50%,#d88a00 100%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 3px 0 #572800);          /* dark inner edge      */
+}
+
+.pill-btn.small-pill{
+  max-width: 100%;        /* safety on very narrow screens */
+  padding: .55rem 1.8rem;
+}
+
+/* phone tweak */
+@media (max-width:420px){
+  .pill-btn.small-pill{ width: 150px; }
+}
+
+.pill-btn.small-pill i{ font-size:1.6rem; }
+
+/* lift & glow on hover / focus */
+.pill-btn:hover,
+.pill-btn:focus{
+  transform:translateY(-3px);
+  box-shadow:
+    inset 0 0 0 4px var(--rim),
+    inset 0 4px 8px rgba(255,255,255,.35),
+    0 10px 38px var(--glow);
+}
+
+/* tiny press-in */
+.pill-btn:active{ transform:translateY(-1px) scale(.98); }
+
+/* ---------- paper-plane glide ---------- */
+@keyframes planeGlide{
+  0%,100%{ transform:translateX(0) rotate(0); }
+  50%   { transform:translateX(4px) rotate(6deg); }
+}
+#modal-submit:hover i,
+#modal-submit:focus i{ animation:planeGlide .9s ease-in-out infinite; }
+
+
+      @media (max-width: 428px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 20px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+         .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .btn-customise {
+    --blue-top: #1da3ff;
+    --blue-bot: #0278ff;
+    --rim: #015bcc;
+    --glow: rgba(0, 105, 255, .35);
+    padding: .5rem 0.4rem;
+    border-radius: 1.7rem;
+    background: linear-gradient(180deg, var(--blue-top), var(--blue-bot) 90%);
+    border: 2px solid var(--rim);
+    font: 700 0.90rem / 1 "Poppins", sans-serif;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    text-decoration: none;
+    transition: transform .22s ease, box-shadow .22s ease;
+}
+.btn-customise i {
+    font-size: 1rem;
+}
+        .single-product.section {
+          padding: 0px;
+          margin-top: 50px;
+        }
+        .btn-group-custom > * {
+          margin-top: 10px;
+          margin-right: 10px;
+        }
+        .logo-img {
+           width: 120px;
+        }
+        .cart-li {
+          margin-left: 0 !important;
+        }
+        .py-5 {
+          padding-top: 2rem !important;
+          padding-bottom: 2rem !important;
+        }
+  
+/* make the centering row span the whole viewport and become a flexbox */
+.row.justify-content-center{
+  min-height:30vh;                 /* full viewport height            */
+  display:flex;                     /* enable flexbox                 */
+  justify-content:center;           /* center horizontally            */
+  align-items:center;               /* center vertically              */
+}
+
+/* optional: keep the form from stretching too wide on desktops */
+.col-md-6{
+  max-width:420px;                  /* adjust to taste                */
+  width:100%;                       /* still fluid under 420px        */
+}
+
+/* slight visual polish */
+#delivery-form .form-control{
+  padding:.75rem 1rem;
+  font-size:1rem;
+  border-radius:8px;
+}
+.g-3, .gx-3 {
+    --bs-gutter-x: -3rem
+-48px
+;
+}
+.cart-item-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.25rem;
+}
+      }
+/* phones ≤ 480 px  – keep only the cart icon */
+@media (max-width:480px){
+  .nav-actions .nav-link:not(.cart-link){
+    display:none !important;     /* hide “Home”, “My Games”, …   */
+  }
+  
+  .mt-2 {
+    margin-top: 0.5rem !important;
+    padding-bottom: 0px !important;
+    margin-bottom: -35px;
+}
+}
+
+      @media (min-width: 428px) and (max-width: 575.98px) {
+      
+        .single-product.section {
+          padding: 0px;
+          margin-top: 50px;
+        }
+        .btn-group-custom > * {
+          margin-top: 10px;
+          margin-right: 10px;
+        }
+
+        .cart-li {
+          margin-left: 0 !important;
+        }
+        .py-5 {
+          padding-top: 0rem !important;
+          padding-bottom: 3rem !important;
+        }
+          .logo-img {
+           width: 150px;
+        }
+        .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    --bs-gutter-x: 4.5rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-right: auto;
+    margin-left: auto;
+}
+      }
+
+      @media (min-width: 576px) and (max-width: 767.98px) {
+       
+        .single-product.section {
+          padding: 0px;
+          margin-top: 50px;
+        }
+        .btn-group-custom > * {
+          margin-top: 10px;
+          margin-right: 10px;
+        }
+
+        .cart-li {
+          margin-left: 0 !important;
+        }
+        .mb-3 {
+          margin-bottom: 1rem !important;
+          margin-top: 2rem;
+        }
+        .logo-img {
+             width: 150px;
+        }
+      }
+
+      @media (min-width: 768px) and (max-width: 1199.98px) {
+        
+        .single-product.section {
+          padding: 0px;
+          margin-top: 50px;
+        }
+        .btn-group-custom > * {
+          margin-top: 10px;
+          margin-right: 10px;
+        }
+
+        .cart-li {
+          margin-left: 0 !important;
+        }
+        .mb-3 {
+          margin-bottom: 1rem !important;
+          margin-top: 2rem;
+        }
+        .logo-img {
+           width: 150px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+       
+        .single-product.section {
+          padding: 0px;
+          margin-top: 50px;
+        }
+        .btn-group-custom > * {
+          margin-top: 10px;
+          margin-right: 10px;
+        }
+
+        .cart-li {
+          margin-left: 0 !important;
+        }
+        .mb-3 {
+          margin-bottom: 0rem !important;
+          margin-top: 2rem;
+        }
+        .logo-img {
+           width: 150px;
+        }
+        
+        footer {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        margin-top: 70px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #aaa;
+        border-top: 1px solid #222;
+        text-align: center;
+      }
+      }
+
+      /*whatsapp icon*/
+      /* ─────────────────────  WhatsApp pill  ───────────────────── */
+.wa-btn{
+  --green-top:#25d366;              /* WhatsApp brand colours */
+  --green-bot:#159947;
+  --rim:#0e7d37;
+  --glow:rgba(37,211,102,.45);
+  
+    left: 20px;
+ width: 55px;
+    height: 55px;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  background:linear-gradient(180deg,var(--green-top),var(--green-bot) 90%);
+  position:relative;
+  text-decoration:none;
+
+  transition:transform .22s ease, box-shadow .22s ease;
+}
+.wa-btn::after{                     /* rim + outer glow */
+  content:"";
+  position:absolute; inset:0; border-radius:inherit;
+  box-shadow:
+    inset 0 0 0 4px var(--rim),
+    inset 0 4px 8px rgba(255,255,255,.35),
+    0 6px 18px var(--glow);
+}
+.wa-btn i{
+  font-size:1.9rem;
+  color:#fff;
+}
+
+/* Hover lift */
+.wa-btn:hover,
+.wa-btn:focus{
+  transform:translateY(-3px);
+  box-shadow:0 10px 26px var(--glow);
+}
+
+/* Shrink a bit on very narrow phones */
+@media (max-width:400px){
+  .wa-btn{ width:54px; height:54px; }
+  .wa-btn i{ font-size:1.6rem; }
+}
+.cta-group .call-btn{ margin:0; }
+
+/* ░░░ PROFILE BADGE + DROPDOWN ░░░ */
+.profile-wrap{position:relative;}
+
+.user-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;
+  background:#fff;color:#1a0033;
+  font:700 1rem/1 "Poppins",sans-serif;
+  text-transform:uppercase;user-select:none;cursor:pointer;
+}
+
+.user-menu{
+  list-style:none;margin:0;padding:6px 0;
+  position:absolute;top:145%;right:0;
+  min-width:140px;background:#1a003c;
+  border:1px solid #4d1f3f;border-radius:10px;
+  box-shadow:0 4px 12px rgba(0,0,0,.35);
+  opacity:0;transform:translateY(-8px) scale(.95);pointer-events:none;
+  transition:opacity .25s,transform .25s;
+}
+
+.profile-wrap.open .user-menu,
+.profile-wrap:focus-within .user-menu{
+  opacity:1;transform:translateY(0) scale(1);pointer-events:auto;
+}
+
+.user-menu li{padding:6px 16px;color:#ffd94a;cursor:pointer;}
+.user-menu li:hover{background:#2a005d;color:#fff;}
+.user-menu a{color:inherit;text-decoration:none;display:block;}
+
+/* ░░░ AUTH SHEET (galaxy skin) ░░░ */
+.auth-backdrop{position:fixed;inset:0;display:flex;
+  justify-content:center;align-items:center;
+  background:rgba(0,0,0,.75);z-index:1100}
+
+.auth-dialog{
+  width:90%;max-width:540px;border-radius:18px;padding:36px 32px;
+  background:url("assets/images/nav-foot-bg.png") center/cover;
+  box-shadow:0 8px 32px rgba(255,0,184,.6);position:relative;color:#fff;
+}
+
+.auth-close{position:absolute;top:18px;right:22px;font-size:1.4rem;
+  cursor:pointer;color:#ffd94a}
+
+.auth-tabs{display:flex;margin-bottom:28px}
+.auth-tab{flex:1;border:none;background:transparent;padding:12px 0;
+  font:600 1rem "Poppins",sans-serif;color:#ffd94a;cursor:pointer}
+.auth-tab.active{color:#fff;border-bottom:2px solid #ffd94a}
+
+.auth-pane{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:16px
+}
+.auth-pane>.full{grid-column:1/-1}
+.auth-pane input{width:100%}
+
+.phone-group{display:grid;grid-template-columns:auto 1fr;gap:16px;width:100%}
+.phone-prefix{max-width:60px;text-align:center}
+
+/* ─────────────────────────────────────────────────────────────
+      ① AUTHENTICATION MODAL  (same neon-galaxy style)
+   ───────────────────────────────────────────────────────────── */
+.auth-backdrop{
+  position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
+  background:rgba(0,0,0,.75);z-index:1100}
+.auth-dialog{
+  width:90%;max-width:540px;border-radius:18px;padding:36px 32px;
+  background:url("assets/images/nav-foot-bg.png") center/cover;
+  box-shadow:0 8px 32px rgba(255,0,184,.6);position:relative}
+.auth-dialog h3{margin:0 0 22px;font:700 1.4rem/1 "Poppins",sans-serif;color:#fff;
+    text-align: center;}
+.auth-close{
+  position:absolute;top:18px;right:22px;font-size:1.4rem;cursor:pointer;color:#ffd94a}
+.auth-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font: 600 1rem "Poppins", sans-serif;
+  color: #ffd94a;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.auth-tab.active {
+  color: #fff;
+  border-bottom: 2px solid #ffd94a;
+}
+
+/* tabs */
+.auth-tabs{display:flex;margin-bottom:28px}
+.auth-tabs button{
+  flex:1;border:none;background:transparent;padding:12px 0;
+  font:600 1rem "Poppins",sans-serif;color:#ffd94a;cursor:pointer}
+.auth-tabs .active{color:#fff;border-bottom:2px solid #ffd94a}
+
+/* ─── AUTH FORM GRID ─── */
+.auth-pane {
+  display: grid;
+  /* two columns of equal weight, with a 16px gap */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  /* center all items horizontally if they don't fill */
+  justify-items: stretch;
+}
+
+/* any element you give class="full" will stretch across both columns */
+.auth-pane > .full {
+  grid-column: 1 / -1;
+}
+
+/* make sure inputs fill their cell */
+.auth-pane input {
+  width: 100%;
+}
+
+/* phone prefix styling (optional: narrower) */
+.auth-pane .phone-prefix {
+  max-width: 60px; /* so “+91” isn’t huge */
+}
+
+.auth-pane .auth-btn {
+       justify-self: center;
+    padding: 10px 10px 10px 10px;
+    margin: 10px;
+    width: 0px;
+}
+
+.row2{display:flex;gap:16px}
+.auth-pane input{
+  flex:1;padding:12px 0px;border:none;border-radius:8px;
+  font:500 1rem "Poppins",sans-serif;color:#000}
+/* ─── Auth button styled exactly like .explore-btn ───────────── */
+/* centre everything inside the form */
+.auth-pane{align-items:center;}                     /* already present – keep */
+/* ------------------------------------------------------------
+   AUTH PILL  – identical skin to the magenta “SIGN IN” sample
+------------------------------------------------------------ */
+.auth-btn,
+.auth-btn.full {                 /* Sign-in and Sign-up */
+  /* geometry ------------------------------------------------ */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45em;                    /* little room if you ever add an icon */
+  padding: .7rem 2.4rem;         /* height + horizontal fatness          */
+  border-radius: 4rem;
+  min-width: 220px;              /* never skinnier than the screenshot   */
+  max-width: 340px;
+  width: 100%;                   /* stretch inside its grid column       */
+  margin: 12px auto 0;           /* centred with a bit of top gap        */
+
+  /* colours / effects --------------------------------------- */
+  font: 800 1.15rem/1 "Poppins", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .35px;
+
+  --pink1:   #ff006a;
+  --pink2:   #be0059;
+  --rim:     #9a0047;
+  --glow:    rgba(255,0,184,0);
+
+  background: linear-gradient(180deg, var(--pink1), var(--pink2) 90%);
+  position: relative;
+  color: #ffd94a;                /* fallback if <span> isn’t used        */
+  cursor: pointer;
+  user-select: none;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+
+/* neon rim + outer glow */
+.auth-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:
+    inset 0 0 0 4px var(--rim),
+    inset 0 4px 8px rgba(255,255,255,.35),
+    0 6px 18px var(--glow);
+}
+
+/* gold gradient text */
+.auth-btn span{
+  background:linear-gradient(180deg,#ffd94a 0%,#ffbb0d 50%,#d88a00 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 0 #572800);
+  font-size: 23px;
+}
+
+.auth-btn:hover,
+.auth-btn:focus{
+  transform:translateY(-4px);
+  box-shadow:0 8px 32px rgba(255,0,184,.45),0 10px 28px var(--glow);
+}
+
+/* ───────────────────────────────────────────────────────────────
+   1 ▸  SLIMMER, RESPONSIVE AUTH BUTTON
+   ─────────────────────────────────────────────────────────────── */
+.auth-btn,
+.auth-btn.full{
+  /* keep the magenta skin, just refine size behaviour */
+  width: auto;           /* grow only as wide as content            */
+  min-width: 130px;      /* sample pill ≈ 170 px                    */
+  max-width: 320px;      /* never let it sprawl                     */
+  padding: .65rem 2rem;  /* same height, a touch less horizontal    */
+  margin: 12px auto 0;   /* stay centred                            */
+  border: 0;
+}
+
+@media (max-width: 460px){          /* small phones */
+  .auth-btn,
+  .auth-btn.full{
+    width: 100%;         /* fill modal width                        */
+    max-width: 260px;    /* but don’t touch edges                   */
+  }
+}
+
+/* ───────────────────────────────────────────────────────────────
+   2 ▸  FORM GRID – 2-col on wide, 1-col on narrow
+   ─────────────────────────────────────────────────────────────── */
+/* Sign-up form already uses .auth-pane; just control its columns */
+#form-up.auth-pane{
+  grid-template-columns: repeat(2,1fr);   /* default → two equal cols */
+}
+
+@media (max-width: 600px){          /* below ~tablet size */
+  #form-up.auth-pane{
+    grid-template-columns: 1fr;     /* stack everything vertically    */
+  }
+  #form-up.auth-pane > *{
+    grid-column: 1 / -1;           /* every child spans full width    */
+  }
+}
+
+/* ensure the “+91 / phone” pair never breaks */
+#form-up .phone-group,
+#form-in .phone-group{
+  grid-template-columns: 60px 1fr; /* prefix + number                */
+  gap: 10px;
+}
+
+
+/* override the two-column grid for sign-in only */
+#form-in.auth-pane {
+  /* switch to a single column */
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 0px;            /* space between input & button */
+  padding-top: 10px;    /* optional */
+}
+
+/* make the input full-width (up to 300px) */
+#form-in.auth-pane input {
+  width: 80%;
+  max-width: 300px;
+  margin: 0;
+}
+
+@media (max-width:480px){
+  #form-in .auth-pane .auth-btn{
+    width:42%;        /*  ←  remove               */
+    height:45px;
+    max-width:305px;  /*  ←  remove               */
+  }
+}
+*/
+
+/* ✅  NEW rule : let the pill grow like on every other page */
+#form-in .auth-btn{
+  width:100%;            /* fills the available column             */
+  max-width:340px;       /* keeps it from getting too wide         */
+  margin:10px auto 0;    /* same centring & top-gap as product page */
+}
+
+/* Small screens ≤ 480 px */
+@media screen and (max-width:480px){
+  #form-in .auth-pane .auth-btn{
+    width:42%;       /* or 100% if you want it full-width            */
+    height:45px;
+    max-width:305px;
+    justify-self:center;
+  }
+}
+
+/* make any .phone-group a two-column grid */
+.phone-group {
+  display: grid;
+  grid-template-columns: auto 1fr;  /* prefix is auto-sized, phone field fills remaining */
+  gap: 16px;
+  width: 100%;
+}
+
+/* fix the prefix to a nice width */
+.phone-prefix {
+  width: 80px;       /* or whatever fixed width you like */
+  flex: none;        /* cancel any flex:1 if it was inherited */
+  text-align: center;
+}
+
+/* ensure the phone number input fills its cell */
+.phone-number {
+  width: 100%;
+}
+
+/* 1) Remove the old 80px prefix and 16px gap, and give the Sign-in group its own layout */
+#form-in .phone-group {
+  display: grid;
+  grid-template-columns: 50px 1fr;   /* 50px for +91, rest for the number */
+  gap: 8px;                          /* smaller gap between fields */
+  max-width: 360px;                  /* optional: constrain total width */
+  margin: 0 auto 20px;               /* center it and add some bottom margin */
+}
+
+/* 2) Shrink the prefix */
+#form-in .phone-prefix {
+  width: 50px;                       /* matches the grid-template-columns */
+}
+
+/* 3) Make sure the number input fills its column */
+#form-in .phone-number {
+  width: 100% !important;            /* override any earlier width rules */
+  max-width: none  !important;
+}
+
+/* 4) Reset the generic #form-in input sizing so it doesn’t shrink your phone-group */
+#form-in.auth-pane input {
+  /*width: auto !important;*/
+  max-width: none !important;
+      padding-left: 7px;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;  /* align vertically */
+  gap: 15px;
+}
+
+.nav-actions .nav-link {
+  display: inline-flex;  /* force horizontal alignment */
+  align-items: center;
+ color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 3px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.nav-actions .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg,#ff00b8,#ffa300);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.nav-actions .nav-link:hover::after,
+.nav-actions .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* profile badge + dropdown */
+.profile-wrap { position: relative; }
+
+.user-badge {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+   background:#fff !important;  color: #1a0033;
+  font: 700 1rem/1 "Poppins", sans-serif;
+  cursor: pointer; user-select: none;
+   margin-top: 0; /* or remove entirely */
+   
+}
+
+.user-menu {
+  list-style: none; margin: 0; padding: 6px 0;
+  position: absolute; top: 120%; right: 0;
+  min-width: 140px;
+  background: #1a003c; border: 1px solid #4d1f3f;
+  border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.35);
+  opacity: 0; transform: translateY(-8px) scale(.95);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+
+.user-menu li {
+  padding: 6px 16px; color: #fff; cursor: pointer;
+}
+.user-menu li:hover {
+  background: #2a005d; color: #fff;
+}
+.user-menu a {
+  color: #fff !important; display: block; text-decoration: none;
+}
+.guest-link i {
+    font-size: 26px;
+    color: #fff;
+}
+  /* 1️⃣  tighten the white “OR” divider (top & bottom 0.75 rem instead of 1.5 rem) */
+  .or-spacer            { margin: .75rem 0 !important; }
+
+  /* 2️⃣  widen the breathing room between the pink pill and the green badge       */
+  .cta-group            { gap: 1.75rem !important; }   /* was 1rem                 */
+  
+    .or-spacer + p {          /* ← the <p> that comes right after .or-spacer */
+    margin-top: .5rem !important;   /* tweak the .5 rem to taste */
+  }
+  
+  /* ═════════ THANK-YOU MODAL SKIN ═════════ */
+.thank-box{
+  /* nebula background & glowing rim */
+  background:url("assets/images/nav-foot-bg.png") center/cover;
+  border:none;
+  border-radius:20px;
+  box-shadow:0 8px 28px rgba(255,0,184,.45);
+  color:#fff;
+  max-width:480px;                /* never stretches too wide */
+}
+
+/* gold-pink “Thank You” highlight */
+.text-gradient{
+  background:linear-gradient(90deg,#ffd94a,#ff5ad7 60%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* simple zoom pop-in for the dialog */
+@keyframes zoomPop{
+  0%   {transform:scale(.7);opacity:0}
+  60%  {transform:scale(1.05)}
+  100% {transform:scale(1);opacity:1}
+}
+.zoom-pop .modal-content{
+  animation:zoomPop .55s cubic-bezier(.25,.8,.25,1);
+}
+
+/* ensure buttons always fill the width on tiny screens */
+@media(max-width:420px){
+  .thank-box h4{font-size:1.15rem;line-height:1.35;}
+  .pill-btn.small-pill{font-size:1.1rem;padding:.55rem 1.4rem;}
+}
+/* caption style */
+.modal-nav-label{
+  font: 600 1rem "Poppins", sans-serif;
+  color:#ffd94a;                 /* same gold you already use */
+  letter-spacing:.2px;
+}
+
+/* make sure the two pills don’t stretch full-width */
+.modal-nav .pill-btn.small-pill{
+  width: 150px;                  /* exact pill width */
+  max-width:100%;                /* safety on phones */
+}
+
+/* optional: stack on ultra-narrow screens (<330 px) */
+@media (max-width:330px){
+  .modal-nav{flex-direction:column; gap:0.75rem;}
+}
+
+/* ░░░  THANK-YOU POP-UP ░░░ */
+.tg-box{
+    position:relative;
+  background:url("assets/images/nav-foot-bg.png") center/cover;
+  border-radius:20px;
+  box-shadow:0 8px 28px rgba(255,0,184,.45);
+  color:#fff;            /* master white text */
+}
+
+/* bigger, bolder “Thank You” */
+.tg-box h4 span.tg-gradient{
+  font-size:2.4rem;         /* ⟵ was ~1.5-1.8 rem via h4 */
+  display:inline-block;
+}
+
+/* arrow cue – gentle pulse + fade for attention */
+@keyframes tgBlink{
+  0%,100%{opacity:.2;transform:scale(.9)}
+  50%   {opacity:1; transform:scale(1.25)}
+}
+
+.tg-cue{
+  display:inline-block;
+  animation:tgBlink 1.1s ease-in-out infinite;
+  /* gold gradient like other icons */
+  background:linear-gradient(180deg,#ffd94a 0%,#ffbb0d 50%,#d88a00 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 #572800);
+  font-size:1.1em;          /* scales with surrounding text */
+}
+
+
+/* headline gradient */
+.tg-gradient{
+  background:linear-gradient(90deg,#ffd94a,#ff5ad7 60%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+
+/* zoom-in entrance */
+@keyframes tgZoom{0%{transform:scale(.75);opacity:0}100%{opacity:1}}
+.tg-zoom .modal-content{animation:tgZoom .55s cubic-bezier(.25,.8,.25,1)}
+
+/* small gold caption */
+.tg-label{
+     font: 600 1rem "Poppins", sans-serif;
+    color: #ffd94a;
+    letter-spacing: .2px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+/* ─── glowing pill buttons ─── */
+.tg-pill{
+  --pink1:#ff006a; --pink2:#be0059; --rim:#9a0047; --glow:rgba(255,0,184,.35);
+
+  display:inline-flex;align-items:center;gap:10px;
+  padding:0.7rem 1rem;;
+  border-radius:50rem;
+  position:relative;
+  font:800 1.15rem/1 "Poppins",sans-serif;
+  text-transform:uppercase;letter-spacing:.4px;
+  background:linear-gradient(180deg,var(--pink1),var(--pink2) 90%);
+  transition:transform .22s ease, box-shadow .22s ease;
+  text-decoration:none;
+}
+
+/* neon rim + outer glow */
+.tg-pill::after{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  box-shadow:
+    inset 0 0 0 4px var(--rim),
+    inset 0 4px 8px rgba(255,255,255,.35),
+    0 6px 16px var(--glow);
+}
+
+/* gold gradient text + icons */
+.tg-pill i,
+.tg-pill span{
+  background:linear-gradient(180deg,#ffd94a 0%,#ffbb0d 50%,#d88a00 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 0 #572800);
+}
+
+/* icon wiggle & lift on hover */
+@keyframes wiggle{
+  0%,100%{transform:rotate(0)}
+  25%{transform:rotate(12deg)}
+  50%{transform:rotate(-10deg)}
+  75%{transform:rotate(6deg)}
+}
+.tg-pill:hover{
+  transform:translateY(-4px);
+  box-shadow:0 10px 40px var(--glow);
+}
+.tg-pill:hover i{animation:wiggle .6s ease-out}
+
+/* phones ≤ 480 px – keep the pills side-by-side */
+@media (max-width:480px){
+  .tg-nav{
+    flex-direction: row;        /* stay in one row               */
+    flex-wrap: nowrap;          /* no wrapping / no new line      */
+    gap: .75rem;                /* a little breathing room        */
+    justify-content: center;    /* centre the pair in the modal   */
+  }
+
+  /* let each pill shrink / grow as needed */
+  .tg-pill{
+    flex: 1 1 46%;              /* roughly half the row each      */
+    max-width: 140px;           /* keeps them from getting huge   */
+    width: auto;                /* auto-width above this size     */
+  }
+}
+
+.mt-2 {
+    margin-top: 0.5rem !important;
+    padding-bottom: 10px;
+    margin-bottom: -35px;
+}
+
+.tg-close{
+  position:absolute;
+  top:12px;               /* tweak to taste */
+  right:16px;
+  background:none;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  line-height:1;
+  font-size:1.65rem;      /* size of the x-mark */
+}
+
+.tg-close i{
+  display:block;
+  /* same gold gradient you used elsewhere */
+  background:linear-gradient(180deg,#ffd94a 0%,#ffbb0d 50%,#d88a00 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 0 #572800);
+  transition:transform .25s ease, opacity .25s ease;
+}
+
+.tg-close:hover i,
+.tg-close:focus i{
+  transform:scale(1.25) rotate(5deg);
+  opacity:.85;            /* subtle emphasis */
+}
+    </style>
+  </head>
+<body>
+      <!-- NAVBAR -->
+    <div class="navbar">
+      <a href="https://thinkinggrey.in/gameweb/index.html" class="d-inline-block">
+    <img src="assets/images/logo.png" alt="TG Gaming logo" class="logo">
+  </a>
+
+      <div class="nav-actions">
+        <a class="nav-link" href="index.html">Home</a>
+        <a class="nav-link active" href="#">My Games</a>
+        <a href="cart.html" class="nav-link cart-link">
+          <i class="fas fa-shopping-cart cart-icon"></i>
+          <span id="cart-count" class="badge">0</span>
+        </a>
+        
+        <!-- ▼ Profile badge + dropdown (copied from product-details.html) ▼ -->
+<div class="profile-wrap">
+  <!-- signed-in badge -->
+  <span id="nav-user"  class="user-badge d-none"></span>
+
+  <!-- guest badge (shown when NOT signed-in) -->
+  <a id="nav-guest" class="guest-link d-none text-decoration-none">
+    <i class="fa-solid fa-user"></i>
+  </a>
+
+  <!-- dropdown -->
+  <ul id="user-menu" class="user-menu"></ul>
+</div>
+<!-- ▲ end profile widget ▲ -->
+
+      </div>
+    </div>
+
+<!-- ░░░  THANK-YOU MODAL  ░░░ -->
+<div class="modal fade" id="thanks-modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered tg-zoom">
+    <div class="modal-content tg-box text-center px-4 py-5">
+<button type="button"
+        class="tg-close"
+        data-bs-dismiss="modal"
+        aria-label="Close">
+  <i class="fa-solid fa-xmark"></i>
+</button>
+
+      <h4 class="fw-semibold mb-3">
+        <span class="tg-gradient">Thank&nbsp;You&nbsp;..!!</span><br>
+        <small class="d-block fw-normal mt-2 mb-2">
+          Thinking Grey sales team will connect you shortly
+        </small>
+      </h4>
+
+     <!-- tiny caption -->
+<small class="tg-label d-block  mt-2 mb-3">
+  Go&nbsp;to&nbsp;&nbsp;<i class="fa-solid fa-arrow-right tg-cue"></i>
+</small>
+
+
+      <!-- neon pills -->
+      <div class="tg-nav d-flex justify-content-center gap-3 flex-wrap">
+        <a href="index.html" class="tg-pill">
+          <i class="fa-solid fa-house"></i><span>Home</span>
+        </a>
+    <!--  Thank-You  ▶  profile pill  -->
+<a id="modal-profile-link" class="tg-pill" href="#">
+  <i class="fa-solid fa-user"></i><span>Profile</span>
+</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container" style="margin-top:2rem;">
+      <!-- Cart Table -->
+      <div class="table-responsive mb-5">
+        <table class="table align-middle cart-table">
+          <thead>
+            <tr>
+              <th style="color: #fff;">My Games</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cart-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Checkout Form -->
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+          <!-- A bare-bones form that keeps the CTA pill only -->
+<form id="call-form" class="text-center">
+  <!-- stays invisible but lets us pass the cart -->
+  <input type="hidden" id="cart_json" name="cart_json">
+  <button id="call-btn" class="call-btn" type="button">
+    <i class="fa-solid fa-phone"></i>
+    <span class="call-text"><span>REQUEST&nbsp;</span><span>FOR&nbsp;CALL</span></span>
+  </button>
+  <a id="wa-btn" class="wa-btn" href="#">
+  <i class="fab fa-whatsapp"></i>
+</a>
+</form>
+</div>
+
+<div class="text-center or-spacer">
+  <span style="font-weight:bold; font-size:18px;">OR</span>
+</div>
+
+          </form>
+
+          <p class="mt-4 text-center">
+            Connect with Thinking Grey team for enquiry<br>
+            Email: <b> mugdha@thinkinggrey.com</b><br>
+            Tel: <b>  +91 9324670321</b>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+         <footer>
+      Copyright © 2025 Thinking Grey<br />
+      Designed By Thinking Grey
+    </footer>
+
+    <!-- SCRIPTS -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/*  TG Gaming – Cart page (DB + mail)              26 Jun 2025
+   ──────────────────────────────────────────────────────────── */
+document.addEventListener('DOMContentLoaded', () => {
+ (function () {
+
+  /* ==========  shortcuts ========== */
+  const $  = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+
+  /* ==========  cached DOM ========== */
+  const tbody     = $('#cart-body');
+  const cartCount = $('#cart-count');
+  const callBtn   = $('#call-btn');
+  const waBtn     = $('#wa-btn');
+  const toastBox  = $('#toast-container');
+const MAIL_ENDPOINT = 'https://my.thinkinggrey.com/mail/mail.php';
+  const authModal = $('#auth-modal');
+  const tabIn     = $('#tab-in');
+  const tabUp     = $('#tab-up');
+  const formIn    = $('#form-in');
+  const formUp    = $('#form-up');
+  const authClose = $('#auth-close');
+
+  const navUser  = $('#nav-user');
+  const navGuest = $('#nav-guest');
+  const userMenu = $('#user-menu');
+  const profile  = $('.profile-wrap');
+
+  /* ==========  products ========== */
+  const PRODUCT_INFO = {
+    "Skill Slice":       {slug:"skillslice",      img:"skillSlice.png"},
+    "Island Conqueror":  {slug:"islandconqueror", img:"islandconqueror.png"},
+    "Color Strike":      {slug:"colourstrike",    img:"colorstrike.png"},
+    "Skill Arcade":      {slug:"skillarcade",     img:"skillarcade.png"},
+    "Knowledge Konnect": {slug:"knowledgekonnect",img:"knowledgekonnect.png"},
+    "Ball Pong":         {slug:"ballpong",        img:"ballpong.png"},
+    "Collect The Coin":  {slug:"collectthecoins", img:"coincollect.png"},
+    "Treasure Hunt":     {slug:"treasurehunt",    img:"treasurehunt.png"},
+    "Space Shooter":     {slug:"spaceshooter",    img:"spaceshooter.png"},
+    "Spin The Wheel":    {slug:"spinthewheel",    img:"spinthewheel.png"}
+  };
+
+  /* ==========  localStorage helpers ========== */
+  const getCart = () => JSON.parse(localStorage.getItem('tg_cart') || '[]');
+  const setCart = c   => { localStorage.setItem('tg_cart', JSON.stringify(c));
+                           updateBadge(); };
+  const getUser = ()  => JSON.parse(localStorage.getItem('tg_user') || 'null');
+
+  /* ==========  badge / toast ========== */
+  function updateBadge(){
+    const n = getCart().length;
+    cartCount.textContent   = n;
+    cartCount.style.display = n ? 'inline-block':'none';
+  }
+  function showToast(msg){
+    const t = document.createElement('div');
+    t.className =
+      'tg-toast px-4 py-3 fw-semibold rounded-pill shadow-lg text-nowrap';
+    t.textContent = msg;
+    toastBox.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('show'));
+    setTimeout(() => t.classList.add('hide'), 3000);
+    setTimeout(() => t.remove(),               3600);
+  }
+/* prettier, responsive toast skin */
+if (!$('#tg-toast-css')) {
+  const css = document.createElement('style');
+  css.id = 'tg-toast-css';
+  css.textContent = `
+    /* ------- container ------- */
+    #toast-container{
+      position:fixed;
+      top:1rem;                        /* keep 1 rem from the top   */
+      right:1rem;                      /* right-aligned on desktop  */
+      display:flex;
+      flex-direction:column;
+      gap:.8rem;                       /* little gap between toasts */
+      z-index:2000;
+      max-width:calc(100vw - 2rem);    /* never kiss the viewport   */
+    }
+    /* centre the stack on very small screens */
+    @media(max-width:480px){
+      #toast-container{
+        left:50%; right:auto;
+        transform:translateX(-50%);
+      }
+    }
+
+    /* ------- individual toast ------- */
+    .tg-toast{
+      position:relative;
+      padding:.85rem 1.6rem;
+      border-radius:3rem;              /* pill shape                */
+      background:linear-gradient(135deg,#ff006a 0%,#ffa300 100%);
+      color:#fff;
+      font:600 .9rem/1.35 "Poppins",sans-serif;
+      letter-spacing:.2px;
+
+      box-shadow:
+        0 0 12px rgba(255,0,184,.6),
+        0 4px 18px rgba(0,0,0,.35);
+      backdrop-filter:blur(4px);       /* glossy glass feel         */
+
+      white-space:normal;              /* allow wrapping            */
+      opacity:0;
+      transform:translateY(-18px) scale(.95);
+      transition:opacity .4s,transform .4s;
+    }
+    /* scale text & padding down on phones */
+    @media(max-width:480px){
+      .tg-toast{font-size:.8rem;padding:.7rem 1.2rem;}
+    }
+
+    /* slide / fade states */
+    .tg-toast.show{opacity:1;transform:translateY(0) scale(1);}
+    .tg-toast.hide{opacity:0;transform:translateY(-18px) scale(.95);}
+  `;
+  document.head.appendChild(css);
+}
+  /* ==========  auth modal & profile bar ========== */
+  const showAuth = () => authModal?.classList.remove('d-none');
+  const hideAuth = () => authModal?.classList.add   ('d-none');
+  const switchTab = w => {
+    tabIn.classList.toggle('active', w==='in');
+    tabUp.classList.toggle('active', w==='up');
+    formIn.classList.toggle('d-none', w!=='in');
+    formUp.classList.toggle('d-none', w!=='up');
+  };
+  authClose?.addEventListener('click', hideAuth);
+  tabIn   ?.addEventListener('click', () => switchTab('in'));
+  tabUp   ?.addEventListener('click', () => switchTab('up'));
+
+  ['login-phone','up-phone'].forEach(id=>{
+    $('#'+id)?.addEventListener('input',e=>{
+      e.target.value = e.target.value.replace(/\D/g,'').slice(0,10);
+    });
+  });
+
+  formIn?.addEventListener('submit', async e=>{
+    e.preventDefault();
+    const phone = $('#login-phone').value.trim();
+    if (phone.length!==10) return alert('Enter 10-digit mobile');
+    const res = await fetch('/gameweb/signin.php',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({phone})
+    }).then(r=>r.json()).catch(()=>({status:'err'}));
+    if (res.status==='ok'){
+      localStorage.setItem('tg_user', JSON.stringify({
+        name:res.name,email:res.email,phone
+      }));
+      hideAuth(); refreshProfile();
+    }else alert('Invalid phone – try Sign-up');
+  });
+
+  formUp?.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const first=$('#up-first').value.trim(),
+          last =$ ('#up-last').value.trim(),
+          email=$('#up-email').value.trim(),
+          phone=$('#up-phone').value.trim();
+    if(!(first&&last&&email)&&phone.length!==10)
+      return alert('Fill every field');
+
+    const res=await fetch('/gameweb/signup.php',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({first,last,email,phone})
+    }).then(r=>r.json()).catch(()=>({status:'err'}));
+
+    if(res.status==='ok'){
+      localStorage.setItem('tg_user',JSON.stringify({
+        name:res.name,email,phone
+      }));
+      hideAuth(); refreshProfile();
+    }else alert(res.error||'Something went wrong');
+  });
+
+  function refreshProfile () {
+  const u = getUser();        // may be null
+  userMenu.innerHTML = '';    // wipe menu
+
+  /* ▼ this is always present ▼ */
+  userMenu.insertAdjacentHTML('beforeend',
+    `<li><a href="index.html">Home</a></li>`);
+
+  if (u && u.phone) {                         // signed-in
+    navUser.textContent = (u.name || '?')[0].toUpperCase();
+    navUser.classList.remove('d-none');
+    navGuest.classList.add   ('d-none');
+
+    /* profile link */
+    userMenu.insertAdjacentHTML('beforeend',
+      `<li><a href="my-requests.html?user=${u.phone}">Profile</a></li>`);
+
+    /* sign-out */
+    const out = document.createElement('li');
+    out.textContent = 'Sign out';
+    out.onclick = () => { localStorage.clear(); location.reload(); };
+    userMenu.appendChild(out);
+
+  } else {                                     // guest
+    navUser.classList.add   ('d-none');
+    navGuest.classList.remove('d-none');
+
+    const li = document.createElement('li');
+    li.textContent = 'Sign in';
+    li.onclick = showAuth;
+    userMenu.appendChild(li);
+  }
+}
+
+  refreshProfile();
+  /* keep Profile pill inside the Thank-You modal always valid */
+const pill = document.getElementById('modal-profile-link');
+if (pill) {
+  const u = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  pill.href = (u && u.phone)
+    ? `my-requests.html?user=${u.phone}`
+    : 'index.html';              // fallback for guests
+}
+
+  [navUser,navGuest].forEach(el=>el?.addEventListener('click',e=>{
+    e.stopPropagation(); profile.classList.toggle('open');
+  }));
+  document.body.addEventListener('click',()=>profile.classList.remove('open'));
+  window.addEventListener('storage',e=>{
+    if(e.key==='tg_user') refreshProfile();
+  });
+
+  /* ==========  Server-side helper ========== */
+  async function pushRequest(user,games){
+    const fd=new FormData();
+    const parts=(user.name||'').trim().split(' ');
+    fd.append('first_name',parts[0]||'');
+    fd.append('last_name', parts.slice(1).join(' '));
+    fd.append('email',     user.email||'');
+    fd.append('phone',     user.phone||'');
+    fd.append('cart_json', JSON.stringify(games));
+    return fetch('/gameweb/call_request.php',{   /* <-- new endpoint */
+      method:'POST',body:fd
+    }).then(r=>r.json());
+  }
+
+ async function sendMail(user,games){
+    const fd  = new FormData();
+    const n   = (user.name||'').trim().split(' ');
+    fd.append('first_name', n[0]||'');
+    fd.append('last_name',  n.slice(1).join(' '));
+    fd.append('email',      user.email||'');
+    fd.append('phone',      user.phone||'');
+    fd.append('cart_json',  JSON.stringify(games));
+    fd.append('totals_json','{}');              // not used yet
+    return fetch(MAIL_ENDPOINT,{method:'POST',body:fd});
+  }
+  
+  /* clear cart (just in case) then jump */
+function zapCartAndGo(url){
+  localStorage.removeItem('tg_cart');
+  location.href = url;
+}
+
+document.getElementById('btn-home')   ?.addEventListener('click', () =>
+  zapCartAndGo('index.html'));
+
+document.getElementById('btn-profile')?.addEventListener('click', () => {
+  const u = JSON.parse(localStorage.getItem('tg_user')||'null');
+  zapCartAndGo(u && u.phone ? `my-requests.html?user=${u.phone}` : 'index.html');
+});
+
+  /* ==========  cart render ========== */
+  function renderCart(){
+    tbody.innerHTML='';
+    const cart=getCart().filter(n=>PRODUCT_INFO[n]);
+    setCart(cart);
+    if (!cart.length) {
+  tbody.innerHTML = `<tr><td colspan="3"
+     class="py-5 text-center text-white">Your cart is empty.</td></tr>`;
+  return;
+}
+    cart.forEach(name=>{
+      const p=PRODUCT_INFO[name];
+      tbody.insertAdjacentHTML('beforeend',`
+        <tr>
+          <td class="d-flex align-items-center gap-3">
+            <img src="assets/images/${p.img}" class="cart-item-img" alt="${name}">
+            <div style="color:#fff;">${name}</div>
+          </td>
+          <td>
+            <button type="button"
+                    class="btn-customise d-inline-flex align-items-center gap-2"
+                    data-slug="${p.slug}" data-name="${name}">
+              <i class="fa-solid fa-wrench"></i><span>Customise</span>
+            </button>
+          </td>
+          <td class="text-end">
+            <button type="button" class="trash-btn" data-name="${name}">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        </tr>`);
+    });
+    callBtn.disabled=false;
+  }
+
+
+  tbody.addEventListener('click',e=>{
+    /* trash */
+    const tr=e.target.closest('.trash-btn');
+    if(tr){ setCart(getCart().filter(g=>g!==tr.dataset.name)); renderCart(); }
+    /* customise */
+    const cu=e.target.closest('.btn-customise');
+    if(cu){
+      const u=getUser(); if(!u||!u.phone) return showAuth();
+      location.href=`customise1.html?game=${cu.dataset.slug}`;
+    }
+  });
+
+  /* ==========  call button ========== */
+/* call button */
+callBtn.addEventListener('click', async () => {
+  const games   = getCart();                 // may be []
+  const user    = getUser() || {};           // may be {}
+
+  callBtn.disabled = true;
+/* --- request logged OK ------------------------------------ */
+try {
+  await pushRequest(user, games);
+  await sendMail   (user, games);
+
+  /* empty cart immediately */
+  localStorage.removeItem('tg_cart');
+  renderCart();          // refresh table & badge
+
+  /* show thank-you modal */
+  const modal = new bootstrap.Modal(document.getElementById('thanks-modal'));
+  modal.show();
+
+} catch (err) {
+  alert('Please try again.');
+} finally {
+  callBtn.disabled = false;   // ✅ only one  finally
+}                             // ← closes try-catch-finally
+
+});                           // ← closes addEventListener
+
+
+
+  /* ==========  WhatsApp badge ========== */
+/* WhatsApp badge */
+waBtn.addEventListener('click', async e => {
+  e.preventDefault();
+
+  const games = getCart();          // may be []
+  const user  = getUser() || {};    // may be {}
+
+ /* 1️⃣  send to your DB + e-mail first */
+  try {
+    await Promise.all([           // wait for both to finish
+      pushRequest(user, games),
+      sendMail   (user, games)
+    ]);
+  } catch (err) { console.error(err); }   // non-blocking 
+
+  let text;
+if (games.length && user.phone) {
+  text = `Hi Thinking Grey team,%0aI’m ${user.name}.%0a` +
+         `Phone – +91 ${user.phone}%0aEmail – ${user.email}%0a` +
+         `Interested games – ${games.join(', ')}%0a` +
+         `I wish to know more about your games.%0aThanks!`;
+} else {
+  text = 'Hey, I am visitor on your game portal website. '
+       + 'I wish to know more about your games.';
+}
+
+
+  window.open(
+    'https://api.whatsapp.com/send?phone=919324670321&text=' + text,
+    '_blank', 'noopener'
+  );
+  
+  /* 2️⃣  cart successfully logged → clear it & refresh badge/table */
+  localStorage.removeItem('tg_cart');
+  renderCart();
+  showToast('Message sent! We’ll be in touch soon.');
+});
+
+  /* ==========  init ========== */
+  renderCart(); updateBadge();
+
+ })();
+});
+</script>
+
+  
+  <!-- ░░░ AUTH MODAL (identical to product-details.html) ░░░ -->
+<div id="auth-modal" class="auth-backdrop d-none">
+  <div class="auth-dialog">
+    <i id="auth-close" class="fa-solid fa-xmark auth-close"></i>
+
+    <h3>Welcome to TG Gaming</h3>
+
+    <nav class="auth-tabs">
+      <button id="tab-in" type="button" class="auth-tab active">Sign in</button>
+      <button id="tab-up" type="button" class="auth-tab">Sign up</button>
+    </nav>
+
+    <!-- sign-in -->
+    <form id="form-in" class="auth-pane">
+      <div class="phone-group full">
+        <input class="phone-prefix" value="+91" readonly>
+        <input id="login-phone" class="phone-number"
+               type="tel" placeholder="10-digit mobile number"
+               maxlength="10" pattern="\d{10}" required>
+      </div>
+      <button type="submit" class="auth-btn"><span>Sign in</span></button>
+    </form>
+
+    <!-- sign-up -->
+    <form id="form-up" class="auth-pane d-none">
+      <input id="up-first"  placeholder="First Name" required>
+      <input id="up-last"   placeholder="Last Name"  required>
+      <input id="up-email"  class="full" placeholder="Email Address" type="email" required>
+      <div class="phone-group full">
+        <input class="phone-prefix" value="+91" readonly>
+        <input id="up-phone" class="phone-number"
+               type="tel" placeholder="10-digit mobile number"
+               maxlength="10" pattern="\d{10}" required>
+      </div>
+      <button type="submit" class="auth-btn full"><span>Sign up</span></button>
+    </form>
+  </div>
+</div>
+
+</html>
+</html>
+
+  </body>
+  </html>

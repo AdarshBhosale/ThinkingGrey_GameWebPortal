@@ -1,0 +1,2056 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Product Detail – TG Gaming</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/fontawesome.css" />
+    <link rel="stylesheet" href="assets/css/templatemo-lugx-gaming.css" />
+    <link rel="stylesheet" href="assets/css/owl.css" />
+    <link rel="stylesheet" href="assets/css/animate.css" />
+<script>
+  // Delete all cookies set for the current path
+  document.cookie.split(";").forEach(function(cookie) {
+    var name = cookie.split("=")[0].trim();
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/";
+  });
+
+</script>
+    <style>
+      body {
+        background: url("assets/images/bg.png") no-repeat center center fixed;
+        background-size: cover;
+        font-family: "Poppins", sans-serif;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 35px;
+        border-bottom: 1px solid #222;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+      }
+      .nav-actions .nav-link {
+        color: white;
+        font-size: 1rem;
+        font-weight: 500;
+        text-decoration: none;
+      }
+      /* =====================  Animated underline on navbar links  ===================== */
+      .nav-actions .nav-link {
+        position: relative; /* 1 — anchor becomes the ref for ::after   */
+        padding-bottom: 3px; /* 2 — a little room for the underline      */
+      }
+
+      .nav-actions .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px; /* underline thickness                      */
+        background: linear-gradient(90deg, #ff00b8, #ffa300);
+        transform: scaleX(0); /* 3 — start hidden                         */
+        transform-origin: left;
+        transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      .nav-actions .nav-link:hover::after,
+      .nav-actions .nav-link:focus::after,
+      .nav-actions .nav-link.active::after {
+        /* keep it visible on the active page      */
+        transform: scaleX(1); /* 4 — grow to full width on hover/focus    */
+      }
+
+      .cart-icon {
+        font-size: 24px;
+        color: #fff;
+        transition: transform 0.3s, color 0.3s;
+      }
+      .badge {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: #ff4e6b;
+        color: #fff;
+        font-size: 0.7rem;
+        line-height: 1;
+        padding: 2px 5px;
+        border-radius: 50%;
+      }
+      /* ====== customise-modal form readability ====== */
+      #customise-modal .form-label {
+        color: #ffd94a; /* gold text – matches other UI accents */
+        font-weight: 600;
+      }
+      #customise-modal ::placeholder {
+        color: #888; /* subtle, but still visible */
+        opacity: 1; /* Firefox */
+      }
+
+      /* === special hover wiggle for paper-plane === */
+      @keyframes planeGlide {
+        0%,
+        100% {
+          transform: translateX(0) rotate(0);
+        }
+        50% {
+          transform: translateX(4px) rotate(6deg);
+        }
+      }
+      #modal-submit:hover i,
+      #modal-submit:focus i {
+        animation: planeGlide 0.9s ease-in-out infinite;
+      }
+
+      .single-product.section {
+        padding-top: 60px !important;
+        margin-top: -10px !important;
+      }
+      /* put this with the other `.thumb-wrap` rules */
+      .thumb-wrap {
+        position: relative; /* establishes the positioning context */
+        display: inline-block; /* keeps the image’s natural size   */
+      }
+
+      /* === customise-modal space skin === */
+      #customise-modal .modal-content {
+        background: url("assets/images/nav-foot-bg.png") center/cover no-repeat;
+        border: none;
+        border-radius: 1rem;
+        color: #fff; /* light text on dark bg   */
+        box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+      }
+      #customise-modal .modal-header {
+        justify-content: center; /* centres the flex children   */
+        position: relative; /* lets us absolutely-place X  */
+        border-bottom: none; /* optional – hides divider    */
+      }
+      /* make the Bootstrap × icon white */
+      #customise-modal .btn-close {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        filter: invert(1); /* white icon                  */
+        opacity: 0.85;
+      }
+      #customise-modal .btn-close:hover {
+        opacity: 1;
+      }
+      #customise-modal .modal-title {
+        margin: 0 auto; /* extra insurance             */
+        font-weight: 700;
+        text-align: center;
+      }
+
+      /* centre the footer & shrink the pill */
+      #customise-modal .modal-footer {
+        justify-content: center; /* centres anything inside the footer  */
+        border-top: none; /* optional – hides the grey divider   */
+      }
+      #modal-submit {
+        margin-top: -15px;
+        font-size: 1.2rem; /* ↓ text a bit smaller                */
+        padding: 0.45rem 1.9rem; /* ↓ pill height & width               */
+      }
+
+      .back-pill i {
+        /* keep arrow proportional      */
+        font-size: 1rem; /* was 1.15rem                  */
+      }
+
+      .back-pill span {
+        filter: drop-shadow(0 2.5px 0 #572802);
+      }
+
+      /* =========================================================
+         LIFT-AND-GLOW HOVER EFFECT FOR THE THREE ACTION PILLS
+         ========================================================= */
+      .pill-customise:hover,
+      .pill-customise:focus,
+      .pill-demo:hover,
+      .pill-demo:focus,
+      #cart-btn:hover,           /* yellow “I’m Interested” state  */
+      #cart-btn:focus,
+      #cart-btn.pill-added:hover,
+      .pill-btn.small-pill:hover,
+      .pill-btn:hover,
+      #cart-btn.pill-added:focus {
+        transform: translateY(-3px); /* slight lift        */
+        box-shadow: 0 8px 32px rgba(255, 0, 184, 0.8),
+          /* purple glow  */ inset 0 0 0 4px var(--stroke),
+          /* keep rim      */ inset 0 4px 8px rgba(255, 255, 255, 0.35); /* inner shine  */
+      }
+
+      @media (max-width: 480px) {
+        .back-pill {
+          font-size: 0.78rem;
+          padding: 0.3rem 0.9rem;
+          gap: 6px;
+        }
+        .back-pill i {
+          font-size: 0.9rem;
+        }
+        
+      }
+
+      /* ═══════════════════════════════════════════════════════════════
+               ❸  ICON ANIMATIONS
+            ════════════════════════════════════════════════════════════════ */
+      @keyframes wiggle {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        50% {
+          transform: rotate(-12deg);
+        }
+      }
+      @keyframes rocketTilt {
+        0%,
+        100% {
+          transform: rotate(0);
+        }
+        50% {
+          transform: rotate(-25deg) translateY(-2px);
+        }
+      }
+      @keyframes cartBounce {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-4px);
+        }
+      }
+
+      .pill-customise:hover i {
+        animation: wiggle 0.6s ease-in-out infinite;
+      }
+      .pill-demo:hover i {
+        animation: rocketTilt 0.8s ease-in-out infinite;
+      }
+      .pill-interest:hover i {
+        animation: cartBounce 0.9s ease-out infinite;
+      }
+
+      /* ──────────────────────────────────────────────────────────────
+                  COMMON SHARED RULES
+                  Every button-image gets these base styles first
+                  ────────────────────────────────────────────────────────────── */
+      .button-img {
+        width: 240px; /* default desktop size */
+        height: 75px;
+        border-radius: 38px; /* pill ends match artwork */
+        display: block; /* makes the <a>/<button> clickable everywhere */
+        transition: transform 0.25s ease, filter 0.25s ease;
+      }
+
+      /* scale up & brighten on hover / focus */
+      .btn-group-custom a:hover .button-img,
+      .btn-group-custom a:focus .button-img,
+      #cart-btn:hover .button-img,
+      #cart-btn:focus .button-img {
+        transform: translateY(-3px) scale(1.05);
+      }
+
+      /* ─── Back-to-Games ⇦ arrow – smaller ───────────────────── */
+      #btn-back i {
+        font-size: 2rem; /* ↓ tweak this number to taste */
+        line-height: 1; /* keeps it vertically centred   */
+      }
+
+      /* ===============  UNIVERSAL PILL BASE  ====================== */
+      .pill-btn {
+        --pink1: #ff006a;
+        --pink2: #be0059;
+        --stroke: #9a0047;
+        --glow: rgba(255, 200, 0, 0);
+
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0.2rem 0.8rem;
+
+        border-radius: 4.5rem;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+        color: transparent; /* we’ll paint text via gradient */
+        background: linear-gradient(180deg, var(--pink1), var(--pink2) 90%);
+        position: relative;
+        cursor: pointer;
+        user-select: none;
+        transition: transform 0.22s ease, box-shadow 0.22s ease;
+      }
+
+      /* put this AFTER the existing .pill-btn rules */
+      .pill-btn.small-pill {
+        font: 800 1.5rem/1 "Poppins", sans-serif;
+
+        padding: 0.6rem 1.8rem;
+        gap: 12px;
+      }
+
+      .pill-btn.small-pill span {
+        filter: drop-shadow(0 3px 0 #572800);
+      }
+      .pill-btn.small-pill i {
+        font-size: 1.5rem 24px;
+      }
+      .gap-3 {
+        gap: 1.2rem 19.2px !important;
+      }
+      .pill-btn span {
+        background: linear-gradient(
+          180deg,
+          #ffd94a 0%,
+          #ffbb0d 50%,
+          #d88a00 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      /* ---------- icon styling inside pills ---------- */
+      .pill-btn i {
+        font-size: 1.9rem; /* scales with button size  */
+        background: linear-gradient(
+          180deg,
+          #ffd94a 0%,
+          #ffbb0d 50%,
+          #d88a00 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent; /* gold gradient like text */
+        filter: drop-shadow(0 2px 0 #572800); /* dark inner edge         */
+      }
+
+      @media (max-width: 480px) {
+        /* keep icons in proportion */
+        .pill-btn i {
+          font-size: 1.4rem;
+        }
+      }
+
+      .pill-btn::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        box-shadow: inset 0 0 0 4px var(--stroke),
+          inset 0 4px 8px rgba(255, 255, 255, 0), 0 6px 16px var(--glow);
+      }
+      /* hover / press */
+      .pill-btn:hover,
+      .pill-btn:focus {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 26px var(--glow);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 32px rgba(255, 0, 184, 0.8);
+      }
+      .pill-btn:active {
+        transform: translateY(-1px) scale(0.98);
+        box-shadow: 0 6px 15px var(--glow);
+      }
+      .pill-yellow:hover i {
+        animation: cartBounce 0.9s ease-out infinite;
+      }
+      /* ===============  COLOUR VARIANTS  ========================== */
+      .pill-magenta {
+        /* already inherits magenta settings */
+      }
+
+      .pill-cyan {
+        --pink1: #19cfff;
+        --pink2: #0093d6;
+        --stroke: #0075af;
+        --glow: rgba(0, 255, 255, 0.35);
+      }
+      .pill-yellow {
+        --pink1: #ff006a;
+        --pink2: #be0059;
+        --stroke: #9a0047;
+      }
+      #game-img {
+        box-shadow: 0 5px 25px rgba(255, 0, 184, 0.3);
+      }
+
+      /* ===============  Responsive tweak  ========================= */
+      @media (max-width: 480px) {
+        .pill-btn {
+          font-size: 1.2rem;
+          padding: 0.6rem 2rem;
+        }
+        .pill-btn i {
+          font-size: 1.4rem;
+        }
+      }
+
+      /* ──────────────────────────────────────────────────────────────
+                  RESPONSIVE  – shrink buttons on small screens
+                  ────────────────────────────────────────────────────────────── */
+      @media (max-width: 576px) {
+        .button-img {
+          width: 190px; /* ~20 % smaller */
+          height: 60px;
+          border-radius: 30px;
+        }
+      }
+
+      footer {
+        background: url("assets/images/nav-foot-bg.png") no-repeat center center;
+        background-size: cover;
+        margin-top: 70px;
+        padding: 30px 20px;
+        font-size: 1rem;
+        color: #aaa;
+        text-align: center;
+        border-top: 1px solid #222;
+      }
+      .navbar img.logo {
+        width: 140px;
+        height: 60px;
+      }
+
+      @media (max-width: 428px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 20px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 40px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 40px;
+        }
+        #cart-btn .button-img {
+          width: 180px;
+          height: 40px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+          margin-top: 20px;
+        }
+        #btn-back i {
+          font-size: 1.8rem 28.8px;
+        }
+      }
+
+      @media (min-width: 428px) and (max-width: 575.98px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 15px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -28px;
+          left: -110px;
+        }
+        .position-relative {
+          position: relative !important;
+          padding-top: 30px;
+        }
+      }
+      @media (min-width: 576px) and (max-width: 767.98px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 15px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .g-5,
+        .gy-5 {
+          --bs-gutter-y: 3rem;
+          padding-top: 20px;
+        }
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -130px;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 1199.98px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 15px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .g-5,
+        .gy-5 {
+          --bs-gutter-y: 3rem;
+          padding-top: 20px;
+        }
+      }
+      @media (min-width: 1200px) {
+        .navbar {
+          background: url(assets/images/nav-foot-bg.png) no-repeat center center;
+          background-size: cover;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 16px 35px;
+          border-bottom: 1px solid #222;
+          position: sticky;
+          top: 0;
+          z-index: 999;
+        }
+        .badge {
+          position: absolute;
+          top: -6px;
+          right: -6px;
+          background: #ff4e6b;
+          color: #fff;
+          font-size: 0.7rem;
+          line-height: 1;
+          padding: 2px 5px;
+          border-radius: 50%;
+        }
+        .nav-actions {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+        }
+        #btn-customise .button-img {
+          width: 150px;
+          height: 50px;
+        }
+        #btn-demo .button-img {
+          width: 115px;
+          height: 50px;
+        }
+        #cart-btn .button-img {
+          width: 200px;
+          height: 50px;
+        }
+        /* center the three image buttons inside their flex wrapper */
+        .btn-group-custom {
+          justify-content: center; /* ⬅︎ main-axis -> horizontal centering  */
+          align-items: center; /* optional: cross-axis -> vertical centering */
+        }
+        .my-3 {
+          margin-top: 1rem !important;
+          margin-bottom: 1rem !important;
+          margin: 5px;
+        }
+        .single-product ul li {
+          display: block;
+          margin: 10px 0px;
+          font-size: 16px;
+          color: #0071f8;
+          margin: 5px;
+        }
+        .fw-semibold {
+          font-weight: 600 !important;
+          margin: 5px;
+        }
+        .single-product.section {
+          padding-top: 70px !important;
+          margin-top: -45px !important;
+        }
+        img {
+          width: 90%;
+        }
+        /* featured game image */
+        #game-img {
+          max-width: 100%; /* stay responsive */
+          height: auto;
+          box-shadow: 0 5px 25px rgba(255, 0, 184, 0.5);
+          border-radius: 12px; /* optional – soft corners */
+        }
+        .g-5,
+        .gy-5 {
+          --bs-gutter-y: 3rem;
+          padding-top: 20px;
+        }
+      }
+      /* =========  Green pulse for "ADDED"  ========= */
+
+      /* ① subtle breathing glow */
+      @keyframes addedPulse {
+        0%,
+        100% {
+          transform: translateY(-4px); /* sits slightly “lifted”   */
+          box-shadow: inset 0 0 0 4px var(--stroke),
+            /* rim                      */ inset 0 4px 8px
+              rgba(255, 255, 255, 0.35),
+            /* inner highlight          */ 0 10px 26px var(--glow); /* outer glow               */
+        }
+        50% {
+          transform: translateY(-2px); /* tiny dip                 */
+          box-shadow: inset 0 0 0 4px var(--stroke),
+            inset 0 4px 8px rgba(255, 255, 255, 0.35), 0 4px 38px var(--glow); /* brighter mid-pulse       */
+        }
+      }
+
+      /* back-btn */
+      @media (max-width: 300px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -5px;
+          left: -20px;
+        }
+      }
+      @media (min-width: 300px) and (max-width: 400px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -5px;
+          left: -60px;
+        }
+      }
+      @media (min-width: 400px) and (max-width: 428px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -2px;
+          left: -65px;
+        }
+      }
+      @media (min-width: 428px) and (max-width: 599px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -35px;
+          left: -115px;
+        }
+      }
+
+      @media (min-width: 600px) and (max-width: 768px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -25px;
+          left: -125px;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 991px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -210px;
+        }
+      }
+      @media (min-width: 991px) and (max-width: 1200px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -105px;
+        }
+      }
+      @media (min-width: 1200px) and (max-width: 1400px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -145px;
+        }
+      }
+      @media (min-width: 1400px) {
+        .back-pill {
+          font: 800 1rem / 1 "Poppins", sans-serif;
+          padding: 0.35rem 1rem;
+          gap: 8px;
+          top: -23px;
+          left: -185px;
+        }
+      }
+
+      .pill-added {
+        --pink1: #1e894e; /* fill-top  */
+        --pink2: #3eaa6e; /* fill-bottom */
+        --stroke: #066b2f; /* dark rim  */
+        --glow: rgba(32, 217, 113, 0.45);
+      }
+      /* run while the cursor is over the green “Added” pill */
+      .pill-added:hover i {
+        animation: checkPop 0.8s ease-in-out infinite;
+      }
+      /* ✔️  little “pop” for the green Added check-mark */
+      @keyframes checkPop {
+        0%,
+        100% {
+          transform: rotate(0) scale(1);
+        }
+        40% {
+          transform: rotate(-8deg) scale(1.15);
+        }
+        70% {
+          transform: rotate(5deg) scale(1.05);
+        }
+      }
+      
+      /* ░░░  profile badge + dropdown  ░░░ */
+.profile-wrap{position:relative;}
+
+.user-badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:50%;
+  margin-left:0px;
+  background:#fff;color:#1a0033;font:700 1rem/1 "Poppins",sans-serif;
+  text-transform:uppercase;user-select:none;cursor:pointer;
+}
+
+.profile-wrap:focus-within .user-menu {                     /* <- and this */
+  opacity:1; transform:translateY(0) scale(1); pointer-events:auto;
+}
+
+/* dropdown hidden by default via opacity:0 in the base .user-menu rule */
+
+.profile-wrap.open .user-menu {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+
+.user-menu li{padding:6px 16px;cursor:pointer;color:#ffd94a;}
+.user-menu li:hover{background:#2a005d;color:#fff;}
+.user-menu a{color:inherit;text-decoration:none;display:block;}
+
+
+
+/* ░░░ AUTH MODAL + GUEST BADGE (copied from index.html) ░░░ */
+.auth-backdrop{position:fixed;inset:0;display:flex;justify-content:center;align-items:center;background:rgba(0,0,0,.75);z-index:1100}
+.auth-dialog{width:90%;max-width:540px;border-radius:18px;padding:36px 32px;background:url("assets/images/nav-foot-bg.png") center/cover;box-shadow:0 8px 32px rgba(255,0,184,.6);position:relative}
+.auth-dialog h3{margin:0 0 22px;font:700 1.4rem/1 "Poppins",sans-serif;color:#fff;     text-align: center;}
+.auth-close{position:absolute;top:18px;right:22px;font-size:1.4rem;cursor:pointer;color:#ffd94a}
+.auth-tabs{display:flex;margin-bottom:28px}
+.auth-tab{flex:1;border:none;background:transparent;padding:12px 0;font:600 1rem "Poppins",sans-serif;color:#ffd94a;cursor:pointer}
+.auth-tab.active{color:#fff;border-bottom:2px solid #ffd94a}
+
+.auth-pane{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.auth-pane>.full{grid-column:1/-1}
+.auth-pane input{width:100%}
+.phone-group{display:grid;grid-template-columns:auto 1fr;gap:16px;width:100%}
+.phone-prefix{max-width:60px;text-align:center}
+
+
+.auth-btn:hover,.auth-btn:focus{transform:translateY(-4px);box-shadow:0 8px 32px rgba(255,0,184,.45),0 10px 28px rgba(255,200,0,0)}
+/* stacked guest badge */
+.guest-link{display:flex;flex-direction:column;align-items:center;gap:4px;color:#fff !important;font:600 .9rem/1 "Poppins",sans-serif;text-decoration:none}
+.guest-link i{font-size:26px;color:#fff}
+
+
+/* ─────────────────────────────────────────────────────────────
+      ① AUTHENTICATION MODAL  (same neon-galaxy style)
+   ───────────────────────────────────────────────────────────── */
+.auth-backdrop{
+  position:fixed;inset:0;display:flex;justify-content:center;align-items:center;
+  background:rgba(0,0,0,.75);z-index:1100}
+.auth-dialog{
+  width:90%;max-width:540px;border-radius:18px;padding:36px 32px;
+  background:url("assets/images/nav-foot-bg.png") center/cover;
+  box-shadow:0 8px 32px rgba(255,0,184,.6);position:relative}
+.auth-dialog h3{margin:0 0 22px;font:700 1.4rem/1 "Poppins",sans-serif;color:#fff}
+.auth-close{
+  position:absolute;top:18px;right:22px;font-size:1.4rem;cursor:pointer;color:#ffd94a}
+.auth-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  font: 600 1rem "Poppins", sans-serif;
+  color: #ffd94a;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.auth-tab.active {
+  color: #fff;
+  border-bottom: 2px solid #ffd94a;
+}
+
+
+/* tabs */
+.auth-tabs{display:flex;margin-bottom:28px}
+.auth-tabs button{
+  flex:1;border:none;background:transparent;padding:12px 0;
+  font:600 1rem "Poppins",sans-serif;color:#ffd94a;cursor:pointer}
+.auth-tabs .active{color:#fff;border-bottom:2px solid #ffd94a}
+
+/* ─── AUTH FORM GRID ─── */
+.auth-pane {
+  display: grid;
+  /* two columns of equal weight, with a 16px gap */
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  /* center all items horizontally if they don't fill */
+  justify-items: stretch;
+}
+
+/* any element you give class="full" will stretch across both columns */
+.auth-pane > .full {
+  grid-column: 1 / -1;
+}
+
+/* make sure inputs fill their cell */
+.auth-pane input {
+  width: 100%;
+}
+
+/* phone prefix styling (optional: narrower) */
+.auth-pane .phone-prefix {
+  max-width: 60px; /* so “+91” isn’t huge */
+}
+
+/* button already styled by .auth-btn; stretch it full-width */
+.auth-pane .auth-btn {
+  justify-self: center; /* keep centering the button */
+  width: 30%;
+    height: 90%;
+}
+
+
+.row2{display:flex;gap:16px}
+.auth-pane input{
+  flex:1;padding:12px 0px;border:none;border-radius:8px;
+  font:500 1rem "Poppins",sans-serif;color:#000}
+/* ─── Auth button styled exactly like .explore-btn ───────────── */
+/* centre everything inside the form */
+.auth-pane{align-items:center;}                     /* already present – keep */
+
+
+/* ─── AUTH PILL: identical skin to .explore-btn ─── */
+.auth-btn{
+  /* geometry */
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4em;
+  padding:var(--explore-pad-y) var(--explore-pad-x);
+  border-radius:4rem;
+  border:none;
+  width:max-content;
+  margin:20px auto 0;             /* ⬅ centres the pill */
+
+  /* type */
+  font:800 var(--explore-font)/1 "Poppins",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+
+  /* colours / effects  */
+  --pink1:#ff006a;
+  --pink2:#be0059;
+  --stroke:#9a0047;
+  --glow:rgba(255,200,0,0);
+
+  background:linear-gradient(180deg,var(--pink1),var(--pink2) 90%);
+  color:#ffd94a;                                   /* gold text     */
+  cursor:pointer;
+  user-select:none;
+  position:relative;
+  transition:transform .22s ease,box-shadow .22s ease;
+}
+/* ========= Phone portrait (≤ 480 px) ========= */
+@media screen and (max-width:480px){
+  .auth-btn{
+    height:60px;                  /* taller = easier thumb tap          */
+    width:90%;                    /* almost full modal width            */
+    max-width:none;               /* drop any fixed cap                 */
+  }
+  .auth-btn span{                 /* optional – scale text with button  */
+    font-size:18px;
+  }
+  .auth-pane .auth-btn {
+    justify-self: center;
+    width: 45%;
+    height: 90%;
+}
+#form-in .auth-btn {
+    width: 40%;
+    max-width: 300px;
+}
+}
+
+/* ========= Large screens (≥ 992 px) – optional ========= */
+@media screen and (min-width:992px){
+  .auth-btn{
+    height:64px;
+    width:220px;
+  }
+}
+
+/* neon rim + outer glow */
+.auth-btn::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  box-shadow:
+    inset 0 0 0 4px var(--stroke),
+    inset 0 4px 8px rgba(255,255,255,.35),
+    0 6px 18px var(--glow);
+}
+
+/* Base style */
+.auth-btn span{
+  background: linear-gradient(180deg, #ffd94a 0%, #ffbb0d 50%, #d88a00 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 0 #572800);
+  font-weight: bold;
+  font-size: 20px;   /* desktop / tablet */
+  width: 120px;
+}
+
+/* lift on hover / focus */
+.auth-btn:hover,
+.auth-btn:focus{
+  transform:translateY(-4px);
+  box-shadow:0 8px 32px rgba(255,0,184,.45),0 10px 28px var(--glow);
+}
+/* 1) Make the sign-in form stack its children vertically and center them */
+/* override the two-column grid for sign-in only */
+#form-in.auth-pane {
+  /* switch to a single column */
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  gap: 0px;            /* space between input & button */
+  padding-top: 10px;    /* optional */
+}
+
+/* make the input full-width (up to 300px) */
+#form-in.auth-pane input {
+  width: 80%;
+  max-width: 300px;
+  margin: 0;
+}
+
+/* make the button sit below, same width */
+/* ─── Base rule (tablet/desktop) ─── */
+#form-in .auth-pane .auth-btn{
+  height:50px;          /* explicit pixels are clearer than % here   */
+  width:25%;
+  max-width:300px;
+  justify-self:center;
+}
+
+/* ─── Phone portrait ≤ 480 px ─── */
+@media screen and (max-width:480px){
+  #form-in .auth-pane .auth-btn{
+    height:60px;        /* larger tap area                           */
+    width:90%;          /* almost full-width inside the modal        */
+    max-width:none;     /* drop the 300 px cap                       */
+  }
+}
+
+/* make any .phone-group a two-column grid */
+.phone-group {
+  display: grid;
+  grid-template-columns: auto 1fr;  /* prefix is auto-sized, phone field fills remaining */
+  gap: 16px;
+  width: 100%;
+}
+
+/* fix the prefix to a nice width */
+.phone-prefix {
+  width: 80px;       /* or whatever fixed width you like */
+  flex: none;        /* cancel any flex:1 if it was inherited */
+  text-align: center;
+}
+
+/* ensure the phone number input fills its cell */
+.phone-number {
+  width: 100%;
+}
+
+/* 1) Remove the old 80px prefix and 16px gap, and give the Sign-in group its own layout */
+#form-in .phone-group {
+  display: grid;
+  grid-template-columns: 50px 1fr;   /* 50px for +91, rest for the number */
+  gap: 8px;                          /* smaller gap between fields */
+  max-width: 360px;                  /* optional: constrain total width */
+  margin: 0 auto 20px;               /* center it and add some bottom margin */
+}
+
+/* 2) Shrink the prefix */
+#form-in .phone-prefix {
+  width: 50px;                       /* matches the grid-template-columns */
+}
+#form-in .auth-btn{
+  width:30%;
+  max-width:300px;
+  min-width:0;      /* drop if you want a floor size */
+}
+@media (max-width:480px){
+  #form-in .auth-btn{
+    width:40%;
+  }
+}
+
+/* 3) Make sure the number input fills its column */
+#form-in .phone-number {
+  width: 100% !important;            /* override any earlier width rules */
+  max-width: none  !important;
+}
+
+/* 4) Reset the generic #form-in input sizing so it doesn’t shrink your phone-group */
+#form-in.auth-pane input {
+  /*width: auto !important;*/
+  max-width: none !important;
+      padding-left: 0px;
+}
+.nav-actions {
+  display: flex;
+  align-items: center;  /* align vertically */
+  gap: 20px;
+}
+/* =================  phones ≤ 428 px  ================= */
+@media (max-width: 428px) {
+  .nav-actions{
+    flex-wrap: nowrap;      /* stay on a single line                 */
+    gap: 25px;               /* smaller gap so items fit              */
+  }
+
+  /* make the text links a touch smaller & prevent mid-word wrapping */
+  .nav-actions .nav-link{
+    font-size: .88rem;      /* was 1rem                              */
+    margin-right: 0;        /* remove extra space                    */
+    white-space: nowrap;    /* “Game Detail” won’t split in two      */
+  }
+
+  /* shrink the icons a hair as well */
+  .cart-icon,
+  .user-badge,
+  .guest-link i{
+    font-size: 25px;        /* default was 24 px / 34 px badge       */
+  }
+  
+   .nav-actions .nav-link.text-link{         /* mark the text links   */
+    display:none!important;                 /* disappear in the bar  */
+  }
+}
+
+@media (max-width: 428px) {
+  .user-menu li:has(> a[href*="product-detail"]){   /* modern :has() */
+    display:none!important;
+  }
+
+  /* fallback for older browsers — keeps the row 0 px high */
+  .user-menu a[href*="product-detail"]{
+    display:none!important;            /* hides text  */
+  }
+  .user-menu a[href*="product-detail"] + *{          /* its parent li */
+    padding:0!important; margin:0!important; height:0!important;
+  }
+}
+
+@media (min-width: 428px) and (max-width: 480px) {
+  .nav-actions{
+    flex-wrap: nowrap;      /* stay on a single line                 */
+    gap: 15px;               /* smaller gap so items fit              */
+  }
+
+  /* make the text links a touch smaller & prevent mid-word wrapping */
+  .nav-actions .nav-link{
+    font-size: .88rem;      /* was 1rem                              */
+    margin-right: 0;        /* remove extra space                    */
+    white-space: nowrap;    /* “Game Detail” won’t split in two      */
+  }
+
+  /* shrink the icons a hair as well */
+  .cart-icon,
+  .user-badge,
+  .guest-link i{
+    font-size: 25px;        /* default was 24 px / 34 px badge       */
+  }
+  
+   .nav-actions .nav-link.text-link{         /* mark the text links   */
+    display:none!important;                 /* disappear in the bar  */
+  }
+}
+
+@media (min-width: 428px) and (max-width: 480px) {
+  .user-menu li:has(> a[href*="product-detail"]){   /* modern :has() */
+    display:none!important;
+  }
+
+  /* fallback for older browsers — keeps the row 0 px high */
+  .user-menu a[href*="product-detail"]{
+    display:none!important;            /* hides text  */
+  }
+  .user-menu a[href*="product-detail"] + *{          /* its parent li */
+    padding:0!important; margin:0!important; height:0!important;
+  }
+}
+
+/* ░░░  HIDE ‘Game Detail’ from the user-menu once the top-bar link is visible  ░░░ */
+@media (min-width: 480px){
+  /* modern browsers – one-liner thanks to :has()  */
+  .user-menu li:has(> a[href*="product-detail"]){
+    display:none!important;
+  }
+
+  /* fallback for older browsers that don’t support :has() */
+  .user-menu a[href*="product-detail"]{
+    display:none!important;
+  }
+}
+
+
+.nav-actions .n
+
+av-link {
+  display: inline-flex;  /* force horizontal alignment */
+  align-items: center;
+ color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
+  padding-bottom: 3px;
+  margin-right: 10px;
+  position: relative;
+}
+
+.nav-actions .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg,#ff00b8,#ffa300);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .3s;
+}
+.nav-actions .nav-link:hover::after,
+.nav-actions .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+/* profile badge + dropdown */
+.profile-wrap { position: relative; }
+
+.user-badge {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+   background:#fff !important;  color: #1a0033;
+  font: 700 1rem/1 "Poppins", sans-serif;
+  cursor: pointer; user-select: none;
+   margin-top: 0; /* or remove entirely */
+   
+}
+
+.user-menu {
+  list-style: none; margin: 0; padding: 6px 0;
+  position: absolute; top: 145%; right: 0;
+  min-width: 140px;
+  background: #1a003c; border: 1px solid #4d1f3f;
+  border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,.35);
+  opacity: 0; transform: translateY(-8px) scale(.95);
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+}
+
+.user-menu li {
+  padding: 6px 16px; color: #fff; cursor: pointer;
+}
+.user-menu li:hover {
+  background: #2a005d; color: #fff;
+}
+.user-menu a {
+  color: #fff !important; display: block; text-decoration: none;
+}
+
+.user-menu a.active{
+  position:relative;
+}
+
+.user-menu a.active::after{
+  content:"";
+  position:absolute;
+  left:0; bottom:4px;               /* tweak ↓ to taste */
+  width:100%; height:2px;
+  background:linear-gradient(90deg,#ff00b8,#ffa300);
+}
+
+/* phones ≤ 480 px — kill the now-empty Game-Detail row */
+
+
+/* show embedded \n characters as real line-breaks */
+#game-desc {
+  white-space: pre-line;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+ <!-- inside .navbar -->
+<a href="https://thinkinggrey.in/gameweb/index.html" class="d-inline-block">
+  <img src="assets/images/logo.png" alt="Logo" class="logo">
+</a>
+
+      <div class="nav-actions">
+     <a class="nav-link text-link"  href="index.html">Home</a>
+<a class="nav-link text-link active" href="#">Game Details</a>
+        <a href="cart.html" class="nav-link cart-link">
+          <i class="fas fa-shopping-cart cart-icon"></i>
+         <span id="cart-count" class="badge d-none"></span>
+        </a>
+        <div class="profile-wrap">
+  <!-- signed-in badge -->
+  <span id="nav-user"  class="user-badge d-none"></span>
+
+  <!-- guest badge (appears when not signed in) -->
+  <a id="nav-guest" class="guest-link d-none text-decoration-none">
+    <i class="fa-solid fa-user"></i>
+  </a>
+
+  <!-- dropdown list -->
+  <ul id="user-menu" class="user-menu"></ul>
+</div>
+
+      </div>
+    </div>
+
+    <section class="single-product section">
+      <div class="container">
+        <!-- new -->
+
+        <div class="row gy-5">
+          <!-- BACK TO GAMES  -->
+
+          <div class="col-lg-6 text-center">
+            <div class="thumb-wrap position-relative d-inline-block">
+              <!-- overlay anchor goes *inside* -->
+              <a
+                id="btn-back"
+                href="index.html"
+                class="pill-btn pill-yellow back-pill text-decoration-none"
+              >
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Back&nbsp;to&nbsp;Games</span>
+              </a>
+
+              <img id="game-img" src="" alt="" />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h2 id="game-title" class="fw-semibold mb-2"></h2>
+            <p id="game-desc" class="my-3"></p>
+            <ul class="list-unstyled small">
+              <li class="mb-1">
+                <strong>Game ID:</strong> <span id="game-id"></span>
+              </li>
+              <li><strong>Tags:</strong> <span id="game-tags"></span></li>
+            </ul>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <!-- NEW wrapper -->
+              <!-- Replace anchor with button -->
+              <button
+                type="button"
+                id="btn-customise"
+                class="pill-btn small-pill pill-customise border-0 text-decoration-none"
+              >
+                <i class="fa-solid fa-wrench"></i><span>Customise</span>
+              </button>
+
+              <a
+                href="#"
+                id="btn-demo"
+                class="pill-btn small-pill pill-demo text-decoration-none"
+                target="_blank"
+              >
+                <i class="fa-solid fa-rocket"></i
+                ><span>Try&nbsp;the&nbsp;Demo</span>
+              </a>
+
+              <button
+                id="cart-btn"
+                class="pill-btn pill-yellow small-pill border-0 bg-transparent"
+              >
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>I’m&nbsp;Interested</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Copyright © 2025 Thinking Grey<br />
+      Designed By Thinking Grey
+    </footer>
+<!--  place this just before your inline <script>  -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+/* ─────────────────────────────────────────────────────────────────────────
+   JSON helper (one copy only!)
+───────────────────────────────────────────────────────────────────────── */
+const API_ROOT = '/gameweb/';          // change if PHP lives elsewhere
+function postJSON (file, payload = {}) {
+  return fetch(API_ROOT + file, {
+    method : 'POST',
+    headers: { 'Content-Type' : 'application/json' },
+    body   : JSON.stringify(payload)
+  }).then(async r => {
+    if (!r.ok) {
+      const txt = await r.text();
+      throw new Error(`HTTP ${r.status}: ${txt.slice(0,120)}`);
+    }
+    return r.json();
+  });
+}
+
+/* ========================================================================
+   product-detail.js
+   ======================================================================== */
+
+/* ❶ helpers --------------------------------------------------------------- */
+const $      = sel => document.querySelector(sel);
+const getLS  = k   => JSON.parse(localStorage.getItem(k) || 'null');
+const setLS  = (k,v)=> localStorage.setItem(k, JSON.stringify(v));
+const getCart= ()  => getLS('tg_cart') || [];
+const setCart= c   => setLS('tg_cart',c);
+function syncBadge () {
+  const badge = document.getElementById('cart-count');
+  const count = (JSON.parse(localStorage.getItem('tg_cart') || '[]')).length;
+
+  if (count) {
+    badge.textContent = count;
+    badge.classList.remove('d-none');   // make it visible
+  } else {
+    badge.classList.add('d-none');      // hide it
+  }
+}
+
+const authSheet = $('#auth-modal');
+const showAuth  = () => authSheet.classList.remove('d-none');
+const hideAuth  = () => authSheet.classList.add   ('d-none');
+
+/* ❷ DOM ready ------------------------------------------------------------ */
+document.addEventListener('DOMContentLoaded', () => {
+
+console.log('[TG] user data →',
+            JSON.parse(localStorage.getItem('tg_user') || 'null'));
+
+  /* auth sheet uses *manual* toggling, not bootstrap.Modal */
+  const authSheet = $('#auth-modal');            // <div class="auth-backdrop …">
+  const showAuth  = () => authSheet.classList.remove('d-none');
+  const hideAuth  = () => authSheet.classList.add   ('d-none');
+
+  /* —— 2.b  catalogue ————————————————————————— */
+  const slug = new URLSearchParams(location.search).get('game')?.toLowerCase()
+              || 'skillslice';
+
+ const CATALOG = {
+          skillslice: {
+            title: "Skill Slice",
+            cover: "skillSlice.png",
+            id: "SS-001",
+            tags: "Learning, Slice",
+            desc: "Skill Slice is a thrilling reflex and quiz challenge where every cut counts! \
+            Chop through juicy vegetables to unlock surprise questions, you only get one shot to pick the right answer. \
+            Sharpen your instincts, slice with style, and test your brain under pressure. \
+            Will you make it count?",
+            custom: "customise1.html?game=skillslice",
+            demo: "https://thinkinggrey.in/skillslice",
+          },
+          islandconqueror: {
+            title: "Island Conqueror",
+            cover: "islandconqueror.png",
+            id: "IC-002",
+            genre: "Adventure",
+            tags: "Strategy, Explore",
+            desc: "Island Conqueror takes you on an adventure through the skies — with learning as your guide! \ Each island below represents an answer. Read the question carefully, then drag your hot air balloon to land on the correct one. \ Score 100 points for each accurate landing and keep conquering more islands. \ Are you ready to rule the world with knowledge? ",
+            custom: "customise1.html?game=islandconqueror",
+            demo: "https://thinkinggrey.in/islandconqueror",
+          },
+          colourstrike: {
+            title: "Color Strike",
+            cover: "colorstrike.png",
+            id: "CS-003",
+            genre: "Puzzle",
+            tags: "Colors, Reflex",
+            desc: "In Colour Strike, test your accuracy and knowledge in a fun and colourful way! Each round presents you with a question and two vibrant drums, each representing a possible answer. Armed with your paint gun, it’s your job to carefully aim and shoot the drum that holds the correct answer. Every correct strike earns you 100 points, pushing your score higher as the game gets more exciting. But be careful - wrong shots mean missed opportunities!",
+            custom: "customise1.html?game=colourstrike",
+            demo: "https://thinkinggrey.in/colourstrike",
+          },
+          skillarcade: {
+            title: "Skill Arcade",
+            cover: "skillarcade.png",
+            id: "SA-004",
+            genre: "Arcade",
+            tags: "Reflex, Challenges",
+            desc: "Skill Arcade combines high-speed racing with fast-thinking quiz action! \ Race your car along the track and reach question checkpoints. \ Each correct answer earns 100 points and gets you closer to the finish line. \ Complete the lap and claim your title as the racing quiz champion. \ Do you have the speed and smarts to cross the finish line first? ",
+            custom: "customise1.html?game=skillarcade",
+            demo: "https://thinkinggrey.in/skillarcade",
+          },
+          knowledgekonnect: {
+            title: "Knowledge Konnect",
+            cover: "knowledgekonnect.png",
+            id: "KK-005",
+            genre: "Quiz",
+            tags: "brain-based, Brain",
+            desc: "Knowledge Konnect is an exciting quiz-based game where players tackle 10 thought-provoking questions to climb the leaderboard can win up to 50,000 points. Starting with 100 points, each correct answer propels you to the next level. Every question has four choices and your goal is to pick the right one. You have 4 helplines to help you along the way. Are you ready to become the Knowledge Master?",
+            custom: "customise1.html?game=knowledgekonnect",
+            demo: "https://thinkinggrey.in/knowledgekonnect/",
+          },
+          ballpong: {
+            title: "Ball Pong",
+            cover: "ballpong.png",
+            id: "BP-006",
+            genre: "Sports",
+            tags: "Ping-Pong, Reflex",
+            desc: "Ball Pong is a skill-based quiz game where accuracy meets brainpower! \ Read each question carefully and aim your pong ball at the cup with the correct answer. Each correct hit earns you points. The more questions you get right, the higher your score climbs. \ Can you master the perfect shot and become the ultimate quiz champ? ",
+            custom: "customise1.html?game=ballpong",
+            demo: "https://thinkinggrey.in/ballPong",
+          },
+          collectthecoins: {
+            title: "Collect The Coin",
+            cover: "coincollect.png",
+            id: "CC-007",
+            genre: "Casual",
+            tags: "Collect, Endless",
+            desc: "Coin Collect is a fast-paced game where players have 20 seconds to grab as many coins as possible. More the coins, better the chances of earning extra points. Once time’s up, players will face a series of questions — coin count decides the bonus potential. Each correct answer boosts the final score to race up the leaderboard.",
+            custom: "customise1.html?game=collectthecoins",
+            demo: "https://thinkinggrey.in/collectthecoins",
+          },
+          treasurehunt: {
+            title: "Treasure Hunt",
+            cover: "treasurehunt.png",
+            id: "TH-008",
+            genre: "Adventure",
+            tags: "Exploration, Puzzle",
+            desc: "Treasure Hunt is an exciting grab-and-learn game where knowledge lies beneath the surface! \Drop the claw to uncover sparkling treasures, each holding a tricky question. Only the sharpest minds can turn their findings into points. The deeper you dig, the harder it gets — but bigger the rewards.\n" +
+    "&nbsp;&nbsp;&nbsp;&nbsp;Are you ready to mine your way to the top? ",
+            custom: "customise1.html?game=treasurehunt",
+            demo: "https://thinkinggrey.in/treasurehunt",
+          },
+          spaceshooter: {
+            title: "Space Shooter",
+            cover: "spaceshooter.png",
+            id: "SS-009",
+            genre: "Shooter",
+            tags: "Arcade, Space",
+        desc:
+    "Space Shooter launches you into a galaxy full of quizzes and action! " +
+    "Destroy incoming asteroids to reveal hidden questions. Aim, shoot, and think fast to keep scoring points. " +
+    "It’s a race through space where brains and reflexes go hand in hand.\n" +           // ← existing break
+    "&nbsp;&nbsp;&nbsp;&nbsp;Can you shoot your way to the top of the leaderboard?",  
+            custom: "customise1.html?game=spaceshooter",
+            demo: "https://thinkinggrey.in/spaceshooter",
+          },
+          spinthewheel: {
+            title: "Spin The Wheel",
+            cover: "spinthewheel.png",
+            id: "SW-010",
+            genre: "Quiz",
+            tags: "Spin, Luck, Trivia",
+        desc:
+    "Spin the Wheel brings luck and learning together in a game full of surprises! " +
+    "Spin to land on random questions — each one a new challenge. Pick the right answer and win points. " +
+    "The thrill of the unknown keeps every round fresh and fun, with knowledge as your greatest weapon.\n" +
+    "&nbsp;&nbsp;&nbsp;&nbsp;Will the wheel spin in your favour!",
+            custom: "customise1.html?game=spinthewheel",
+            demo: "https://thinkinggrey.in/spinthewheel",
+          },
+        };
+  const g = CATALOG[slug] ?? {title:slug, cover:'placeholder.png',
+                              id:'N/A', tags:'', demo:'#'};
+
+  $('#game-img' ).src  = 'assets/images/' + g.cover;
+  $('#game-img' ).alt  = g.title;
+  $('#game-title').textContent = g.title;
+$('#game-desc').innerHTML = (g.desc ?? '').replace(/\n/g, '<br>');
+  $('#game-id'   ).textContent = g.id;
+  $('#game-tags' ).textContent = g.tags;
+  $('#btn-demo'  ).href        = g.demo;
+
+  /* —— 2.c  cart pill ————————————————————————— */
+const cartBtn  = $('#cart-btn'),
+      cartIcon = cartBtn.querySelector('i'),
+      cartTxt  = cartBtn.querySelector('span');
+      
+ function paintCart (inCart){
+  cartIcon.classList.toggle('fa-check',          inCart);
+  cartIcon.classList.toggle('fa-cart-shopping', !inCart);
+  cartTxt.textContent = inCart ? 'Added' : 'I’m Interested';
+  cartBtn.classList.toggle('pill-added',  inCart);
+  cartBtn.classList.toggle('pill-yellow', !inCart);
+}
+
+
+/* -----------------------------------------------------------------------
+   KEEP CART UI IN SYNC — add this right after paintCart()
+----------------------------------------------------------------------- */
+function refreshCartUI () {
+  // repaint the pill + badge to reflect *current* localStorage
+  const inCart = getCart().includes(g.title);
+  paintCart(inCart);
+  syncBadge();
+}
+
+/* a) first paint on normal load */
+refreshCartUI();
+
+/* b) fires when the page is *restored* from back-forward cache */
+window.addEventListener('pageshow', refreshCartUI);
+
+/* c) fires when another tab changes localStorage.tg_cart */
+window.addEventListener('storage', e => {
+  if (e.key === 'tg_cart') refreshCartUI();
+});
+/* --------------------------------------------------------------------- */
+
+const alreadyInCart = getCart().includes(g.title);
+paintCart(alreadyInCart);      // green ✔️ or pink cart pill
+syncBadge();  
+
+cartBtn.addEventListener('click', e => {
+  e.preventDefault();
+  
+    const user = getLS('tg_user');
+  if (!user || !user.phone){           // ← visitor is *not* signed in
+    sessionStorage.setItem('pendingCart', g.title);   // remember the game
+    showAuth();                        // pop the auth sheet
+    return;                            // stop – don’t touch the cart yet
+  }
+
+  /* already signed-in → normal cart toggle */
+  let cart  = getCart();
+  const inCart = cart.includes(g.title);
+  cart = inCart ? cart.filter(x => x !== g.title) : [...cart, g.title];
+  setCart(cart);  paintCart(!inCart);  syncBadge();
+});
+
+/* —— 2.d  customise button ———————————— */
+$('#btn-customise').addEventListener('click', e => {
+  e.preventDefault();
+  const user = getLS('tg_user');
+
+  // g.custom is defined in the catalogue object
+  if (user && user.phone) {
+    window.location.href = g.custom;          // ← go straight to the form
+  } else {
+    sessionStorage.setItem('afterAuth', 'customise');
+    showAuth();                               // first-time users sign in
+  }
+});
+
+/* —— 2.g  auth → customise hand-off ———— */
+function postAuth () {
+  hideAuth();
+  refreshProfileUI();
+
+  const pending = sessionStorage.getItem('pendingCart');
+  if (pending){                        // was there a click before logging in?
+    let cart = getCart();
+    if (!cart.includes(pending)){      // avoid duplicates
+      cart.push(pending);
+      setCart(cart);
+    }
+    sessionStorage.removeItem('pendingCart');
+    /* repaint the pill + badge now that the item is in the cart */
+    paintCart(true);
+    syncBadge();
+  }
+
+  /* keep any other jump-after-login logic you already have */
+  if (sessionStorage.getItem('afterAuth') === 'customise'){
+    sessionStorage.removeItem('afterAuth');
+    window.location.href = g.custom;
+  }
+}
+
+  /* —— 2.e  auth sheet — tabs + close ————————— */
+  $('#auth-close').onclick = hideAuth;
+
+  $('#tab-in').onclick = () => switchTab('in');
+  $('#tab-up').onclick = () => switchTab('up');
+
+  function switchTab(which){
+    $('#tab-in').classList.toggle('active', which==='in');
+    $('#tab-up').classList.toggle('active', which==='up');
+    $('#form-in').classList.toggle('d-none', which!=='in');
+    $('#form-up').classList.toggle('d-none', which!=='up');
+  }
+
+  /* mask phone inputs */
+  ['login-phone','up-phone','user-phone'].forEach(id=>{
+    const el = $('#'+id); if (!el) return;
+    el.addEventListener('input', ()=>
+      el.value = el.value.replace(/\D/g,'').slice(-10 + (id==='user-phone'?0:10)));
+  });
+
+ /* sign-in --------------------------------------------------------------- */
+$('#form-in').onsubmit = e => {
+  e.preventDefault();
+
+  const phone = $('#login-phone').value.trim();
+  if (phone.length !== 10) return alert('Enter 10-digit mobile number');
+
+  postJSON('signin.php', { phone })
+    .then(res => {
+      if (res.status === 'ok') {
+        // save user + refresh header
+        setLS('tg_user', { name: res.name, email: res.email, phone });
+        postAuth();
+      } else {
+        alert('No account found – please sign up first.');
+      }
+    })
+};
+
+
+/* sign-up --------------------------------------------------------------- */
+$('#form-up').onsubmit = e => {
+  e.preventDefault();
+
+  const f = $('#up-first').value.trim(),
+        l = $('#up-last').value.trim(),
+        email = $('#up-email').value.trim(),
+        phone = $('#up-phone').value.replace(/\D/g,'').slice(-10);
+
+  if (!f || !l || !email || phone.length !== 10)
+    return alert('Please complete every field correctly');
+
+  postJSON('signup.php', { first: f, last: l, email, phone })
+    .then(res => {
+      if (res.status === 'ok') {
+        setLS('tg_user', { name: res.name, email, phone });
+        postAuth();
+      } else if (res.status === 'exists') {
+        alert('This phone number is already registered – try signing in.');
+      } else {
+        alert('Something went wrong – please try again.');
+      }
+    })
+    .catch(() => alert('Network error – please try again'));
+};
+
+
+  /* —— 2.f  profile badge / dropdown ————————— */
+  const navUser  = $('#nav-user'),
+        navGuest = $('#nav-guest'),
+        userMenu = $('#user-menu'),
+        profile  = $('.profile-wrap');
+
+/* ──────────────────────────────────────────────────────────────
+   PROFILE BADGE  ▸  Sign-in ↔ Profile/Sign-out
+   ────────────────────────────────────────────────────────────── */
+function refreshProfileUI () {
+  const u = JSON.parse(localStorage.getItem('tg_user') || 'null');
+  userMenu.innerHTML = '';
+
+  /* ► ALWAYS add navigation links for small screens */
+const here = location.pathname.endsWith('/') ? 'index.html' : location.pathname.split('/').pop();
+
+userMenu.insertAdjacentHTML(
+  'beforeend',
+  `<li><a href="index.html"  class="${here==='index.html' ? 'active' : ''}">Home</a></li>`+
+  `<li><a href="product-details.html" class="${here==='product-detail.html' ? 'active' : ''}">Game Details</a></li>`
+);
+
+  if (u && u.phone) {          /* ─ logged-in ───────────────── */
+    navUser.textContent = u.name.trim()[0].toUpperCase();
+    navUser.classList.remove('d-none');
+    navGuest.classList.add('d-none');
+
+    /* profile + sign-out */
+    userMenu.insertAdjacentHTML(
+      'beforeend',
+      `<li><a href="my-requests.html?user=${u.phone}">Profile</a></li>`
+    );
+    const out = document.createElement('li');
+    out.innerHTML = '<a href="#">Sign out</a>';
+    out.onclick = e => { e.preventDefault(); localStorage.clear();
+                         sessionStorage.clear(); refreshProfileUI(); location.reload(); };
+    userMenu.appendChild(out);
+
+  } else {                     /* ─ guest ───────────────────── */
+    navUser.classList.add('d-none');
+    navGuest.classList.remove('d-none');
+
+    const li = document.createElement('li');
+    li.textContent = 'Sign in';
+    li.onclick = () => { closeMenu(); showAuth(); };
+    userMenu.appendChild(li);
+  }
+}
+
+refreshProfileUI();
+
+/* keep header in sync if another tab logs in/out */
+window.addEventListener('storage', e => {
+  if (e.key === 'tg_user') refreshProfileUI();
+});
+
+/* ─── click handlers ───────────────────────────────────────── */
+function closeMenu () { profile.classList.remove('open'); }
+
+/* profile badge toggles the menu */
+navUser.addEventListener('click', e => {   //  << remove stray space
+  e.stopPropagation();
+  profile.classList.toggle('open');
+});
+
+navGuest.addEventListener('click', e => {
+  e.stopPropagation();
+  profile.classList.toggle('open');
+});                        
+
+document.body.addEventListener('click', closeMenu);
+
+  /* —— 2.g  auth → customise hand-off ———————— */
+  function postAuth(){
+    hideAuth(); refreshProfileUI(); 
+    if(sessionStorage.getItem('afterAuth')==='customise'){
+      sessionStorage.removeItem('afterAuth');
+      customiseModal.show();
+    }
+  }
+}); 
+
+
+</script>
+
+
+<!-- ░░░ AUTH MODAL – reused from index.html ░░░ -->
+<div id="auth-modal" class="auth-backdrop d-none">
+  <div class="auth-dialog">
+    <i id="auth-close" class="fa-solid fa-xmark auth-close"></i>
+
+    <h3>Welcome to TG Gaming</h3>
+
+    <nav class="auth-tabs">
+      <button id="tab-in" type="button" class="auth-tab active">Sign in</button>
+      <button id="tab-up" type="button" class="auth-tab">Sign up</button>
+    </nav>
+
+    <!-- ── Sign-in form ── -->
+    <form id="form-in" class="auth-pane">
+      <div class="phone-group full">
+        <input class="phone-prefix" value="+91" readonly>
+        <input id="login-phone" class="phone-number"
+               type="tel" placeholder="10-digit mobil number"
+               maxlength="10" pattern="\d{10}" required>
+      </div>
+      <button type="submit" class="auth-btn"><span>Sign in</span></button>
+    </form>
+
+    <!-- ── Sign-up form ── -->
+    <form id="form-up" class="auth-pane d-none">
+      <input id="up-first"  placeholder="First Name" required>
+      <input id="up-last"   placeholder="Last Name"  required>
+      <input id="up-email"  class="full" placeholder="Email Address" type="email" required>
+      <div class="phone-group full">
+        <input class="phone-prefix" value="+91" readonly>
+        <input id="up-phone" class="phone-number"
+               type="tel" placeholder="10-digit mobile number"
+               maxlength="10" pattern="\d{10}" required>
+      </div>
+      <button type="submit" class="auth-btn full"><span>Sign up</span></button>
+    </form>
+  </div>
+</div>
+
+
+  </body>
+</html>
