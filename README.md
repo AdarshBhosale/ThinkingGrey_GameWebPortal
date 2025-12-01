@@ -1,21 +1,26 @@
-Thinking Grey_GameWebPortal\n
+# ThinkingGrey Game Web Portal
 
-The ThinkingGrey Game Web Portal is a comprehensive gamified learning marketplace designed to showcase interactive learning solutions developed in Construct 3. The platform enables clients to explore various game-based learning modules, view detailed features, and select any solution for a live demo or purchase.
+The **ThinkingGrey Game Web Portal** is a comprehensive gamified learning marketplace designed to showcase interactive learning solutions developed in Construct 3. The platform enables clients to explore various game-based learning modules, view detailed features, and select any solution for a live demo or purchase.
 
-Users can easily upload a sample 2-question Excel file to generate a customized demo experience, helping them evaluate the product before making a purchase. The portal includes essential user-friendly features such as sign-in, profile management, shopping cart, and structured product listings to ensure a seamless browsing and buying experience.
+Users can upload a sample 2-question Excel file to generate a customized demo experience, helping them evaluate the product before purchase. The portal includes sign-in, profile management, shopping cart, and structured product listings to ensure a smooth browsing and buying experience.
 
-🚀 Key Features
-📚 Display of all gamified learning solutions built using Construct 3
-📤 Upload option for sample 2-question Excel file to generate a personalized demo
-🛒 Shopping cart for selecting and purchasing solutions
-🔐 User authentication with sign-in and profile management
-💼 Clean and easy navigation for clients to explore solutions
-📄 Feature-rich product pages with descriptions and previews
+## 🚀 Key Features
 
-🛠️ Tech Stack
-Frontend: HTML, CSS, Bootstrap, JavaScript
-Backend: PHP
-Database: SQL (MySQL)
-Games: Construct3
+- Display of all gamified learning solutions built using Construct 3  
+- Upload option for sample 2-question Excel file to generate a personalized demo  
+- Shopping cart for selecting and purchasing solutions  
+- User authentication with sign-in and profile management  
+- Clean and easy navigation for clients to explore solutions  
+- Feature-rich product pages with descriptions and previews  
 
-<img width="1901" height="854" alt="image" src="https://github.com/user-attachments/assets/64cd2697-88ac-497c-b45f-b82670348ecf" />
+## 🛠 Tech Stack
+
+- **Frontend:** HTML, CSS, Bootstrap, JavaScript  
+- **Backend:** PHP  
+- **Database:** SQL (MySQL)  
+- **Games:** Construct 3  
+
+
+
+<img width="1900" height="857" alt="image" src="https://github.com/user-attachments/assets/84154eab-1fa9-46fd-928b-509860f8ac8e" />
+
